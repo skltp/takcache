@@ -27,6 +27,8 @@ public class TakServiceImpl implements TakService{
 
     private String endpointAddressTjanstekatalog;
     private String userAgentHeader;
+    private SokVagvalsInfoInterface port = null;
+
 
     @Autowired
     public TakServiceImpl(Environment env) {
@@ -69,8 +71,6 @@ public class TakServiceImpl implements TakService{
         }
         return anropsBehorighetsInfoTypes;
     }
-    private SokVagvalsInfoInterface port = null;
-
 
     private static URL createEndpointUrlFromWsdl(String adressOfWsdl) {
         try {

@@ -5,8 +5,7 @@ import se.skltp.takcache.exceptions.RoutingException;
 import java.util.List;
 
 public interface TakCache {
-    public boolean refresh();
-    public boolean refresh(TakCacheLog takCacheLog);
+    public TakCacheLog refresh();
 
     public boolean isAuthorized(String senderId, String tjanstegranssnitt, String receiverAddress);
 

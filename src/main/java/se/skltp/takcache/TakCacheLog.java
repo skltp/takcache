@@ -3,13 +3,23 @@ package se.skltp.takcache;
 import java.util.ArrayList;
 import java.util.List;
 
+import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_FAILED;
+
 public class TakCacheLog {
+
+    public enum RefreshStatus {
+        REFRESH_OK,
+        REFRESH_FAILED,
+        RESTORED_FROM_LOCAL_CACHE;
+    }
+
     private  boolean isRefreshSuccessful = false;
-    private  boolean isVagvalRefreshSuccessful = false;
-    private  boolean isBehorigheterRefreshSuccessful = false;
+    private  RefreshStatus vagvalRefreshStatus = REFRESH_FAILED;
+    private  RefreshStatus behorigheterRefreshStatus = REFRESH_FAILED;
 
     private  int numberBehorigheter;
     private  int numberVagval;
+
 
     private  List<String> logBuffer = null;
 
@@ -33,20 +43,20 @@ public class TakCacheLog {
         isRefreshSuccessful = refreshSuccessful;
     }
 
-    public boolean isVagvalRefreshSuccessful() {
-        return isVagvalRefreshSuccessful;
+    public RefreshStatus getVagvalRefreshStatus() {
+        return vagvalRefreshStatus;
     }
 
-    public void setVagvalRefreshSuccessful(boolean vagvalRefreshSuccessful) {
-        isVagvalRefreshSuccessful = vagvalRefreshSuccessful;
+    public void setVagvalRefreshStatus(RefreshStatus vagvalRefreshStatus) {
+        this.vagvalRefreshStatus = vagvalRefreshStatus;
     }
 
-    public boolean isBehorigheterRefreshSuccessful() {
-        return isBehorigheterRefreshSuccessful;
+    public RefreshStatus getBehorigheterRefreshStatus() {
+        return behorigheterRefreshStatus;
     }
 
-    public void setBehorigheterRefreshSuccessful(boolean behorigheterRefreshSuccessful) {
-        isBehorigheterRefreshSuccessful = behorigheterRefreshSuccessful;
+    public void setBehorigheterRefreshStatus(RefreshStatus behorigheterRefreshStatus) {
+        this.behorigheterRefreshStatus = behorigheterRefreshStatus;
     }
 
     public int getNumberBehorigheter() {
@@ -65,3 +75,5 @@ public class TakCacheLog {
         this.numberVagval = numberVagval;
     }
 }
+
+

@@ -17,6 +17,8 @@ import se.skltp.takcache.vagval.VagvalPersistentHandler;
 import java.util.Collections;
 import java.util.List;
 
+import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
+
 
 @Service
 public class TakCacheImpl implements TakCache {
@@ -45,23 +47,19 @@ public class TakCacheImpl implements TakCache {
 
         String useBehorighetFromProperty = env.getProperty(USE_BEHORIGHET_PROPERTY_NAME);
         String useVagvalFromProperty = env.getProperty(USE_VAGVAL_PROPERTY_NAME);
-        String behorighetPersistentFileName = env.getProperty(BEHORIGHET_PERSISTENT_FILE_PROPERTY_NAME);
-        String vagvalPersistentFileName = env.getProperty(VAGVAL_PERSISTENT_FILE_PROPERTY_NAME);
-
         this.useBehorighetCache = useBehorighetFromProperty==null ? true : Boolean.parseBoolean(useBehorighetFromProperty);
         this.useVagvalCache     = useVagvalFromProperty==null ? true: Boolean.parseBoolean(useVagvalFromProperty);
-        this.behorighetFileName = behorighetPersistentFileName;
-        this.vagvalFileName     = vagvalPersistentFileName;
+
+        String behorighetPersistentFileName = env.getProperty(BEHORIGHET_PERSISTENT_FILE_PROPERTY_NAME);
+        String vagvalPersistentFileName = env.getProperty(VAGVAL_PERSISTENT_FILE_PROPERTY_NAME);
+        setLocalCacheFileNames(behorighetPersistentFileName, vagvalPersistentFileName);
     }
 
     @Override
-    public boolean refresh() {
-        return refresh(new TakCacheLog());
-    }
-
-    @Override
-    public boolean refresh(TakCacheLog takCacheLog) {
+    public TakCacheLog refresh() {
+        TakCacheLog takCacheLog = new TakCacheLog();
         takCacheLog.setRefreshSuccessful(true);
+
         if(useVagvalCache) {
             refreshVagvalCache(takCacheLog);
             if( vagvalCache == null){
@@ -77,7 +75,7 @@ public class TakCacheImpl implements TakCache {
                 behorighetCache = restoreBehorigheterFromLocalFileCache(takCacheLog);
             }
         }
-        return takCacheLog.isRefreshSuccessful();
+        return takCacheLog;
     }
 
     @Override
@@ -104,6 +102,11 @@ public class TakCacheImpl implements TakCache {
         return vagvalCache == null ? null : vagvalCache.getRoutingAddress(tjanstegranssnitt, receiverAddress, rivProfile);
     }
 
+    protected void setLocalCacheFileNames(String behorighetFileName, String vagvalFileName){
+        this.behorighetFileName = behorighetFileName;
+        this.vagvalFileName     = vagvalFileName;
+    }
+
     private BehorighetHandler restoreBehorigheterFromLocalFileCache(TakCacheLog takCacheLog) {
         List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypes = BehorighetPersistentHandler.restoreFromLocalCache(behorighetFileName);
         if(anropsBehorighetsInfoTypes==null){
@@ -111,7 +114,9 @@ public class TakCacheImpl implements TakCache {
             takCacheLog.setNumberBehorigheter(0);
             return null;
         }
+        LOGGER.warn("Behorigheter restored from local cache");
         takCacheLog.addLog("Restored behorigheter from local cache.");
+        takCacheLog.setBehorigheterRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
         takCacheLog.setNumberBehorigheter(anropsBehorighetsInfoTypes.size());
         return new BehorighetHandler(anropsBehorighetsInfoTypes);
     }
@@ -123,7 +128,9 @@ public class TakCacheImpl implements TakCache {
             takCacheLog.setNumberVagval(0);
             return null;
         }
+        LOGGER.warn("Virtualisations restored from local cache");
         takCacheLog.addLog("Restored vagval from local cache.");
+        takCacheLog.setVagvalRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
         takCacheLog.setNumberVagval( virtualiseringsInfoTypes.size());
         return  new VagvalHandler(virtualiseringsInfoTypes);
     }
@@ -134,16 +141,16 @@ public class TakCacheImpl implements TakCache {
             if (virtualiseringar != null && !virtualiseringar.isEmpty()) {
                 LOGGER.info("Init number of virtualizations: {}", virtualiseringar.size());
                 vagvalCache = new VagvalHandler(virtualiseringar);
-                takCacheLog.setVagvalRefreshSuccessful(true);
+                takCacheLog.setVagvalRefreshStatus(TakCacheLog.RefreshStatus.REFRESH_OK);
                 takCacheLog.setNumberVagval(virtualiseringar.size());
                 VagvalPersistentHandler.saveToLocalCache(vagvalFileName, virtualiseringar);
             } else {
                 takCacheLog.addLog("Failed to refresh TAK data. Got empty result of virtualisations from TAK service");
-                LOGGER.warn("Failed to refresh TAK data. No VirtualiseringsInfo found.");
+                LOGGER.warn("Failed to refresh TAK data. No VirtualiseringsInfo found, TAK returned empty list.");
             }
         } catch(Exception e){
             takCacheLog.addLog("Failed to refresh TAK virtualisations. Exception from TakService: "+e.getMessage());
-            LOGGER.error("Couldn't get vagval.", e);
+            LOGGER.error("Failed to refresh TAK virtualisations. Exception from TakService:", e);
         }
     }
 
@@ -153,16 +160,16 @@ public class TakCacheImpl implements TakCache {
              if(behorigheter != null && !behorigheter.isEmpty()) {
                  LOGGER.info("Init number of permissions: {}", behorigheter.size());
                  behorighetCache = new BehorighetHandler(behorigheter);
-                 takCacheLog.setBehorigheterRefreshSuccessful(true);
+                 takCacheLog.setBehorigheterRefreshStatus(TakCacheLog.RefreshStatus.REFRESH_OK);
                  takCacheLog.setNumberBehorigheter(behorigheter.size());
                  BehorighetPersistentHandler.saveToLocalCache(behorighetFileName, behorigheter);
             } else {
                  takCacheLog.addLog("Failed to refresh TAK behorigheter. Got empty result of behorigheter from TAK service");
-                 LOGGER.warn("Failed to refresh TAK data. No AnropsBehorighetsInfo found!");
+                 LOGGER.warn("Failed to refresh TAK data. No AnropsBehorighetsInfo found, TAK returned empty list.");
             }
         } catch(Exception e){
              takCacheLog.addLog("Failed to refresh TAK behorigheter. Exception from TakService: "+e.getMessage());
-             LOGGER.error("Couldn't get behorigheter.", e);
+             LOGGER.error("Failed to refresh TAK behorigheter. Exception from TakService:", e);
         }
     }
 

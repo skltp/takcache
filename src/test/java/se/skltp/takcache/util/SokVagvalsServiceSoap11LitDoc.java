@@ -1,18 +1,19 @@
 package se.skltp.takcache.util;
 
-import se.skltp.tak.vagvalsinfo.wsdl.v2.*;
+import se.skltp.tak.vagvalsinfo.wsdl.v2.HamtaAllaAnropsBehorigheterResponseType;
+import se.skltp.tak.vagvalsinfo.wsdl.v2.HamtaAllaTjanstekontraktResponseType;
+import se.skltp.tak.vagvalsinfo.wsdl.v2.HamtaAllaVirtualiseringarResponseType;
+import se.skltp.tak.vagvalsinfo.wsdl.v2.SokVagvalsInfoInterface;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
-@WebService(targetNamespace = "urn:skl:tp:vagvalsinfo:v2", name = "SokVagvalsServiceSoap11LitDocService")
-//@XmlSeeAlso({ObjectFactory.class})
+@WebService(targetNamespace = "urn:skl:tp:vagvalsinfo:v2", name = "SokVagvalsSoap11LitDoc")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
-public class SokVagvalsInfo implements SokVagvalsInfoInterface {
+public class SokVagvalsServiceSoap11LitDoc implements SokVagvalsInfoInterface {
     private HamtaAllaAnropsBehorigheterResponseType hamtaAllaAnropsBehorigheterResponseType = new HamtaAllaAnropsBehorigheterResponseType();
     private HamtaAllaVirtualiseringarResponseType hamtaAllaVirtualiseringarResponseType = new HamtaAllaVirtualiseringarResponseType();
 
