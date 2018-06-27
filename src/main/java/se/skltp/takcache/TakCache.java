@@ -9,7 +9,7 @@ public interface TakCache {
 
     public boolean isAuthorized(String senderId, String tjanstegranssnitt, String receiverAddress);
 
-    public List<String> getRoutingRivProfiles(String tjanstegranssnitt, String receiverAddress);
+    public List<RoutingInfo> getRoutingInfo(String tjanstegranssnitt, String receiverAddress);
 
     public String getRoutingAddress(String tjanstegranssnitt, String receiverAddress, String rivProfile) throws RoutingException;
 }

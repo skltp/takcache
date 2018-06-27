@@ -42,6 +42,10 @@ public class VagvalHandler {
           return virtualiseringarMatchingRivProfile.get(0).getAdress();
     }
 
+    public List<VirtualiseringsInfoType> geVirtualiseringar(String tjanstegranssnitt, String receiverAddress) {
+        return  getValidVagval(tjanstegranssnitt, receiverAddress);
+    }
+
     public List<String> getRoutingRivProfiles(String tjanstegranssnitt, String receiverAddress) {
         List<VirtualiseringsInfoType> validVirtualiseringar = getValidVagval(tjanstegranssnitt, receiverAddress);
         return validVirtualiseringar.stream().map(VirtualiseringsInfoType::getRivProfil).collect(Collectors.toList());

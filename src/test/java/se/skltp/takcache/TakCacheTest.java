@@ -76,8 +76,8 @@ public class TakCacheTest {
     @Test
     public void simpleVagvalTest() throws Exception {
         Mockito.when(takService.getVirtualiseringar()).thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
-        assertEquals( 0, takCache.getRoutingRivProfiles(NAMNRYMD_1, RECEIVER_1).size());
-        assertEquals( 1, takCache.getRoutingRivProfiles(NAMNRYMD_1, RECEIVER_2).size());
+        assertEquals( 0, takCache.getRoutingInfo(NAMNRYMD_1, RECEIVER_1).size());
+        assertEquals( 1, takCache.getRoutingInfo(NAMNRYMD_1, RECEIVER_2).size());
         assertEquals( ADDRESS_1, takCache.getRoutingAddress(NAMNRYMD_1, RECEIVER_2, RIV21));
         assertEquals( ADDRESS_1, takCache.getRoutingAddress(NAMNRYMD_2, RECEIVER_2, RIV20));
     }

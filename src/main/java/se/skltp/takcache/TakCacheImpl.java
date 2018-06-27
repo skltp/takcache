@@ -14,6 +14,7 @@ import se.skltp.takcache.services.TakService;
 import se.skltp.takcache.vagval.VagvalHandler;
 import se.skltp.takcache.vagval.VagvalPersistentHandler;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -87,11 +88,25 @@ public class TakCacheImpl implements TakCache {
     }
 
     @Override
-    public List<String> getRoutingRivProfiles(String tjanstegranssnitt, String receiverAddress) {
+    public List<RoutingInfo> getRoutingInfo(String tjanstegranssnitt, String receiverAddress) {
         if( vagvalCache == null && useVagvalCache){
             refresh();
         }
-        return vagvalCache == null ? Collections.<String>emptyList() : vagvalCache.getRoutingRivProfiles(tjanstegranssnitt, receiverAddress);
+        if( vagvalCache == null){
+            return Collections.<RoutingInfo>emptyList();
+        }
+        return toRoutingInfo(vagvalCache.geVirtualiseringar(tjanstegranssnitt, receiverAddress));
+    }
+
+    private List<RoutingInfo> toRoutingInfo(List<VirtualiseringsInfoType> virtualiseringsInfoTypes) {
+        List<RoutingInfo> routingInfoList = new ArrayList<>();
+        for( VirtualiseringsInfoType virtualiseringsInfoType: virtualiseringsInfoTypes ){
+            RoutingInfo routingInfo = new RoutingInfo();
+            routingInfo.setAddress(virtualiseringsInfoType.getAdress());
+            routingInfo.setRivProfile(virtualiseringsInfoType.getRivProfil());
+            routingInfoList.add(routingInfo);
+        }
+        return routingInfoList;
     }
 
     @Override
