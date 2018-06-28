@@ -21,6 +21,27 @@
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
   </properties>
 
+  <scm>
+    <url>http://github.com/skltp-incubator/takcache</url>
+    <connection>scm:git:git://github.com/skltp-incubator/takcache.git</connection>
+    <developerConnection>scm:git:git://github.com/skltp-incubator/takcache.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>basefarm-nexus</id>
+      <name>SKLTP-Releases</name>
+      <url>http://ine-dib-nexus1.in1.sth.basefarm.net:8081/repository/SKLTP-Releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>basefarm-nexus</id>
+      <name>SKLTP-Snapshots</name>
+      <url>http://ine-dib-nexus1.in1.sth.basefarm.net:8081/repository/SKLTP-Snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+
   <dependencies>
     <!-- TAK vagval schemas -->
     <dependency>
