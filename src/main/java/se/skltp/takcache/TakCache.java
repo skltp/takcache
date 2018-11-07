@@ -7,6 +7,8 @@ import java.util.List;
 public interface TakCache {
     public TakCacheLog refresh();
 
+    public TakCacheLog refresh(String tjanstegranssnitt);
+
     public boolean isAuthorized(String senderId, String tjanstegranssnitt, String receiverAddress);
 
     public List<RoutingInfo> getRoutingInfo(String tjanstegranssnitt, String receiverAddress);

@@ -47,7 +47,7 @@ public class TakCacheIT {
         assertTrue( takCacheLog.isRefreshSuccessful() );
         assertEquals( REFRESH_OK, takCacheLog.getBehorigheterRefreshStatus() );
         assertEquals( REFRESH_OK, takCacheLog.getVagvalRefreshStatus() );
-        assertEquals( 4, takCacheLog.getNumberBehorigheter());
+        assertEquals( 5, takCacheLog.getNumberBehorigheter());
         assertEquals( 5, takCacheLog.getNumberVagval());
 
         mockWebService.stop();

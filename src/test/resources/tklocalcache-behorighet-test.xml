@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistentCache xmlns:ns2="urn:skl:tp:vagvalsinfo:v2">
      <anropsBehorighetsInfo>
-        <ns2:anropsBehorighetsInfoId>1</ns2:anropsBehorighetsInfoId>
+        <ns2:anropsBehorighetsInfoId>a</ns2:anropsBehorighetsInfoId>
         <ns2:receiverId>vp-test-producer</ns2:receiverId>
         <ns2:senderId>tp</ns2:senderId>
         <ns2:tjansteKontrakt>urn:riv:domain:subdomain:GetProductDetailResponder:1</ns2:tjansteKontrakt>

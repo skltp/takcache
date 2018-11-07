@@ -3,6 +3,7 @@ package se.skltp.takcache.services;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.*;
@@ -25,23 +26,16 @@ public class TakServiceImpl implements TakService{
 
     public static final String VP_HEADER_USER_AGENT_DEFAULT = "SKLTP VP/3.1";
 
+
+    @Value("${takcache.endpoint.address:null}")
     private String endpointAddressTjanstekatalog;
+
+    @Value("${takcache.header.user.agent:SKLTP VP/3.1}" )
     private String userAgentHeader;
+
     private SokVagvalsInfoInterface port = null;
 
-
-    @Autowired
-    public TakServiceImpl(Environment env) {
-        endpointAddressTjanstekatalog = env.getProperty(ENDPOINT_ADDRESS_PROPERTY_NAME);
-        LOGGER.info("endpointAddressTjanstekatalog from property: {}", endpointAddressTjanstekatalog);
-        if(endpointAddressTjanstekatalog== null || endpointAddressTjanstekatalog.isEmpty()){
-            LOGGER.error("No endpoint address for TAK set. Please configure property {}.", ENDPOINT_ADDRESS_PROPERTY_NAME);
-        }
-
-        String userAgentConfigured = env.getProperty(ENDPOINT_USER_AGENT_PROPERTY_NAME);
-        LOGGER.info("User agent header from property: {}", userAgentConfigured);
-        this.userAgentHeader = userAgentConfigured != null ? userAgentConfigured : VP_HEADER_USER_AGENT_DEFAULT;
-
+    public TakServiceImpl() {
     }
 
     public List<VirtualiseringsInfoType> getVirtualiseringar() throws Exception {
@@ -85,8 +79,14 @@ public class TakServiceImpl implements TakService{
     }
 
     private SokVagvalsInfoInterface getPort() {
+
         if(port == null){
             LOGGER.info("Use TAK endpoint adress: {}", endpointAddressTjanstekatalog);
+            if(endpointAddressTjanstekatalog== null || endpointAddressTjanstekatalog.isEmpty()){
+                LOGGER.error("No endpoint address for TAK set. Please configure property {}.", ENDPOINT_ADDRESS_PROPERTY_NAME);
+            }
+            LOGGER.info("User agent header: {}", userAgentHeader);
+
             SokVagvalsServiceSoap11LitDocService service = new SokVagvalsServiceSoap11LitDocService(
                     createEndpointUrlFromServiceAddress(endpointAddressTjanstekatalog));
             port = service.getSokVagvalsSoap11LitDocPort();

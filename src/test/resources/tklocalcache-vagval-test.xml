@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistentCache xmlns:ns2="urn:skl:tp:vagvalsinfo:v2">
     <virtualiseringsInfo xmlns:ns2="urn:skl:tp:vagvalsinfo:v2">
-        <ns2:virtualiseringsInfoId>1</ns2:virtualiseringsInfoId>
+        <ns2:virtualiseringsInfoId>a</ns2:virtualiseringsInfoId>
         <ns2:receiverId>vp-test-producer</ns2:receiverId>
         <ns2:rivProfil>RIVTABP20</ns2:rivProfil>
         <ns2:tjansteKontrakt>urn:riv:domain:subdomain:GetProductDetailResponder:1</ns2:tjansteKontrakt>

@@ -24,7 +24,7 @@ public class BehorighetPersistentHandler {
     }
 
     public static void saveToLocalCache(String fileName, List<AnropsBehorighetsInfoType> virtualiseringar) {
-        if(fileName==null){
+        if(fileName==null || fileName.isEmpty()){
             LOGGER.warn("No filename defined for local cache");
             return;
         }
@@ -43,7 +43,7 @@ public class BehorighetPersistentHandler {
     }
 
     public static List<AnropsBehorighetsInfoType> restoreFromLocalCache(String fileName) {
-        if(fileName==null){
+        if(fileName==null || fileName.isEmpty()){
             LOGGER.warn("No filename defined for local cache");
             return null;
         }

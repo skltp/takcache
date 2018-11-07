@@ -24,7 +24,7 @@ public class VagvalPersistentHandler {
     }
 
     public static void saveToLocalCache(String fileName, List<VirtualiseringsInfoType> virtualiseringar)  {
-        if(fileName==null){
+        if(fileName==null || fileName.isEmpty()){
             LOGGER.warn("No filename defined for local cache");
             return;
         }
@@ -42,7 +42,7 @@ public class VagvalPersistentHandler {
     }
 
     public static List<VirtualiseringsInfoType> restoreFromLocalCache(String fileName) {
-        if(fileName==null){
+        if(fileName==null || fileName.isEmpty()){
             LOGGER.warn("No filename defined for local cache");
             return null;
         }

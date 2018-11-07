@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -16,8 +17,8 @@
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <tak.version>1.5.0</tak.version>
-    <log4j2-version>2.11.0</log4j2-version>
-    <spring.version>4.1.6.RELEASE</spring.version>
+    <log4j2-version>2.1</log4j2-version>
+    <spring.version>4.3.0.RELEASE</spring.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
   </properties>
 
@@ -66,20 +67,15 @@
       <version>${log4j2-version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>${log4j2-version}</version>
+      <groupId>com.lmax</groupId>
+      <artifactId>disruptor</artifactId>
+      <version>${lmax_disruptor-version}</version>
     </dependency>
-      <dependency>
-          <groupId>com.lmax</groupId>
-          <artifactId>disruptor</artifactId>
-          <version>${lmax_disruptor-version}</version>
-      </dependency>
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -150,22 +146,22 @@
 
     <plugins>
       <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <executions>
-              <execution>
-                  <id>integration-test</id>
-                  <goals>
-                      <goal>integration-test</goal>
-                  </goals>
-              </execution>
-              <execution>
-                  <id>verify</id>
-                  <goals>
-                      <goal>verify</goal>
-                  </goals>
-              </execution>
-          </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>integration-test</id>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>verify</id>
+            <goals>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
 

@@ -44,6 +44,7 @@ public class VagvalSchemasTestListsUtil {
         List<AnropsBehorighetsInfoType> authorization = new ArrayList<AnropsBehorighetsInfoType>();
         authorization.add(createAuthorization(SENDER_1, NAMNRYMD_1, RECEIVER_1));
         authorization.add(createAuthorization(SENDER_2, NAMNRYMD_1, RECEIVER_1));
+        authorization.add(createAuthorization(SENDER_1, NAMNRYMD_2, RECEIVER_1));
         authorization.add(createAuthorization(SENDER_3, NAMNRYMD_1, RECEIVER_1, getRelativeDate(TWO_HOURS_AGO), getRelativeDate(AN_HOUR_AGO)));
         authorization.add(createAuthorization(SENDER_3, NAMNRYMD_1, RECEIVER_1, getRelativeDate(IN_ONE_HOUR), getRelativeDate(IN_TEN_YEARS)));
         return authorization;
