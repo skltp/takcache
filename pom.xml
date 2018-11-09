@@ -20,28 +20,47 @@
     <log4j2-version>2.1</log4j2-version>
     <spring.version>4.3.0.RELEASE</spring.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
+
+    <surefire.plugin.version>2.20.1</surefire.plugin.version>
+
+    <!-- ************************-->
+    <!-- Sonar/Reporting settings -->
+    <!-- ************************-->
+    <jacoco.plugin.version>0.8.2</jacoco.plugin.version>
+    <sonar.plugin.version>3.5.0.1254</sonar.plugin.version>
+
+    <jacoco.outputDir>${project.build.directory}</jacoco.outputDir>
+    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
+    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
+    <jacoco.reportPath>${project.basedir}/../target/jacoco.exec</jacoco.reportPath>
+
+    <sonar.language>java</sonar.language>
+    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
+    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
+
   </properties>
 
   <scm>
-    <url>http://github.com/skltp-incubator/takcache</url>
-    <connection>scm:git:git://github.com/skltp-incubator/takcache.git</connection>
-    <developerConnection>scm:git:git://github.com/skltp-incubator/takcache.git</developerConnection>
+    <url>http://github.com/skltp/takcache</url>
+    <connection>scm:git:git://github.com/skltp/takcache.git</connection>
+    <developerConnection>scm:git:git://github.com/skltp/takcache.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
     <repository>
-      <id>basefarm-nexus</id>
-      <name>SKLTP-Releases</name>
-      <url>http://ine-dib-nexus1.in1.sth.basefarm.net:8081/repository/SKLTP-Releases/</url>
+      <id>release-nexus</id>
+      <name>Release Nexus</name>
+      <url>${releases-nexus-url}</url>
     </repository>
     <snapshotRepository>
-      <id>basefarm-nexus</id>
-      <name>SKLTP-Snapshots</name>
-      <url>http://ine-dib-nexus1.in1.sth.basefarm.net:8081/repository/SKLTP-Snapshots/</url>
+      <id>snapshot-nexus</id>
+      <name>Snapshot Nexus</name>
+      <url>${snapshot-nexus-url}</url>
     </snapshotRepository>
   </distributionManagement>
-
 
   <dependencies>
     <!-- TAK vagval schemas -->
@@ -123,7 +142,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.20.1</version>
+          <version>${surefire.plugin.version}</version>
         </plugin>
         <plugin>
           <artifactId>maven-failsafe-plugin</artifactId>
@@ -162,8 +181,83 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <argLine>${failsafeArgLine}</argLine>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>${sonar.plugin.version}</version>
       </plugin>
     </plugins>
-
   </build>
+
+  <profiles>
+    <profile>
+      <id>test-coverage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+             <configuration>
+              <argLine>${surefireArgLine}</argLine>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.plugin.version}</version>
+            <executions>
+              <execution>
+                <id>pre-unit-test</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${sonar.jacoco.reportPath}</destFile>
+                  <propertyName>surefireArgLine</propertyName>
+                </configuration>
+              </execution>
+              <execution>
+                <id>post-unit-test</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <dataFile>${jacoco.reportPath}</dataFile>
+                  <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>pre-integration-test</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${sonar.jacoco.itReportPath}</destFile>
+                  <propertyName>failsafeArgLine</propertyName>
+                </configuration>
+              </execution>
+              <execution>
+                <id>post-integration-test</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <dataFile>${jacoco.reportPath}</dataFile>
+                  <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>

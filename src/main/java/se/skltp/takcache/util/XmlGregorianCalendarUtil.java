@@ -1,17 +1,17 @@
 package se.skltp.takcache.util;
 
-import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
-
+import java.util.GregorianCalendar;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class XmlGregorianCalendarUtil {
 	private static DatatypeFactory datatypeFactory = getDatatypeFactory();
+
+	private XmlGregorianCalendarUtil() {
+    // Private Utility class
+  }
 	
 	private static DatatypeFactory getDatatypeFactory() {
 		try {

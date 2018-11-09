@@ -12,7 +12,7 @@ public class BehorighetHandler {
 
 	public BehorighetHandler(List<AnropsBehorighetsInfoType> permissions) {
 		if (permissions == null) {
-			throw new RuntimeException("Null is not allowed for the parameter permissions");
+			throw new IllegalArgumentException("Null is not allowed for the parameter permissions");
 		}
 		this.permissionMap = new PermissionMap(permissions);
 	}

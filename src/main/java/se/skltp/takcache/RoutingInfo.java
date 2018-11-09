@@ -4,15 +4,6 @@ public class RoutingInfo {
     private String address;
     private String rivProfile;
 
-    public RoutingInfo() {
-        
-    }
-
-    public RoutingInfo(String address, String rivProfile) {
-        this.address = address;
-        this.rivProfile = rivProfile;
-    }
-
     public String getAddress() {
         return address;
     }

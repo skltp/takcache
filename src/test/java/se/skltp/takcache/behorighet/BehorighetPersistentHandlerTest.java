@@ -32,10 +32,9 @@ public class BehorighetPersistentHandlerTest {
 
         String fileName = String.format("%s/behorighetcache-test.xml", testFolder.getRoot().getPath());
 
-        BehorighetPersistentHandler behorighetPersistentHandler = new BehorighetPersistentHandler();
-        behorighetPersistentHandler.saveToLocalCache(fileName, authorizations );
+        BehorighetPersistentHandler.saveToLocalCache(fileName, authorizations );
 
-        List<AnropsBehorighetsInfoType> authorizationsFromFile = behorighetPersistentHandler.restoreFromLocalCache(fileName);
+        List<AnropsBehorighetsInfoType> authorizationsFromFile = BehorighetPersistentHandler.restoreFromLocalCache(fileName);
         assertEquals(4, authorizationsFromFile.size());
         assertEquals(NAMNRYMD_1, authorizationsFromFile.get(0).getTjansteKontrakt());
     }

@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class VirtualiseringsInfoMap {
 
-    private Map<String, List<VirtualiseringsInfoType>> virtualiseringsInfoMap;
+    private Map<String, List<VirtualiseringsInfoType>> virtualiseringarMap;
 
     public VirtualiseringsInfoMap( List<VirtualiseringsInfoType> virtualiseringsInfo) {
-        this.virtualiseringsInfoMap = createVirtualiseringsInfoMap(virtualiseringsInfo);
+        this.virtualiseringarMap = createVirtualiseringsInfoMap(virtualiseringsInfo);
     }
 
     public List<VirtualiseringsInfoType> lookupInVirtualiseringsInfoMap(String receiverId, String tjansteKontrakt) {
         String key = createVirtualiseringsInfoMapKey(receiverId, tjansteKontrakt);
-        return virtualiseringsInfoMap.get(key);
+        return virtualiseringarMap.get(key);
     }
 
     private Map<String, List<VirtualiseringsInfoType>> createVirtualiseringsInfoMap(List<VirtualiseringsInfoType> inVirtualiseringsInfo) {
@@ -27,12 +27,7 @@ public class VirtualiseringsInfoMap {
         for (VirtualiseringsInfoType v : inVirtualiseringsInfo) {
             String key = createVirtualiseringsInfoMapKey(v.getReceiverId(), v.getTjansteKontrakt());
 
-            List<VirtualiseringsInfoType> value = outVirtualiseringsInfoMap.get(key);
-            if (value == null) {
-                value = new ArrayList<>();
-                outVirtualiseringsInfoMap.put(key, value);
-            }
-
+            List<VirtualiseringsInfoType> value = outVirtualiseringsInfoMap.computeIfAbsent(key, val->new ArrayList<>());
             value.add(v);
         }
 

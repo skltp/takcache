@@ -17,7 +17,7 @@ public class VagvalHandler {
     public VagvalHandler(List<VirtualiseringsInfoType> virtualiseringsInfo) {
 
         if (virtualiseringsInfo == null) {
-            throw new RuntimeException("Null is not allowed for the parameter virtualiseringsInfo");
+            throw new IllegalArgumentException("Null is not allowed for the parameter virtualiseringsInfo");
         }
         virtualiseringsInfoMap = new VirtualiseringsInfoMap(virtualiseringsInfo);
     }

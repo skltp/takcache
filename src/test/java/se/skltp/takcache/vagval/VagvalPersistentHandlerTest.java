@@ -36,10 +36,9 @@ public class VagvalPersistentHandlerTest {
 
         String fileName = String.format("%s/vagvalcache-test.xml", testFolder.getRoot().getPath());
 
-        VagvalPersistentHandler vagvalPersistentHandler = new VagvalPersistentHandler();
-        vagvalPersistentHandler.saveToLocalCache(fileName, routings );
+        VagvalPersistentHandler.saveToLocalCache(fileName, routings );
 
-        List<VirtualiseringsInfoType> routingsFromFile = vagvalPersistentHandler.restoreFromLocalCache(fileName);
+        List<VirtualiseringsInfoType> routingsFromFile = VagvalPersistentHandler.restoreFromLocalCache(fileName);
         assertEquals(5, routingsFromFile.size());
         assertEquals(NAMNRYMD_1, routingsFromFile.get(0).getTjansteKontrakt());
     }

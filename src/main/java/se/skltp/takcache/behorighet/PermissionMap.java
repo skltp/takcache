@@ -8,33 +8,28 @@ import java.util.List;
 import java.util.Map;
 
 public class PermissionMap {
-    Map<String, List<AnropsBehorighetsInfoType>> permissionMap;
+    Map<String, List<AnropsBehorighetsInfoType>> behorighetMap;
 
     public PermissionMap(List<AnropsBehorighetsInfoType> permissions) {
-        permissionMap = createPermissionMap(permissions);
+        behorighetMap = createPermissionMap(permissions);
     }
 
     public List<AnropsBehorighetsInfoType> lookupInPermissionMap(String receiverId, String senderId, String tjansteKontrakt) {
         String key = createPermissionsMapKey(receiverId, senderId, tjansteKontrakt);
-        return permissionMap.get(key);
+        return behorighetMap.get(key);
     }
 
     private Map<String, List<AnropsBehorighetsInfoType>> createPermissionMap(List<AnropsBehorighetsInfoType> inPermissions) {
 
-       permissionMap = new HashMap<>();
+       behorighetMap = new HashMap<>();
 
         for (AnropsBehorighetsInfoType p : inPermissions) {
             String key = createPermissionsMapKey(p.getReceiverId(), p.getSenderId(), p.getTjansteKontrakt());
-
-            List<AnropsBehorighetsInfoType> value = permissionMap.get(key);
-            if (value == null) {
-                value = new ArrayList<>();
-                permissionMap.put(key, value);
-            }
+            List<AnropsBehorighetsInfoType> value = behorighetMap.computeIfAbsent(key, k -> new ArrayList<>());
             value.add(p);
         }
 
-        return permissionMap;
+        return behorighetMap;
     }
 
     private String createPermissionsMapKey(String receiverId, String senderId, String tjansteKontrakt) {

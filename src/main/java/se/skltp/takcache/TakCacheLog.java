@@ -24,7 +24,7 @@ public class TakCacheLog {
     private  List<String> logBuffer = null;
 
     public TakCacheLog() {
-            logBuffer = new ArrayList<String>();
+            logBuffer = new ArrayList<>();
     }
 
     public void addLog(String log) {

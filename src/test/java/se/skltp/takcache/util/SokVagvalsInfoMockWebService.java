@@ -25,6 +25,7 @@ public class SokVagvalsInfoMockWebService {
     public void stop(){
         if(endpoint!=null){
             endpoint.stop();
+            endpoint=null;
         }
     }
 

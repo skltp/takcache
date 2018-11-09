@@ -24,7 +24,7 @@ import se.skltp.takcache.vagval.VagvalPersistentHandler;
 @Service
 public class TakCacheImpl implements TakCache {
 
-  private final static Logger LOGGER = LogManager.getLogger(TakCacheImpl.class);
+  private static final Logger LOGGER = LogManager.getLogger(TakCacheImpl.class);
 
   public static final String MSG_EMPTY_VAGVAL_FROM_TAK = "Failed to refresh TAK data. Got empty result of virtualisations from TAK service";
   public static final String MSG_NO_VAGVAL_AFTER_FILTER = "Failed to refresh TAK data. No VirtualiseringsInfo after filter on ";
@@ -87,18 +87,12 @@ public class TakCacheImpl implements TakCache {
     return takCacheLog;
   }
 
-  private void filterCache(String tjanstegranssnitt) {
-//    VagvalHandler vagvalHandlerTmp = new VagvalHandler();
-//    vagvalCache.
-  }
-
   @Override
   public boolean isAuthorized(String senderId, String tjanstegranssnitt, String receiverAddress) {
     if (behorighetCache == null && useBehorighetCache) {
       refresh();
     }
-    return behorighetCache == null ? false
-        : behorighetCache.isAuthorized(senderId, tjanstegranssnitt, receiverAddress);
+    return behorighetCache!=null && behorighetCache.isAuthorized(senderId, tjanstegranssnitt, receiverAddress);
   }
 
   @Override
@@ -256,14 +250,6 @@ public class TakCacheImpl implements TakCache {
 
   public void setUseVagvalCache(boolean useVagvalCache) {
     this.useVagvalCache = useVagvalCache;
-  }
-
-  public void setBehorighetFileName(String behorighetFileName) {
-    this.behorighetFileName = behorighetFileName;
-  }
-
-  public void setVagvalFileName(String vagvalFileName) {
-    this.vagvalFileName = vagvalFileName;
   }
 
 

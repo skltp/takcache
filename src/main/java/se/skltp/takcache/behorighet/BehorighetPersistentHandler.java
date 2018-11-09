@@ -1,24 +1,25 @@
 package se.skltp.takcache.behorighet;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
-
+import java.io.File;
+import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.File;
-import java.io.Serializable;
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 
 public class BehorighetPersistentHandler {
-    private final static Logger LOGGER = LogManager.getLogger(BehorighetPersistentHandler.class);
+    private static final Logger LOGGER = LogManager.getLogger(BehorighetPersistentHandler.class);
+
+    private BehorighetPersistentHandler() {
+        // Private Utility class
+    }
 
     @XmlRootElement
-    static class PersistentCache implements Serializable {
-        private static final long serialVersionUID = 1L;
+    static class PersistentCache {
         @XmlElement
         private List<AnropsBehorighetsInfoType> anropsBehorighetsInfo;
     }
