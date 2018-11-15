@@ -4,8 +4,6 @@ import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.HamtaAllaAnropsBehorigheterResponseType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.HamtaAllaVirtualiseringarResponseType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
-import se.skltp.takcache.behorighet.BehorighetPersistentHandler;
-import se.skltp.takcache.vagval.VagvalPersistentHandler;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,16 +13,6 @@ import static se.skltp.takcache.util.TestTakDataDefines.*;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.*;
 
 public class VagvalSchemasTestListsUtil {
-    public static List<AnropsBehorighetsInfoType> getBehorigheterFromXmlResource(String resourceName){
-        URL url = VagvalSchemasTestListsUtil.class.getClassLoader().getResource(resourceName);
-        return BehorighetPersistentHandler.restoreFromLocalCache(url.getFile());
-    }
-
-    public static List<VirtualiseringsInfoType> getVagvalFromXmlResource(String resourceName){
-        URL url = VagvalSchemasTestListsUtil.class.getClassLoader().getResource(resourceName);
-        return VagvalPersistentHandler.restoreFromLocalCache(url.getFile());
-    }
-
 
     public static HamtaAllaAnropsBehorigheterResponseType getStaticBehorighet(){
         HamtaAllaAnropsBehorigheterResponseType hamtaAllaAnropsBehorigheterResponseType = new HamtaAllaAnropsBehorigheterResponseType();
@@ -37,8 +25,6 @@ public class VagvalSchemasTestListsUtil {
         hamtaAllaVirtualiseringarResponseType.getVirtualiseringsInfo().addAll(getStaticVagvalList());
         return hamtaAllaVirtualiseringarResponseType;
     }
-
-
 
     public static List<AnropsBehorighetsInfoType> getStaticBehorighetList(){
         List<AnropsBehorighetsInfoType> authorization = new ArrayList<AnropsBehorighetsInfoType>();

@@ -10,12 +10,12 @@ public class TakCacheLog {
     public enum RefreshStatus {
         REFRESH_OK,
         REFRESH_FAILED,
-        RESTORED_FROM_LOCAL_CACHE;
+        RESTORED_FROM_LOCAL_CACHE,
+        REUSING_EXISTING_CACHE;
     }
 
     private  boolean isRefreshSuccessful = false;
-    private  RefreshStatus vagvalRefreshStatus = REFRESH_FAILED;
-    private  RefreshStatus behorigheterRefreshStatus = REFRESH_FAILED;
+    private  RefreshStatus refreshStatus = REFRESH_FAILED;
 
     private  int numberBehorigheter;
     private  int numberVagval;
@@ -43,20 +43,12 @@ public class TakCacheLog {
         isRefreshSuccessful = refreshSuccessful;
     }
 
-    public RefreshStatus getVagvalRefreshStatus() {
-        return vagvalRefreshStatus;
+    public RefreshStatus getRefreshStatus() {
+        return refreshStatus;
     }
 
-    public void setVagvalRefreshStatus(RefreshStatus vagvalRefreshStatus) {
-        this.vagvalRefreshStatus = vagvalRefreshStatus;
-    }
-
-    public RefreshStatus getBehorigheterRefreshStatus() {
-        return behorigheterRefreshStatus;
-    }
-
-    public void setBehorigheterRefreshStatus(RefreshStatus behorigheterRefreshStatus) {
-        this.behorigheterRefreshStatus = behorigheterRefreshStatus;
+    public void setRefreshStatus(RefreshStatus refreshStatus) {
+        this.refreshStatus = refreshStatus;
     }
 
     public int getNumberBehorigheter() {

@@ -1,8 +1,5 @@
 package se.skltp.takcache;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,8 +42,7 @@ public class TakCacheIT {
         TakCacheLog takCacheLog  = takCache.refresh();
 
         assertTrue( takCacheLog.isRefreshSuccessful() );
-        assertEquals( REFRESH_OK, takCacheLog.getBehorigheterRefreshStatus() );
-        assertEquals( REFRESH_OK, takCacheLog.getVagvalRefreshStatus() );
+        assertEquals( REFRESH_OK, takCacheLog.getRefreshStatus() );
         assertEquals( 5, takCacheLog.getNumberBehorigheter());
         assertEquals( 5, takCacheLog.getNumberVagval());
 

@@ -12,63 +12,77 @@ import java.util.stream.Collectors;
 
 public class VagvalHandler {
 
-    VirtualiseringsInfoMap virtualiseringsInfoMap;
+  VirtualiseringsInfoMap virtualiseringsInfoMap;
+  List<VirtualiseringsInfoType> virtualiseringsInfos;
 
-    public VagvalHandler(List<VirtualiseringsInfoType> virtualiseringsInfo) {
+  public VagvalHandler(List<VirtualiseringsInfoType> virtualiseringsInfos) {
 
-        if (virtualiseringsInfo == null) {
-            throw new IllegalArgumentException("Null is not allowed for the parameter virtualiseringsInfo");
-        }
-        virtualiseringsInfoMap = new VirtualiseringsInfoMap(virtualiseringsInfo);
+    if (virtualiseringsInfos == null) {
+      throw new IllegalArgumentException("Null is not allowed for the parameter virtualiseringsInfos");
+    }
+    this.virtualiseringsInfos = virtualiseringsInfos;
+    virtualiseringsInfoMap = new VirtualiseringsInfoMap(virtualiseringsInfos);
+  }
+
+  public String getRoutingAddress(String tjanstegranssnitt, String receiverAddress,
+      String rivProfile) throws RoutingException {
+
+    List<VirtualiseringsInfoType> validVirtualiseringar = getValidVagval(tjanstegranssnitt, receiverAddress);
+    if (validVirtualiseringar.isEmpty()) {
+      throw new RoutingException(RoutingFailReason.NO_MATCH, "Inget matchande vägval hittat");
     }
 
-    public String getRoutingAddress(String tjanstegranssnitt, String receiverAddress, String rivProfile) throws RoutingException {
+    List<VirtualiseringsInfoType> virtualiseringarMatchingRivProfile = validVirtualiseringar
+        .stream()
+        .filter(virt -> rivProfile.equals(virt.getRivProfil()))
+        .collect(Collectors.toList());
 
-          List<VirtualiseringsInfoType> validVirtualiseringar = getValidVagval(tjanstegranssnitt, receiverAddress);
-          if( validVirtualiseringar.isEmpty() ){
-              throw new RoutingException(RoutingFailReason.NO_MATCH, "Inget matchande vägval hittat");
-          }
-
-          List<VirtualiseringsInfoType> virtualiseringarMatchingRivProfile  = validVirtualiseringar.stream()
-                  .filter(virt -> rivProfile.equals(virt.getRivProfil()))
-                  .collect(Collectors.toList());
-
-          if(virtualiseringarMatchingRivProfile.isEmpty()){
-              throw new RoutingException(RoutingFailReason.NO_MATCHING_RIV_PROFILE, "Ingen matchande riv-profil");
-          }else if(virtualiseringarMatchingRivProfile.size() > 1){
-              throw new RoutingException(RoutingFailReason.MULTIPLE_MATCHES, "Flera matchande vägval");
-          }
-
-          return virtualiseringarMatchingRivProfile.get(0).getAdress();
+    if (virtualiseringarMatchingRivProfile.isEmpty()) {
+      throw new RoutingException(RoutingFailReason.NO_MATCHING_RIV_PROFILE, "Ingen matchande riv-profil");
+    } else if (virtualiseringarMatchingRivProfile.size() > 1) {
+      throw new RoutingException(RoutingFailReason.MULTIPLE_MATCHES, "Flera matchande vägval");
     }
 
-    public List<VirtualiseringsInfoType> geVirtualiseringar(String tjanstegranssnitt, String receiverAddress) {
-        return  getValidVagval(tjanstegranssnitt, receiverAddress);
+    return virtualiseringarMatchingRivProfile.get(0).getAdress();
+  }
+
+
+  public List<VirtualiseringsInfoType> getVirtualiseringsInfos() {
+    return virtualiseringsInfos;
+  }
+
+  public List<VirtualiseringsInfoType> geVirtualiseringar(String tjanstegranssnitt,
+      String receiverAddress) {
+    return getValidVagval(tjanstegranssnitt, receiverAddress);
+  }
+
+  public List<String> getRoutingRivProfiles(String tjanstegranssnitt, String receiverAddress) {
+    List<VirtualiseringsInfoType> validVirtualiseringar = getValidVagval(tjanstegranssnitt, receiverAddress);
+    return validVirtualiseringar.stream().map(VirtualiseringsInfoType::getRivProfil).collect(Collectors.toList());
+  }
+
+  private List<VirtualiseringsInfoType> getValidVagval(String tjanstegranssnitt,
+      String receiverAddress) {
+
+    List<VirtualiseringsInfoType> validVirtualiseringar = new ArrayList<>();
+
+    List<VirtualiseringsInfoType> matchingVirtualiseringsInfo = virtualiseringsInfoMap
+        .lookupInVirtualiseringsInfoMap(receiverAddress, tjanstegranssnitt);
+    if (matchingVirtualiseringsInfo == null) {
+      return validVirtualiseringar;
     }
 
-    public List<String> getRoutingRivProfiles(String tjanstegranssnitt, String receiverAddress) {
-        List<VirtualiseringsInfoType> validVirtualiseringar = getValidVagval(tjanstegranssnitt, receiverAddress);
-        return validVirtualiseringar.stream().map(VirtualiseringsInfoType::getRivProfil).collect(Collectors.toList());
+    XMLGregorianCalendar now = XmlGregorianCalendarUtil.getNowAsXMLGregorianCalendar();
+    for (VirtualiseringsInfoType vi : matchingVirtualiseringsInfo) {
+      if (XmlGregorianCalendarUtil .isTimeWithinInterval(now, vi.getFromTidpunkt(), vi.getTomTidpunkt())) {
+        validVirtualiseringar.add(vi);
+      }
     }
 
-    private List<VirtualiseringsInfoType> getValidVagval(String tjanstegranssnitt, String receiverAddress) {
+    return validVirtualiseringar;
+  }
 
-        List<VirtualiseringsInfoType> validVirtualiseringar = new ArrayList<>();
-
-        List<VirtualiseringsInfoType> matchingVirtualiseringsInfo = virtualiseringsInfoMap.lookupInVirtualiseringsInfoMap(receiverAddress, tjanstegranssnitt);
-        if (matchingVirtualiseringsInfo == null) {
-            return validVirtualiseringar;
-        }
-
-        XMLGregorianCalendar now = XmlGregorianCalendarUtil.getNowAsXMLGregorianCalendar();
-        for (VirtualiseringsInfoType vi : matchingVirtualiseringsInfo) {
-            if( XmlGregorianCalendarUtil.isTimeWithinInterval(now, vi.getFromTidpunkt(), vi.getTomTidpunkt()) ){
-                validVirtualiseringar.add(vi);
-            }
-        }
-
-        return validVirtualiseringar;
-    }
-
-
+  public int count() {
+    return virtualiseringsInfos.size();
+  }
 }

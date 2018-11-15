@@ -2,7 +2,11 @@ package se.skltp.takcache;
 
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,12 +17,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
+import se.skltp.takcache.TakCacheLog.RefreshStatus;
+import se.skltp.takcache.TakCachePersistentHandler.PersistentCache;
 import se.skltp.takcache.behorighet.BehorighetHandler;
-import se.skltp.takcache.behorighet.BehorighetPersistentHandler;
+import se.skltp.takcache.exceptions.PersistentCacheException;
 import se.skltp.takcache.exceptions.RoutingException;
 import se.skltp.takcache.services.TakService;
 import se.skltp.takcache.vagval.VagvalHandler;
-import se.skltp.takcache.vagval.VagvalPersistentHandler;
 
 
 @Service
@@ -26,12 +31,16 @@ public class TakCacheImpl implements TakCache {
 
   private static final Logger LOGGER = LogManager.getLogger(TakCacheImpl.class);
 
-  public static final String MSG_EMPTY_VAGVAL_FROM_TAK = "Failed to refresh TAK data. Got empty result of virtualisations from TAK service";
-  public static final String MSG_NO_VAGVAL_AFTER_FILTER = "Failed to refresh TAK data. No VirtualiseringsInfo after filter on ";
-  public static final String MSG_REFRESH_VIRTUALISATION_EXCEPTION = "Failed to refresh TAK virtualisations. Exception from TakService: ";
-  public static final String MSG_EMPTY_BEHORIGHETER_FROM_TAK = "Failed to refresh TAK behorigheter. Got empty result of behorigheter from TAK service";
-  public static final String MSG_NO_BEHORIGHETER_AFTER_FILTER = "Failed to refresh TAK behorigheter. No behorigheter after filter on:";
-  public static final String MSG_REFRESH_BEHORIGHETER_EXCEPTION = "Failed to refresh TAK behorigheter. Exception from TakService: ";
+  public static final String MSG_INITIALIZE_TAK_CACHE = "Initialize TAK cache resources...";
+  public static final String MSG_SAVE_TO_LOCAL_CACHE_FILE = "Succeeded to get virtualizations and/or permissions from TAK, save to local TAK copy...";
+  public static final String MSG_SAVED_TO_LOCAL_CACHE_FILE = "Succesfully saved virtualizations and permissions to local TAK copy: ";
+  public static final String MSG_SAVE_TO_LOCAL_CACHE_FAILED = "Failed to save virtualizations and permissions to local TAK copy: ";
+  public static final String MSG_REASON_FOR_FAILURE = "Reason for failure: ";
+  public static final String MSG_FAILED_USE_EXISTING_CACHE = "Failed to get virtualizations and/or permissions from TAK, see logfiles for details. Will continue to use already loaded TAK data.";
+  public static final String MSG_FAILED_RESTORE_FROM_FILE ="Failed to get virtualizations and/or permissions from TAK, see logfiles for details. Restore from local TAK copy...";
+  public static final String SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_COPY = "Succesfully restored virtualizations and permissions from local TAK copy: ";
+  public static final String MSG_RESTORE_FROM_FILE_FAILED = "Failed to restore virtualizations and permissions from local TAK copy: ";
+
 
   TakService takService;
 
@@ -44,14 +53,13 @@ public class TakCacheImpl implements TakCache {
   @Value("#{new Boolean('${takcache.use.vagval.cache:true}')}")
   protected boolean useVagvalCache;
 
-  @Value("${takcache.behorighet.persistent.file.name:#{null}}")
-  protected String behorighetFileName;
-
-  @Value("${takcache.vagval.persistent.file.name:#{null}}")
-  protected String vagvalFileName;
+  @Value("${takcache.persistent.file.name:#{null}}")
+  protected String localTakCacheFileName;
 
   @Value("${takcache.tjanstegranssnitt.filter:#{null}}")
   protected String tjanstegranssnittFilter;
+
+  private Calendar calendar = Calendar.getInstance();
 
   @Autowired
   public TakCacheImpl(TakService takService) {
@@ -64,35 +72,43 @@ public class TakCacheImpl implements TakCache {
     return refresh();
   }
 
+
   @Override
   public TakCacheLog refresh() {
     TakCacheLog takCacheLog = new TakCacheLog();
+    logStartInitializeTakCache(takCacheLog);
     takCacheLog.setRefreshSuccessful(true);
 
     if (useVagvalCache) {
       refreshVagvalCache(takCacheLog);
-      if (vagvalCache == null) {
-        takCacheLog.setRefreshSuccessful(false);
-        vagvalCache = restoreVagvalFromLocalFileCache(takCacheLog);
-      }
     }
 
-    if (useBehorighetCache) {
+    if (useBehorighetCache && takCacheLog.isRefreshSuccessful()) {
       refreshBehorighetCache(takCacheLog);
-      if (behorighetCache == null) {
-        takCacheLog.setRefreshSuccessful(false);
-        behorighetCache = restoreBehorigheterFromLocalFileCache(takCacheLog);
-      }
     }
+
+    if (takCacheLog.isRefreshSuccessful()) {
+      takCacheLog.setRefreshStatus(RefreshStatus.REFRESH_OK);
+      saveToLocalFileCache(takCacheLog);
+    } else if (isExistingCacheAvailable()) {
+      takCacheLog.addLog(MSG_FAILED_USE_EXISTING_CACHE);
+      takCacheLog.setRefreshStatus(RefreshStatus.REUSING_EXISTING_CACHE);
+    } else {
+      takCacheLog.addLog(MSG_FAILED_RESTORE_FROM_FILE);
+      restoreFromLocalFileCache(takCacheLog);
+    }
+
+
+    logEndInitializeTakCache(takCacheLog);
     return takCacheLog;
   }
 
-  @Override
+ @Override
   public boolean isAuthorized(String senderId, String tjanstegranssnitt, String receiverAddress) {
     if (behorighetCache == null && useBehorighetCache) {
       refresh();
     }
-    return behorighetCache!=null && behorighetCache.isAuthorized(senderId, tjanstegranssnitt, receiverAddress);
+    return behorighetCache != null && behorighetCache.isAuthorized(senderId, tjanstegranssnitt, receiverAddress);
   }
 
   @Override
@@ -118,76 +134,77 @@ public class TakCacheImpl implements TakCache {
   }
 
   @Override
+  @Deprecated
+  public List<AnropsBehorighetsInfoType> getAnropsBehorighetsInfos() {
+    return behorighetCache == null ? Collections.<AnropsBehorighetsInfoType>emptyList() : behorighetCache.getAnropsBehorighetsInfos();
+  }
+
+  @Override
   public String getRoutingAddress(String tjanstegranssnitt, String receiverAddress,
       String rivProfile) throws RoutingException {
     if (vagvalCache == null && useVagvalCache) {
       refresh();
     }
-    return vagvalCache == null ? null
-        : vagvalCache.getRoutingAddress(tjanstegranssnitt, receiverAddress, rivProfile);
+    return vagvalCache == null ? null : vagvalCache.getRoutingAddress(tjanstegranssnitt, receiverAddress, rivProfile);
   }
 
-  protected void setLocalCacheFileNames(String behorighetFileName, String vagvalFileName) {
-    this.behorighetFileName = behorighetFileName;
-    this.vagvalFileName = vagvalFileName;
-  }
-
-  private BehorighetHandler restoreBehorigheterFromLocalFileCache(TakCacheLog takCacheLog) {
-    List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypes = BehorighetPersistentHandler
-        .restoreFromLocalCache(behorighetFileName);
-    if (anropsBehorighetsInfoTypes == null) {
-      takCacheLog.addLog("Failed restore behorigheter from local cache.");
-      takCacheLog.setNumberBehorigheter(0);
-      return null;
+  private void saveToLocalFileCache(TakCacheLog takCacheLog) {
+    try {
+      takCacheLog.addLog(MSG_SAVE_TO_LOCAL_CACHE_FILE);
+      List<VirtualiseringsInfoType> virtualiseringsInfoTypes = useVagvalCache ? vagvalCache.getVirtualiseringsInfos() : null;
+      List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypes = useBehorighetCache ? behorighetCache.getAnropsBehorighetsInfos() : null;
+      TakCachePersistentHandler.saveToLocalCache(localTakCacheFileName, virtualiseringsInfoTypes, anropsBehorighetsInfoTypes);
+      takCacheLog.addLog(MSG_SAVED_TO_LOCAL_CACHE_FILE + localTakCacheFileName);
+    } catch (PersistentCacheException e) {
+      takCacheLog.addLog(MSG_SAVE_TO_LOCAL_CACHE_FAILED + localTakCacheFileName);
+      takCacheLog.addLog( MSG_REASON_FOR_FAILURE + e.getMessage());
     }
-    LOGGER.warn("Behorigheter restored from local cache");
-    takCacheLog.addLog("Restored behorigheter from local cache.");
-    takCacheLog.setBehorigheterRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
-    takCacheLog.setNumberBehorigheter(anropsBehorighetsInfoTypes.size());
-    return new BehorighetHandler(anropsBehorighetsInfoTypes);
   }
 
-  private VagvalHandler restoreVagvalFromLocalFileCache(TakCacheLog takCacheLog) {
-    List<VirtualiseringsInfoType> virtualiseringsInfoTypes = VagvalPersistentHandler
-        .restoreFromLocalCache(vagvalFileName);
-    if (virtualiseringsInfoTypes == null) {
-      takCacheLog.addLog("Failed restore vagval from local cache.");
-      takCacheLog.setNumberVagval(0);
-      return null;
+  private void restoreFromLocalFileCache(TakCacheLog takCacheLog) {
+
+    try {
+      PersistentCache persistentCache = TakCachePersistentHandler.restoreFromLocalCache(localTakCacheFileName);
+      if (useVagvalCache) {
+        vagvalCache = new VagvalHandler(persistentCache.virtualiseringsInfo);
+      }
+      if (useBehorighetCache) {
+        behorighetCache = new BehorighetHandler(persistentCache.anropsBehorighetsInfo);
+      }
+
+      LOGGER.warn("Restored from local cache file: "+ localTakCacheFileName );
+      takCacheLog.addLog(SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_COPY + localTakCacheFileName);
+      takCacheLog.setRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
+
+    } catch (PersistentCacheException e) {
+      takCacheLog.addLog(MSG_RESTORE_FROM_FILE_FAILED +localTakCacheFileName);
+      takCacheLog.addLog(MSG_REASON_FOR_FAILURE + e.getMessage());
     }
-    LOGGER.warn("Virtualisations restored from local cache");
-    takCacheLog.addLog("Restored vagval from local cache.");
-    takCacheLog.setVagvalRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
-    takCacheLog.setNumberVagval(virtualiseringsInfoTypes.size());
-    return new VagvalHandler(virtualiseringsInfoTypes);
+
   }
 
   private void refreshVagvalCache(TakCacheLog takCacheLog) {
+    takCacheLog.setRefreshSuccessful(false);
     try {
       List<VirtualiseringsInfoType> virtualiseringar = takService.getVirtualiseringar();
       if (virtualiseringar == null || virtualiseringar.isEmpty()) {
-        takCacheLog.addLog(MSG_EMPTY_VAGVAL_FROM_TAK);
-        LOGGER.warn(MSG_EMPTY_VAGVAL_FROM_TAK);
+        LOGGER.warn("Got empty result of virtualisations from TAK service");
         return;
       }
 
       LOGGER.info("Init number of virtualizations: {}", virtualiseringar.size());
-      List<VirtualiseringsInfoType> filteredVirtualiseringar = filterVirtualiseringar(
-          virtualiseringar);
+      List<VirtualiseringsInfoType> filteredVirtualiseringar = filterVirtualiseringar(virtualiseringar);
       if (filteredVirtualiseringar == null || filteredVirtualiseringar.isEmpty()) {
-        takCacheLog.addLog(MSG_NO_VAGVAL_AFTER_FILTER + tjanstegranssnittFilter);
-        LOGGER.warn(MSG_NO_VAGVAL_AFTER_FILTER + tjanstegranssnittFilter);
+        LOGGER.error( "No VirtualiseringsInfo after filtering on: "  + tjanstegranssnittFilter);
         return;
       }
 
       LOGGER.info("Number of filtered virtualizations: {}", filteredVirtualiseringar.size());
+      takCacheLog.setRefreshStatus(TakCacheLog.RefreshStatus.REFRESH_OK);
       vagvalCache = new VagvalHandler(filteredVirtualiseringar);
-      takCacheLog.setVagvalRefreshStatus(TakCacheLog.RefreshStatus.REFRESH_OK);
-      takCacheLog.setNumberVagval(filteredVirtualiseringar.size());
-      VagvalPersistentHandler.saveToLocalCache(vagvalFileName, filteredVirtualiseringar);
+      takCacheLog.setRefreshSuccessful(true);
     } catch (Exception e) {
-      takCacheLog.addLog(MSG_REFRESH_VIRTUALISATION_EXCEPTION + e.getMessage());
-      LOGGER.error(MSG_REFRESH_VIRTUALISATION_EXCEPTION, e);
+      LOGGER.error( "Exception from TakService when getting virtualizations:",  e);
     }
   }
 
@@ -203,33 +220,29 @@ public class TakCacheImpl implements TakCache {
   }
 
   private void refreshBehorighetCache(TakCacheLog takCacheLog) {
+    takCacheLog.setRefreshSuccessful(false);
     try {
       List<AnropsBehorighetsInfoType> behorigheter = takService.getBehorigheter();
       if (behorigheter == null || behorigheter.isEmpty()) {
-        takCacheLog.addLog(MSG_EMPTY_BEHORIGHETER_FROM_TAK);
-        LOGGER.warn(MSG_EMPTY_BEHORIGHETER_FROM_TAK);
+        LOGGER.warn(" Got empty result of behorigheter from TAK service");
         return;
       }
 
       LOGGER.info("Init number of permissions: {}", behorigheter.size());
       List<AnropsBehorighetsInfoType> filteredBehorigheter = filterBehorigheter(behorigheter);
       if (filteredBehorigheter == null || filteredBehorigheter.isEmpty()) {
-        takCacheLog.addLog( MSG_NO_BEHORIGHETER_AFTER_FILTER + tjanstegranssnittFilter);
-        LOGGER.warn(MSG_NO_BEHORIGHETER_AFTER_FILTER + tjanstegranssnittFilter);
+        LOGGER.warn("No behorigheter after filtering on " + tjanstegranssnittFilter);
         return;
       }
 
       LOGGER.info("Number of filtered permissions: {}", filteredBehorigheter.size());
       behorighetCache = new BehorighetHandler(filteredBehorigheter);
-      takCacheLog.setBehorigheterRefreshStatus(TakCacheLog.RefreshStatus.REFRESH_OK);
-      takCacheLog.setNumberBehorigheter(filteredBehorigheter.size());
-      BehorighetPersistentHandler.saveToLocalCache(behorighetFileName, filteredBehorigheter);
-
+      takCacheLog.setRefreshSuccessful(true);
     } catch (Exception e) {
-      takCacheLog.addLog(MSG_REFRESH_BEHORIGHETER_EXCEPTION + e.getMessage());
-      LOGGER.error(MSG_REFRESH_BEHORIGHETER_EXCEPTION, e);
+      LOGGER.error( "Exception from TakService when getting behorigheter:", e);
     }
   }
+
 
   private List<AnropsBehorighetsInfoType> filterBehorigheter(
       List<AnropsBehorighetsInfoType> behorigheter) {
@@ -242,6 +255,37 @@ public class TakCacheImpl implements TakCache {
     return behorigheter;
   }
 
+
+  private void logStartInitializeTakCache(TakCacheLog takCacheLog){
+    takCacheLog.addLog("Host: "+getHostName());
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    takCacheLog.addLog("Time: " + df.format(calendar.getTime()));
+    takCacheLog.addLog(MSG_INITIALIZE_TAK_CACHE);
+  }
+
+  private void logEndInitializeTakCache(TakCacheLog takCacheLog) {
+    takCacheLog.setNumberVagval(vagvalCache == null ? 0 : vagvalCache.count());
+    takCacheLog.setNumberBehorigheter(behorighetCache == null ? 0 : behorighetCache.count());
+
+    takCacheLog.addLog("Init TAK cache loaded number of permissions: " + takCacheLog.getNumberBehorigheter());
+    takCacheLog.addLog("Init TAK cache loaded number of virtualizations: " + takCacheLog.getNumberVagval());
+    takCacheLog.addLog("Init done, was successful: " + takCacheLog.isRefreshSuccessful());
+  }
+
+  private String getHostName() {
+    try {
+      return InetAddress.getLocalHost().getCanonicalHostName();
+    } catch (UnknownHostException e) {
+      return "UNKNOWN";
+    }
+  }
+
+  private boolean isExistingCacheAvailable() {
+    return !(useVagvalCache && vagvalCache == null || useBehorighetCache && behorighetCache == null);
+  }
+
+
+
   // Methods to increase testability
 
   public void setUseBehorighetCache(boolean useBehorighetCache) {
@@ -252,5 +296,8 @@ public class TakCacheImpl implements TakCache {
     this.useVagvalCache = useVagvalCache;
   }
 
+  public void setLocalTakCacheFileName(String fileName) {
+    this.localTakCacheFileName = fileName;
+  }
 
 }

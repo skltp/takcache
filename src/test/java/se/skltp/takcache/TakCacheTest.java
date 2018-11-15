@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
-import static se.skltp.takcache.TakCacheLog.RefreshStatus.*;
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_OK;
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
+import static se.skltp.takcache.TakCacheLog.RefreshStatus.REUSING_EXISTING_CACHE;
 import static se.skltp.takcache.util.TestTakDataDefines.ADDRESS_1;
 import static se.skltp.takcache.util.TestTakDataDefines.NAMNRYMD_1;
 import static se.skltp.takcache.util.TestTakDataDefines.NAMNRYMD_2;
@@ -40,7 +40,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xml.sax.InputSource;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
-import se.skltp.takcache.TakCacheLog.RefreshStatus;
 import se.skltp.takcache.exceptions.TakServiceException;
 import se.skltp.takcache.services.TakService;
 import se.skltp.takcache.util.VagvalSchemasTestListsUtil;
@@ -70,33 +69,40 @@ public class TakCacheTest {
     MockitoAnnotations.initMocks(this);
 
     // Reset internal cache between tests
-    takCache.behorighetCache=null;
-    takCache.vagvalCache=null;
-    takCache.tjanstegranssnittFilter=null;
-    takCache.setLocalCacheFileNames(null, null);
+    takCache.behorighetCache = null;
+    takCache.vagvalCache = null;
+    takCache.tjanstegranssnittFilter = null;
+    takCache.setLocalTakCacheFileName(null);
     takCache.setUseBehorighetCache(true);
     takCache.setUseVagvalCache(true);
   }
 
   @Test
   public void simpleSuccessfulRefreshTest() throws Exception {
-    Mockito.when(takService.getBehorigheter())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
-    Mockito.when(takService.getVirtualiseringar())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
+    mockTakServiceDefaultValues();
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertTrue(takCacheLog.isRefreshSuccessful());
-    assertEquals(REFRESH_OK, takCacheLog.getBehorigheterRefreshStatus());
-    assertEquals(REFRESH_OK, takCacheLog.getVagvalRefreshStatus());
+    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
     assertEquals(5, takCacheLog.getNumberBehorigheter());
     assertEquals(5, takCacheLog.getNumberVagval());
   }
 
+//  @Test
+//  public void simpleSuccessfulRefreshTest() throws Exception {
+//    mockTakServiceDefaultValues();
+//    TakCacheLog takCacheLog = takCache.refresh();
+//
+//    assertTrue(takCacheLog.isRefreshSuccessful());
+//    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
+//    assertEquals(5, takCacheLog.getNumberBehorigheter());
+//    assertEquals(5, takCacheLog.getNumberVagval());
+//  }
+
+
   @Test
   public void simpleBehorighetTest() throws Exception {
-    Mockito.when(takService.getBehorigheter())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
+    mockTakServiceDefaultValues();
     assertTrue(takCache.isAuthorized(SENDER_1, NAMNRYMD_1, RECEIVER_1));
     assertTrue(takCache.isAuthorized(SENDER_1, NAMNRYMD_2, RECEIVER_1));
     assertFalse(takCache.isAuthorized(SENDER_3, NAMNRYMD_1, RECEIVER_1));
@@ -104,8 +110,7 @@ public class TakCacheTest {
 
   @Test
   public void filterShouldRemoveNotMatchingBehorighetTest() throws Exception {
-    Mockito.when(takService.getBehorigheter())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
+    mockTakServiceDefaultValues();
 
     TakCacheLog takCacheLog = takCache.refresh(NAMNRYMD_1);
     assertEquals(4, takCacheLog.getNumberBehorigheter());
@@ -116,8 +121,7 @@ public class TakCacheTest {
 
   @Test
   public void simpleRoutingInfoTest() throws Exception {
-    Mockito.when(takService.getVirtualiseringar())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
+    mockTakServiceDefaultValues();
     assertEquals(0, takCache.getRoutingInfo(NAMNRYMD_1, RECEIVER_1).size());
     assertEquals(1, takCache.getRoutingInfo(NAMNRYMD_1, RECEIVER_2).size());
     assertEquals(2, takCache.getRoutingInfo(NAMNRYMD_2, RECEIVER_2).size());
@@ -125,35 +129,32 @@ public class TakCacheTest {
 
   @Test
   public void routingInfoValuesShouldExistTest() throws Exception {
-    Mockito.when(takService.getVirtualiseringar())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
+    mockTakServiceDefaultValues();
     List<RoutingInfo> routingInfoList = takCache.getRoutingInfo(NAMNRYMD_1, RECEIVER_2);
     assertEquals(1, routingInfoList.size());
     assertEquals(ADDRESS_1, routingInfoList.get(0).getAddress());
     assertEquals(RIV21, routingInfoList.get(0).getRivProfile());
   }
+
   @Test
   public void simpleRoutingAddressTest() throws Exception {
-    Mockito.when(takService.getVirtualiseringar())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
+    mockTakServiceDefaultValues();
     assertEquals(ADDRESS_1, takCache.getRoutingAddress(NAMNRYMD_1, RECEIVER_2, RIV21));
     assertEquals(ADDRESS_1, takCache.getRoutingAddress(NAMNRYMD_2, RECEIVER_2, RIV20));
   }
 
   @Test
   public void filterShouldRemoveNotMatchingNamespaceInVagvalTest() throws Exception {
-    Mockito.when(takService.getVirtualiseringar())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
+    mockTakServiceDefaultValues();
     TakCacheLog takCacheLog = takCache.refresh(NAMNRYMD_1);
-    assertEquals(REFRESH_OK, takCacheLog.getVagvalRefreshStatus());
+    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
     assertEquals(3, takCacheLog.getNumberVagval());
     assertEquals(0, takCache.getRoutingInfo(NAMNRYMD_2, RECEIVER_2).size());
   }
 
   @Test
   public void filterShouldNotEffectRemainingVagvalTest() throws Exception {
-    Mockito.when(takService.getVirtualiseringar())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
+    mockTakServiceDefaultValues();
     TakCacheLog takCacheLog = takCache.refresh(NAMNRYMD_1);
 
     assertEquals(0, takCache.getRoutingInfo(NAMNRYMD_1, RECEIVER_1).size());
@@ -182,12 +183,7 @@ public class TakCacheTest {
   public void noContactWithTjanstekatalogenAlwaysReultsInLocalCacheIsRead()
       throws Exception {
 
-    URL localTakVagvalCache = TakCacheTest.class.getClassLoader()
-        .getResource("tklocalcache-vagval-test.xml");
-    URL localTakBehorigetCache = TakCacheTest.class.getClassLoader()
-        .getResource("tklocalcache-behorighet-test.xml");
-    takCache
-        .setLocalCacheFileNames(localTakBehorigetCache.getFile(), localTakVagvalCache.getFile());
+    takCache.setLocalTakCacheFileName(getLocalCacheResource());
 
     Mockito.when(takService.getVirtualiseringar())
         .thenThrow(new TakServiceException(new Exception("Failed get virtualizations from TAK")));
@@ -197,8 +193,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getBehorigheterRefreshStatus());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getVagvalRefreshStatus());
+    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberBehorigheter());
     assertEquals(1, takCacheLog.getNumberVagval());
 
@@ -208,12 +203,8 @@ public class TakCacheTest {
   public void emptyAnswerFromTjanstekatalogenAlwaysReultsInLocalCacheIsRead()
       throws Exception {
 
-    URL localTakVagvalCache = TakCacheTest.class.getClassLoader()
-        .getResource("tklocalcache-vagval-test.xml");
-    URL localTakBehorigetCache = TakCacheTest.class.getClassLoader()
-        .getResource("tklocalcache-behorighet-test.xml");
-    takCache
-        .setLocalCacheFileNames(localTakBehorigetCache.getFile(), localTakVagvalCache.getFile());
+
+    takCache.setLocalTakCacheFileName(getLocalCacheResource());
 
     Mockito.when(takService.getVirtualiseringar()).thenReturn(new ArrayList<>());
     Mockito.when(takService.getBehorigheter()).thenReturn(new ArrayList<>());
@@ -221,8 +212,26 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getBehorigheterRefreshStatus());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getVagvalRefreshStatus());
+    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(1, takCacheLog.getNumberBehorigheter());
+    assertEquals(1, takCacheLog.getNumberVagval());
+
+  }
+
+  @Test
+  public void emptyBehorigheterFromTjanstekatalogenAlwaysReultsInLocalCacheIsRead()
+      throws Exception {
+
+
+    takCache.setLocalTakCacheFileName(getLocalCacheResource());
+
+    Mockito.when(takService.getVirtualiseringar()).thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
+    Mockito.when(takService.getBehorigheter()).thenReturn(new ArrayList<>());
+
+    TakCacheLog takCacheLog = takCache.refresh();
+
+    assertFalse(takCacheLog.isRefreshSuccessful());
+    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberBehorigheter());
     assertEquals(1, takCacheLog.getNumberVagval());
 
@@ -233,21 +242,17 @@ public class TakCacheTest {
   public void noDataAfterFilterShouldReultsInLocalCacheIsRead()
       throws Exception {
 
-    URL localTakVagvalCache = TakCacheTest.class.getClassLoader()
-        .getResource("tklocalcache-vagval-test.xml");
-    URL localTakBehorigetCache = TakCacheTest.class.getClassLoader()
-        .getResource("tklocalcache-behorighet-test.xml");
-    takCache
-        .setLocalCacheFileNames(localTakBehorigetCache.getFile(), localTakVagvalCache.getFile());
+     takCache.setLocalTakCacheFileName(getLocalCacheResource());
 
-    Mockito.when(takService.getVirtualiseringar()).thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
-    Mockito.when(takService.getBehorigheter()).thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
+    Mockito.when(takService.getVirtualiseringar())
+        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
+    Mockito.when(takService.getBehorigheter())
+        .thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
 
     TakCacheLog takCacheLog = takCache.refresh("NamespaceNoMatch");
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getBehorigheterRefreshStatus());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getVagvalRefreshStatus());
+    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberBehorigheter());
     assertEquals(1, takCacheLog.getNumberVagval());
 
@@ -257,26 +262,20 @@ public class TakCacheTest {
   public void contactWithTjanstekatalogenAlwaysReultsInLocalCacheIsUpdated()
       throws Exception {
 
-    String vagValfileName = String
-        .format("%s/vagvalcache-test.xml", testFolder.getRoot().getPath());
-    String behorigheterfileName = String
-        .format("%s/behorighetercache-test.xml", testFolder.getRoot().getPath());
-    takCache.setLocalCacheFileNames(behorigheterfileName, vagValfileName);
+    mockTakServiceDefaultValues();
 
-    Mockito.when(takService.getVirtualiseringar())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
-    Mockito.when(takService.getBehorigheter())
-        .thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
+    String cachefileName = String
+        .format("%s/localcache-test.xml", testFolder.getRoot().getPath());
+    takCache.setLocalTakCacheFileName(cachefileName);
 
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertTrue(takCacheLog.isRefreshSuccessful());
-    assertEquals(REFRESH_OK, takCacheLog.getBehorigheterRefreshStatus());
-    assertEquals(REFRESH_OK, takCacheLog.getVagvalRefreshStatus());
+    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
     XMLAssert.assertXpathExists("/persistentCache/virtualiseringsInfo",
-        new InputSource(new FileReader(vagValfileName)));
+        new InputSource(new FileReader(cachefileName)));
     XMLAssert.assertXpathExists("/persistentCache/anropsBehorighetsInfo",
-        new InputSource(new FileReader(behorigheterfileName)));
+        new InputSource(new FileReader(cachefileName)));
   }
 
   @Test
@@ -309,5 +308,123 @@ public class TakCacheTest {
     assertTrue(takCacheLog.isRefreshSuccessful());
     assertEquals(5, takCacheLog.getNumberVagval());
 
+  }
+
+  @Test
+  public void restoreFromCacheShouldWorkWithOnlyUseVagval()
+      throws Exception {
+
+    Mockito.when(takService.getVirtualiseringar())
+        .thenThrow(new TakServiceException(new Exception("Should not happen")));
+
+    takCache.setLocalTakCacheFileName(getLocalCacheResource());
+    takCache.setUseVagvalCache(true);
+    takCache.setUseBehorighetCache(false);
+
+    TakCacheLog takCacheLog = takCache.refresh();
+
+    assertFalse(takCacheLog.isRefreshSuccessful());
+    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(1, takCacheLog.getNumberVagval());
+    assertEquals(0, takCacheLog.getNumberBehorigheter());
+
+  }
+
+  @Test
+  public void restoreFromCacheShouldWorkWithOnlyUseBehorighet()
+      throws Exception {
+
+    Mockito.when(takService.getBehorigheter())
+        .thenThrow(new TakServiceException(new Exception("Should not happen")));
+
+    takCache.setLocalTakCacheFileName(getLocalCacheResource());
+    takCache.setUseVagvalCache(false);
+    takCache.setUseBehorighetCache(true);
+
+    TakCacheLog takCacheLog = takCache.refresh();
+
+    assertFalse(takCacheLog.isRefreshSuccessful());
+    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(1, takCacheLog.getNumberBehorigheter());
+    assertEquals(0, takCacheLog.getNumberVagval());
+
+  }
+
+  @Test
+  public void saveToCacheShouldWorkWithOnlyUseVagval()
+      throws Exception {
+
+    mockTakServiceDefaultValues();
+
+    String cachefileName = String
+        .format("%s/localcache-test.xml", testFolder.getRoot().getPath());
+    takCache.setLocalTakCacheFileName(cachefileName);
+    takCache.setUseVagvalCache(true);
+    takCache.setUseBehorighetCache(false);
+
+    TakCacheLog takCacheLog = takCache.refresh();
+
+    assertTrue(takCacheLog.isRefreshSuccessful());
+    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
+    XMLAssert.assertXpathExists("/persistentCache/virtualiseringsInfo",
+        new InputSource(new FileReader(cachefileName)));
+
+  }
+
+
+  @Test
+  public void saveToCacheShouldWorkWithOnlyUseBehorighet()
+      throws Exception {
+
+    mockTakServiceDefaultValues();
+
+    String cachefileName = String
+        .format("%s/localcache-test.xml", testFolder.getRoot().getPath());
+    takCache.setLocalTakCacheFileName(cachefileName);
+    takCache.setUseVagvalCache(false);
+    takCache.setUseBehorighetCache(true);
+
+    TakCacheLog takCacheLog = takCache.refresh();
+
+    assertTrue(takCacheLog.isRefreshSuccessful());
+    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
+    XMLAssert.assertXpathExists("/persistentCache/anropsBehorighetsInfo",
+        new InputSource(new FileReader(cachefileName)));
+
+  }
+
+  @Test
+  public void ifExistingCacheExistItShopuldBeUsedIfRefreshFailes()
+      throws Exception {
+
+    mockTakServiceDefaultValues();
+
+    TakCacheLog takCacheLog = takCache.refresh();
+    assertTrue(takCacheLog.isRefreshSuccessful());
+    assertEquals( REFRESH_OK, takCacheLog.getRefreshStatus() );
+    assertEquals( 5, takCacheLog.getNumberBehorigheter());
+    assertEquals( 5, takCacheLog.getNumberVagval());
+
+
+    Mockito.when(takService.getVirtualiseringar())
+        .thenThrow(new TakServiceException(new Exception("Should not happen")));;
+
+    takCacheLog = takCache.refresh();
+
+    assertFalse(takCacheLog.isRefreshSuccessful());
+    assertEquals(REUSING_EXISTING_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(5, takCacheLog.getNumberVagval());
+    assertEquals(5, takCacheLog.getNumberBehorigheter());
+  }
+
+  private String getLocalCacheResource() {
+    return TakCacheTest.class.getClassLoader().getResource("tklocalcache-test.xml").getFile();
+  }
+
+  private void mockTakServiceDefaultValues() throws TakServiceException {
+    Mockito.when(takService.getBehorigheter())
+        .thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
+    Mockito.when(takService.getVirtualiseringar())
+        .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
   }
 }
