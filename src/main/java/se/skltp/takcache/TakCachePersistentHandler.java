@@ -20,7 +20,7 @@ public class TakCachePersistentHandler {
   public static final String MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK = "Failed to restore from local TAK: ";
   public static final String MSG_FAILED_TO_SAVE_TO_LOCAL_TAK = "Failed to save to local TAK: ";
 
-  private TakCachePersistentHandler() {
+   private TakCachePersistentHandler() {
     // Private Utility class
   }
 
@@ -50,7 +50,7 @@ public class TakCachePersistentHandler {
       jaxbMarshaller.marshal(pc, new File(fileName));
     } catch (Exception e) {
       LOGGER.error(MSG_FAILED_TO_SAVE_TO_LOCAL_TAK + fileName, e);
-      throw (new PersistentCacheException(e.getMessage()));
+      throw (new PersistentCacheException(e));
     }
   }
 
@@ -72,7 +72,7 @@ public class TakCachePersistentHandler {
       return (PersistentCache) jaxbUnmarshaller.unmarshal(new File(fileName));
     } catch (Exception e) {
       LOGGER.error(MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK + fileName, e);
-      throw (new PersistentCacheException(e.getMessage()));
+      throw (new PersistentCacheException(e));
     }
   }
 

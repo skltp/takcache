@@ -1,5 +1,6 @@
 package se.skltp.takcache;
 
+import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_FAILED;
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
 
 import java.net.InetAddress;
@@ -269,7 +270,7 @@ public class TakCacheImpl implements TakCache {
 
     takCacheLog.addLog("Init TAK cache loaded number of permissions: " + takCacheLog.getNumberBehorigheter());
     takCacheLog.addLog("Init TAK cache loaded number of virtualizations: " + takCacheLog.getNumberVagval());
-    takCacheLog.addLog("Init done, was successful: " + takCacheLog.isRefreshSuccessful());
+    takCacheLog.addLog("Init done, was successful: " + (takCacheLog.getRefreshStatus()!=REFRESH_FAILED));
   }
 
   private String getHostName() {
