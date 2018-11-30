@@ -44,6 +44,8 @@ public class TakCachePersistentHandler {
       JAXBContext jaxbContext = JAXBContext.newInstance(PersistentCache.class);
       Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
+      LOGGER.info("Save virtualizations and permissions to local TAK copy: {}", fileName);
+
       PersistentCache pc = new PersistentCache();
       pc.virtualiseringsInfo = vagval;
       pc.anropsBehorighetsInfo = behorigheter;
@@ -67,6 +69,7 @@ public class TakCachePersistentHandler {
     }
 
     try {
+      LOGGER.info("Restore virtualizations and permissions from local TAK copy: {}", fileName);
       JAXBContext jaxbContext = JAXBContext.newInstance(PersistentCache.class);
       Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
       return (PersistentCache) jaxbUnmarshaller.unmarshal(new File(fileName));
