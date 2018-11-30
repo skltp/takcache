@@ -44,8 +44,8 @@
 
   <scm>
     <url>http://github.com/skltp/takcache</url>
-    <connection>scm:git:git://github.com/skltp/takcache.git</connection>
-    <developerConnection>scm:git:git://github.com/skltp/takcache.git</developerConnection>
+    <connection>scm:git:https://github.com/skltp/takcache.git</connection>
+    <developerConnection>scm:git:https://github.com/skltp/takcache.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
