@@ -25,48 +25,64 @@ public class TakCachePersistentHandler {
   }
 
   @XmlRootElement
-  static class PersistentCache {
+  public static class PersistentCache {
 
     @XmlElement
     protected List<VirtualiseringsInfoType> virtualiseringsInfo;
+
     @XmlElement
     protected List<AnropsBehorighetsInfoType> anropsBehorighetsInfo;
   }
 
+  public static void saveBehorigheter(String fileName, List<AnropsBehorighetsInfoType> behorigheter)
+      throws PersistentCacheException {
+
+    PersistentCache persistentCache;
+    try {
+      persistentCache = restoreFromLocalCache(fileName);
+    } catch (PersistentCacheException e) {
+      persistentCache = new PersistentCache();
+    }
+    persistentCache.anropsBehorighetsInfo = behorigheter;
+    savePersistentCache(fileName, persistentCache);
+  }
+
+  public static void saveVagval(String fileName, List<VirtualiseringsInfoType> vagval)
+      throws PersistentCacheException {
+
+    PersistentCache persistentCache;
+    try {
+      persistentCache = restoreFromLocalCache(fileName);
+    } catch (PersistentCacheException e) {
+      persistentCache = new PersistentCache();
+    }
+    persistentCache.virtualiseringsInfo = vagval;
+    savePersistentCache(fileName, persistentCache);
+  }
+
   public static void saveToLocalCache(String fileName, List<VirtualiseringsInfoType> vagval, List<AnropsBehorighetsInfoType> behorigheter)
       throws PersistentCacheException {
-    if (fileName == null || fileName.isEmpty()) {
-      LOGGER.warn(MSG_NO_FILE_NAME_DEFINED);
-      throw (new PersistentCacheException(MSG_NO_FILE_NAME_DEFINED));
-    }
 
-    try {
-      JAXBContext jaxbContext = JAXBContext.newInstance(PersistentCache.class);
-      Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+    PersistentCache persistentCache = new PersistentCache();
+    persistentCache.virtualiseringsInfo = vagval;
+    persistentCache.anropsBehorighetsInfo = behorigheter;
 
-      LOGGER.info("Save virtualizations and permissions to local TAK copy: {}", fileName);
+    savePersistentCache(fileName, persistentCache);
+  }
 
-      PersistentCache pc = new PersistentCache();
-      pc.virtualiseringsInfo = vagval;
-      pc.anropsBehorighetsInfo = behorigheter;
-      jaxbMarshaller.marshal(pc, new File(fileName));
-    } catch (Exception e) {
-      LOGGER.error(MSG_FAILED_TO_SAVE_TO_LOCAL_TAK + fileName, e);
-      throw (new PersistentCacheException(e));
-    }
+  public static List<AnropsBehorighetsInfoType> restoreBehorigheter(String fileName) throws PersistentCacheException {
+     PersistentCache persistentCache =restoreFromLocalCache(fileName);
+     return persistentCache.anropsBehorighetsInfo;
+  }
+
+  public static List<VirtualiseringsInfoType> restoreVagval(String fileName) throws PersistentCacheException {
+    PersistentCache persistentCache =restoreFromLocalCache(fileName);
+    return persistentCache.virtualiseringsInfo;
   }
 
   public static PersistentCache restoreFromLocalCache(String fileName)
       throws PersistentCacheException {
-    return unmarshallPersistenCache(fileName);
-  }
-
-  public static PersistentCache unmarshallPersistenCache(String fileName)
-      throws PersistentCacheException {
-    if (fileName == null || fileName.isEmpty()) {
-      LOGGER.warn(MSG_NO_FILE_NAME_DEFINED);
-      throw (new PersistentCacheException(MSG_NO_FILE_NAME_DEFINED ));
-    }
+    evaluateFileName(fileName);
 
     try {
       LOGGER.info("Restore virtualizations and permissions from local TAK copy: {}", fileName);
@@ -76,6 +92,28 @@ public class TakCachePersistentHandler {
     } catch (Exception e) {
       LOGGER.error(MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK + fileName, e);
       throw (new PersistentCacheException(e));
+    }
+  }
+
+  protected static void savePersistentCache(String fileName, PersistentCache persistentCache) throws PersistentCacheException {
+    evaluateFileName(fileName);
+
+    try {
+      LOGGER.info("Save virtualizations and permissions to local TAK copy: {}", fileName);
+
+      JAXBContext jaxbContext = JAXBContext.newInstance(PersistentCache.class);
+      Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+      jaxbMarshaller.marshal(persistentCache, new File(fileName));
+    } catch (Exception e) {
+      LOGGER.error(MSG_FAILED_TO_SAVE_TO_LOCAL_TAK + fileName, e);
+      throw (new PersistentCacheException(e));
+    }
+  }
+
+  private static void evaluateFileName(String fileName) throws PersistentCacheException {
+    if (fileName == null || fileName.isEmpty()) {
+      LOGGER.warn(MSG_NO_FILE_NAME_DEFINED);
+      throw (new PersistentCacheException(MSG_NO_FILE_NAME_DEFINED));
     }
   }
 

@@ -5,6 +5,7 @@ import se.skltp.takcache.exceptions.RoutingException;
 
 import java.util.List;
 
+@Deprecated
 public interface TakCache {
     public TakCacheLog refresh();
 

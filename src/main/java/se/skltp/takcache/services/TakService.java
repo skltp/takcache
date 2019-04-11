@@ -11,4 +11,5 @@ public interface TakService {
 
     public List<VirtualiseringsInfoType> getVirtualiseringar() throws TakServiceException;
 
+    String getEndPointAddress();
 }

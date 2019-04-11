@@ -38,6 +38,7 @@ public class TakServiceImpl implements TakService {
         this.userAgentHeader=userAgentHeader;
   }
 
+  @Override
   public List<VirtualiseringsInfoType> getVirtualiseringar() throws TakServiceException {
     List<VirtualiseringsInfoType> virtualiseringsInfoTypes = null;
     try {
@@ -52,6 +53,7 @@ public class TakServiceImpl implements TakService {
     return virtualiseringsInfoTypes;
   }
 
+  @Override
   public List<AnropsBehorighetsInfoType> getBehorigheter() throws TakServiceException {
     List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypes = null;
     try {
@@ -64,6 +66,11 @@ public class TakServiceImpl implements TakService {
       throw new TakServiceException(e);
     }
     return anropsBehorighetsInfoTypes;
+  }
+
+  @Override
+  public String getEndPointAddress(){
+    return endpointAddressTjanstekatalog;
   }
 
   private static URL createEndpointUrlFromWsdl(String adressOfWsdl) {
@@ -99,6 +106,7 @@ public class TakServiceImpl implements TakService {
     }
     return port;
   }
+
 
 
 }

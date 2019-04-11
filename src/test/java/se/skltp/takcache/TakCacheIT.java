@@ -1,5 +1,9 @@
 package se.skltp.takcache;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static se.skltp.takcache.services.TakServiceImpl.ENDPOINT_ADDRESS_PROPERTY_NAME;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,11 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.SocketUtils;
 import se.skltp.takcache.util.SokVagvalsInfoMockWebService;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_OK;
-import static se.skltp.takcache.services.TakServiceImpl.ENDPOINT_ADDRESS_PROPERTY_NAME;
-
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration("classpath*:spring-context.xml")
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
@@ -26,6 +25,12 @@ public class TakCacheIT {
 
     @Autowired
     TakCache takCache;
+
+    @Autowired
+    VagvalCache vagvalCache;
+
+    @Autowired
+    BehorighetCache behorighetCache;
 
     @BeforeClass
     public static void before(){
@@ -42,9 +47,39 @@ public class TakCacheIT {
         TakCacheLog takCacheLog  = takCache.refresh();
 
         assertTrue( takCacheLog.isRefreshSuccessful() );
-        assertEquals( REFRESH_OK, takCacheLog.getRefreshStatus() );
+        assertEquals( RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus() );
         assertEquals( 5, takCacheLog.getNumberBehorigheter());
         assertEquals( 5, takCacheLog.getNumberVagval());
+
+        mockWebService.stop();
+
+    }
+
+    @Test
+    public void simpleSuccessfulVagvalRefreshTest() throws Exception {
+
+        mockWebService.start();
+
+        TakCacheStatus takCacheLog  = vagvalCache.refresh();
+
+        assertTrue( takCacheLog.isRefreshSuccessful() );
+        assertEquals( RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus() );
+        assertEquals( 5, takCacheLog.getNumberInCache());
+
+        mockWebService.stop();
+
+    }
+
+    @Test
+    public void simpleSuccessfulBehorighetRefreshTest() throws Exception {
+
+        mockWebService.start();
+
+        TakCacheStatus takCacheLog  = behorighetCache.refresh();
+
+        assertTrue( takCacheLog.isRefreshSuccessful() );
+        assertEquals( RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus() );
+        assertEquals( 5, takCacheLog.getNumberInCache());
 
         mockWebService.stop();
 

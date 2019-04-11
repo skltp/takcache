@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
-import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_OK;
-import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
-import static se.skltp.takcache.TakCacheLog.RefreshStatus.REUSING_EXISTING_CACHE;
 import static se.skltp.takcache.util.TestTakDataDefines.ADDRESS_1;
 import static se.skltp.takcache.util.TestTakDataDefines.NAMNRYMD_1;
 import static se.skltp.takcache.util.TestTakDataDefines.NAMNRYMD_2;
@@ -18,7 +15,6 @@ import static se.skltp.takcache.util.TestTakDataDefines.SENDER_1;
 import static se.skltp.takcache.util.TestTakDataDefines.SENDER_3;
 
 import java.io.FileReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -83,22 +79,10 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertTrue(takCacheLog.isRefreshSuccessful());
-    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus());
     assertEquals(5, takCacheLog.getNumberBehorigheter());
     assertEquals(5, takCacheLog.getNumberVagval());
   }
-
-//  @Test
-//  public void simpleSuccessfulRefreshTest() throws Exception {
-//    mockTakServiceDefaultValues();
-//    TakCacheLog takCacheLog = takCache.refresh();
-//
-//    assertTrue(takCacheLog.isRefreshSuccessful());
-//    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
-//    assertEquals(5, takCacheLog.getNumberBehorigheter());
-//    assertEquals(5, takCacheLog.getNumberVagval());
-//  }
-
 
   @Test
   public void simpleBehorighetTest() throws Exception {
@@ -147,7 +131,7 @@ public class TakCacheTest {
   public void filterShouldRemoveNotMatchingNamespaceInVagvalTest() throws Exception {
     mockTakServiceDefaultValues();
     TakCacheLog takCacheLog = takCache.refresh(NAMNRYMD_1);
-    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus());
     assertEquals(3, takCacheLog.getNumberVagval());
     assertEquals(0, takCache.getRoutingInfo(NAMNRYMD_2, RECEIVER_2).size());
   }
@@ -193,7 +177,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberBehorigheter());
     assertEquals(1, takCacheLog.getNumberVagval());
 
@@ -212,7 +196,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberBehorigheter());
     assertEquals(1, takCacheLog.getNumberVagval());
 
@@ -231,7 +215,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberBehorigheter());
     assertEquals(1, takCacheLog.getNumberVagval());
 
@@ -252,7 +236,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh("NamespaceNoMatch");
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberBehorigheter());
     assertEquals(1, takCacheLog.getNumberVagval());
 
@@ -271,7 +255,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertTrue(takCacheLog.isRefreshSuccessful());
-    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus());
     XMLAssert.assertXpathExists("/persistentCache/virtualiseringsInfo",
         new InputSource(new FileReader(cachefileName)));
     XMLAssert.assertXpathExists("/persistentCache/anropsBehorighetsInfo",
@@ -324,7 +308,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberVagval());
     assertEquals(0, takCacheLog.getNumberBehorigheter());
 
@@ -344,7 +328,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.RESTORED_FROM_LOCAL_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(1, takCacheLog.getNumberBehorigheter());
     assertEquals(0, takCacheLog.getNumberVagval());
 
@@ -365,7 +349,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertTrue(takCacheLog.isRefreshSuccessful());
-    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus());
     XMLAssert.assertXpathExists("/persistentCache/virtualiseringsInfo",
         new InputSource(new FileReader(cachefileName)));
 
@@ -387,7 +371,7 @@ public class TakCacheTest {
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertTrue(takCacheLog.isRefreshSuccessful());
-    assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus());
     XMLAssert.assertXpathExists("/persistentCache/anropsBehorighetsInfo",
         new InputSource(new FileReader(cachefileName)));
 
@@ -401,7 +385,7 @@ public class TakCacheTest {
 
     TakCacheLog takCacheLog = takCache.refresh();
     assertTrue(takCacheLog.isRefreshSuccessful());
-    assertEquals( REFRESH_OK, takCacheLog.getRefreshStatus() );
+    assertEquals( RefreshStatus.REFRESH_OK, takCacheLog.getRefreshStatus() );
     assertEquals( 5, takCacheLog.getNumberBehorigheter());
     assertEquals( 5, takCacheLog.getNumberVagval());
 
@@ -412,7 +396,7 @@ public class TakCacheTest {
     takCacheLog = takCache.refresh();
 
     assertFalse(takCacheLog.isRefreshSuccessful());
-    assertEquals(REUSING_EXISTING_CACHE, takCacheLog.getRefreshStatus());
+    assertEquals(RefreshStatus.REUSING_EXISTING_CACHE, takCacheLog.getRefreshStatus());
     assertEquals(5, takCacheLog.getNumberVagval());
     assertEquals(5, takCacheLog.getNumberBehorigheter());
   }

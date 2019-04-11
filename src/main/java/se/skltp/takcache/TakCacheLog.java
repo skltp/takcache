@@ -3,19 +3,10 @@ package se.skltp.takcache;
 import java.util.ArrayList;
 import java.util.List;
 
-import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_FAILED;
-
 public class TakCacheLog {
 
-    public enum RefreshStatus {
-        REFRESH_OK,
-        REFRESH_FAILED,
-        RESTORED_FROM_LOCAL_CACHE,
-        REUSING_EXISTING_CACHE;
-    }
-
     private  boolean isRefreshSuccessful = false;
-    private  RefreshStatus refreshStatus = REFRESH_FAILED;
+    private  RefreshStatus refreshStatus = RefreshStatus.REFRESH_FAILED;
 
     private  int numberBehorigheter;
     private  int numberVagval;

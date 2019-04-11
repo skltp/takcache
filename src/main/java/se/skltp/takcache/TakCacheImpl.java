@@ -1,8 +1,5 @@
 package se.skltp.takcache;
 
-import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_FAILED;
-import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
@@ -18,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
-import se.skltp.takcache.TakCacheLog.RefreshStatus;
 import se.skltp.takcache.TakCachePersistentHandler.PersistentCache;
 import se.skltp.takcache.behorighet.BehorighetHandler;
 import se.skltp.takcache.exceptions.PersistentCacheException;
@@ -27,6 +23,7 @@ import se.skltp.takcache.services.TakService;
 import se.skltp.takcache.vagval.VagvalHandler;
 
 
+@Deprecated
 @Service
 public class TakCacheImpl implements TakCache {
 
@@ -175,7 +172,7 @@ public class TakCacheImpl implements TakCache {
 
       LOGGER.warn("Restored from local cache file: "+ localTakCacheFileName );
       takCacheLog.addLog(SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_COPY + localTakCacheFileName);
-      takCacheLog.setRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
+      takCacheLog.setRefreshStatus(RefreshStatus.RESTORED_FROM_LOCAL_CACHE);
 
     } catch (PersistentCacheException e) {
       takCacheLog.addLog(MSG_RESTORE_FROM_FILE_FAILED +localTakCacheFileName);
@@ -201,7 +198,7 @@ public class TakCacheImpl implements TakCache {
       }
 
       LOGGER.info("Number of filtered virtualizations: {}", filteredVirtualiseringar.size());
-      takCacheLog.setRefreshStatus(TakCacheLog.RefreshStatus.REFRESH_OK);
+      takCacheLog.setRefreshStatus(RefreshStatus.REFRESH_OK);
       vagvalCache = new VagvalHandler(filteredVirtualiseringar);
       takCacheLog.setRefreshSuccessful(true);
     } catch (Exception e) {
@@ -270,7 +267,7 @@ public class TakCacheImpl implements TakCache {
 
     takCacheLog.addLog("Init TAK cache loaded number of permissions: " + takCacheLog.getNumberBehorigheter());
     takCacheLog.addLog("Init TAK cache loaded number of virtualizations: " + takCacheLog.getNumberVagval());
-    takCacheLog.addLog("Init done, was successful: " + (takCacheLog.getRefreshStatus()!=REFRESH_FAILED));
+    takCacheLog.addLog("Init done, was successful: " + (takCacheLog.getRefreshStatus()!=RefreshStatus.REFRESH_FAILED));
   }
 
   private String getHostName() {
