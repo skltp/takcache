@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.SocketUtils;
 import se.skltp.takcache.util.SokVagvalsInfoMockWebService;
@@ -19,6 +20,7 @@ import static se.skltp.takcache.services.TakServiceImpl.ENDPOINT_ADDRESS_PROPERT
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration("classpath*:spring-context.xml")
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
+@TestPropertySource("classpath:test-properties.properties")
 public class TakCacheIT {
     public static final String TAK_SOKVALSINFO_ADDRESS = "http://localhost:%d/sokvagvalsinfo";
 

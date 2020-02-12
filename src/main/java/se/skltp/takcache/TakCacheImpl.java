@@ -58,7 +58,10 @@ public class TakCacheImpl implements TakCache {
   protected String localTakCacheFileName;
 
   @Value("${takcache.tjanstegranssnitt.filter:#{null}}")
-  protected String tjanstegranssnittFilter;
+  protected List<String> tjanstegranssnittFilter;
+
+  @Value("${takcache.tjanstegranssnitt.filter:#{null}}")
+  protected String filter;
 
   private Calendar calendar = Calendar.getInstance();
 
@@ -69,10 +72,16 @@ public class TakCacheImpl implements TakCache {
 
   @Override
   public TakCacheLog refresh(String tjanstegranssnittFilter) {
-    this.tjanstegranssnittFilter = tjanstegranssnittFilter;
+    this.tjanstegranssnittFilter = new ArrayList();
+    this.tjanstegranssnittFilter.add(tjanstegranssnittFilter);
     return refresh();
   }
 
+  @Override
+  public TakCacheLog refresh(List<String> tjanstegranssnittFilter) {
+    this.tjanstegranssnittFilter = tjanstegranssnittFilter;
+    return refresh();
+  }
 
   @Override
   public TakCacheLog refresh() {
@@ -214,7 +223,7 @@ public class TakCacheImpl implements TakCache {
     if (tjanstegranssnittFilter != null && !tjanstegranssnittFilter.isEmpty()) {
       return virtualiseringar
           .stream()
-          .filter(virt -> tjanstegranssnittFilter.equals(virt.getTjansteKontrakt()))
+          .filter(virt -> tjanstegranssnittFilter.contains(virt.getTjansteKontrakt()))
           .collect(Collectors.toList());
     }
     return virtualiseringar;
@@ -250,7 +259,7 @@ public class TakCacheImpl implements TakCache {
     if (tjanstegranssnittFilter != null && !tjanstegranssnittFilter.isEmpty()) {
       return behorigheter
           .stream()
-          .filter(behorighet -> tjanstegranssnittFilter.equals(behorighet.getTjansteKontrakt()))
+          .filter(behorighet -> tjanstegranssnittFilter.contains(behorighet.getTjansteKontrakt()))
           .collect(Collectors.toList());
     }
     return behorigheter;

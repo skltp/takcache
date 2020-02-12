@@ -6,6 +6,9 @@ import se.skltp.takcache.exceptions.RoutingException;
 import java.util.List;
 
 public interface TakCache {
+
+    public TakCacheLog refresh(List<String> tjanstegranssnittFilter);
+
     public TakCacheLog refresh();
 
     public TakCacheLog refresh(String tjanstegranssnitt);
