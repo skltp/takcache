@@ -7,18 +7,25 @@ import java.util.List;
 
 public interface TakCache {
 
-    public TakCacheLog refresh(List<String> tjanstegranssnittFilter);
+    TakCacheLog refresh();
 
-    public TakCacheLog refresh();
+    TakCacheLog refresh(List<String> tjanstegranssnittFilter);
 
-    public TakCacheLog refresh(String tjanstegranssnitt);
-
-    public boolean isAuthorized(String senderId, String tjanstegranssnitt, String receiverAddress);
-
-    public List<RoutingInfo> getRoutingInfo(String tjanstegranssnitt, String receiverAddress);
+    TakCacheLog refresh(VagvalFilter vagvalFilter, BehorighetFilter behorighetFilter);
 
     @Deprecated
-    public List<AnropsBehorighetsInfoType> getAnropsBehorighetsInfos();
+    boolean isAuthorized(String senderId, String tjanstegranssnitt, String receiverAddress);
 
-    public String getRoutingAddress(String tjanstegranssnitt, String receiverAddress, String rivProfile) throws RoutingException;
+    @Deprecated
+    List<RoutingInfo> getRoutingInfo(String tjanstegranssnitt, String receiverAddress);
+
+    @Deprecated
+    List<AnropsBehorighetsInfoType> getAnropsBehorighetsInfos();
+
+    @Deprecated
+    String getRoutingAddress(String tjanstegranssnitt, String receiverAddress, String rivProfile) throws RoutingException;
+
+    BehorigheterCache getBehorigeterCache();
+
+    VagvalCache getVagvalCache();
 }

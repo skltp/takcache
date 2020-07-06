@@ -35,10 +35,7 @@ public class TakCachePersistentHandler {
 
   public static void saveToLocalCache(String fileName, List<VirtualiseringsInfoType> vagval, List<AnropsBehorighetsInfoType> behorigheter)
       throws PersistentCacheException {
-    if (fileName == null || fileName.isEmpty()) {
-      LOGGER.warn(MSG_NO_FILE_NAME_DEFINED);
-      throw (new PersistentCacheException(MSG_NO_FILE_NAME_DEFINED));
-    }
+    checkFileNameExist(fileName);
 
     try {
       JAXBContext jaxbContext = JAXBContext.newInstance(PersistentCache.class);
@@ -56,6 +53,28 @@ public class TakCachePersistentHandler {
     }
   }
 
+  public static void saveBehorigheterToLocalCache(String fileName, List<AnropsBehorighetsInfoType> behorigheter)
+      throws PersistentCacheException {
+    checkFileNameExist(fileName);
+    try {
+      PersistentCache pc = restoreFromLocalCache(fileName);
+      saveToLocalCache(fileName, pc.virtualiseringsInfo, behorigheter);
+    }catch(PersistentCacheException e){
+      saveToLocalCache(fileName, null, behorigheter);
+    }
+  }
+
+  public static void saveVagvalToLocalCache(String fileName, List<VirtualiseringsInfoType> vagval)
+      throws PersistentCacheException {
+    checkFileNameExist(fileName);
+    try {
+      PersistentCache pc = restoreFromLocalCache(fileName);
+      saveToLocalCache(fileName, vagval, pc.anropsBehorighetsInfo);
+    }catch(PersistentCacheException e){
+      saveToLocalCache(fileName, vagval, null);
+    }
+  }
+
   public static PersistentCache restoreFromLocalCache(String fileName)
       throws PersistentCacheException {
     return unmarshallPersistenCache(fileName);
@@ -63,10 +82,7 @@ public class TakCachePersistentHandler {
 
   public static PersistentCache unmarshallPersistenCache(String fileName)
       throws PersistentCacheException {
-    if (fileName == null || fileName.isEmpty()) {
-      LOGGER.warn(MSG_NO_FILE_NAME_DEFINED);
-      throw (new PersistentCacheException(MSG_NO_FILE_NAME_DEFINED ));
-    }
+    checkFileNameExist(fileName);
 
     try {
       LOGGER.info("Restore virtualizations and permissions from local TAK copy: {}", fileName);
@@ -76,6 +92,13 @@ public class TakCachePersistentHandler {
     } catch (Exception e) {
       LOGGER.error(MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK + fileName, e);
       throw (new PersistentCacheException(e));
+    }
+  }
+
+  private static void checkFileNameExist(String fileName) throws PersistentCacheException {
+    if (fileName == null || fileName.isEmpty()) {
+      LOGGER.warn(MSG_NO_FILE_NAME_DEFINED);
+      throw (new PersistentCacheException(MSG_NO_FILE_NAME_DEFINED));
     }
   }
 
