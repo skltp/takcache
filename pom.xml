@@ -11,15 +11,15 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
 
     <tak.version>1.5.0</tak.version>
-    <log4j2-version>2.1</log4j2-version>
-    <spring.version>4.3.0.RELEASE</spring.version>
-    <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
+    <log4j2-version>2.17.1</log4j2-version>
+    <spring.version>5.3.18</spring.version>
+    <lmax_disruptor-version>3.4.4</lmax_disruptor-version>
 
-    <surefire.plugin.version>2.20.1</surefire.plugin.version>
+    <surefire.plugin.version>2.22.2</surefire.plugin.version>
 
     <!-- ************************-->
     <!-- Sonar/Reporting settings -->
@@ -90,21 +90,21 @@
     </dependency>
 
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.8.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.testinfected.hamcrest-matchers</groupId>
-      <artifactId>core-matchers</artifactId>
-      <version>1.5</version>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>2.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
-      <version>1.9.5</version>
+      <version>1.10.19</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -114,10 +114,15 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>xmlunit</groupId>
-      <artifactId>xmlunit</artifactId>
-      <version>1.5</version>
+      <groupId>org.xmlunit</groupId>
+      <artifactId>xmlunit-legacy</artifactId>
+      <version>2.9.0</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.ws</groupId>
+      <artifactId>jaxws-rt</artifactId>
+      <version>2.3.2</version>
     </dependency>
 
   </dependencies>

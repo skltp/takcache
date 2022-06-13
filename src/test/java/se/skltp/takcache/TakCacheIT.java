@@ -20,7 +20,6 @@ import static se.skltp.takcache.services.TakServiceImpl.ENDPOINT_ADDRESS_PROPERT
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration("classpath*:spring-context.xml")
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
-@TestPropertySource("classpath:test-properties.properties")
 public class TakCacheIT {
     public static final String TAK_SOKVALSINFO_ADDRESS = "http://localhost:%d/sokvagvalsinfo";
 
