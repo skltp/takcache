@@ -1,6 +1,7 @@
 pipeline {
     agent any
     parameters {
+         string(name: 'SONAR_TOKENID', description: 'The SonarQube access token ID.', defaultValue: 'ntjp-sonarqube-token')
          string(name: 'SONAR_ENV', description: 'The SonarQube environment to use when scanning.', defaultValue: 'inera-sonarqube')
          string(name: 'SONAR_PROJECTKEY', description: 'The project key for the SQ project we are scanning', defaultValue: 'ntjp-takcache')
          string(name: 'SONAR_JAVA_BINARIES', description: 'What binaries to scan.', defaultValue: 'target/classes/**/*')
@@ -14,7 +15,6 @@ pipeline {
         JAVA_HOME = "${env.JDK_PATH}"
         MAVEN_IMAGE = 'maven:3.8.4-jdk-11'
         SCANNER_HOME = tool name: 'SonarScanner 4.5'
-        SONAR_TOKENID = credentials('ntjp-sonarqube-token')
     }
 
     stages {
@@ -43,8 +43,9 @@ pipeline {
                 branch 'develop'
             }
             steps {
+                
                 withSonarQubeEnv(credentialsId: "${env.SONAR_TOKENID}", installationName: "${params.SONAR_ENV}") {
-                    sh """${SCANNER_HOME}/bin/sonar-scanner \
+                    sh """${env.SCANNER_HOME}/bin/sonar-scanner \
                             -Dsonar.projectKey=${params.SONAR_PROJECTKEY} \
                             -Dsonar.projectVersion=${pomVersion} \
                             -Dsonar.java.binaries=${params.SONAR_JAVA_BINARIES} \
