@@ -44,7 +44,7 @@ pipeline {
             }
             steps {
                 
-                withSonarQubeEnv(credentialsId: "${env.SONAR_TOKENID}", installationName: "${params.SONAR_ENV}") {
+                withSonarQubeEnv(credentialsId: "${params.SONAR_TOKENID}", installationName: "${params.SONAR_ENV}") {
                     sh """${env.SCANNER_HOME}/bin/sonar-scanner \
                             -Dsonar.projectKey=${params.SONAR_PROJECTKEY} \
                             -Dsonar.projectVersion=${pomVersion} \
