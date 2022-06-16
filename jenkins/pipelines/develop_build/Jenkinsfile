@@ -1,9 +1,8 @@
 pipeline {
     agent any
     parameters {
-         credentials(name: 'SONAR_TOKENID', description: 'The tokenID to the SQ server', defaultValue: 'ntjp-sonarqube-token', credentialType: "Secret Text", required: true )
-         string(name: 'SONAR_ENV', description: 'The SonarQube environment to use when scanning.', defaultValue: 'inera-sonarqube', required: true )
-         string(name: 'SONAR_PROJECTKEY', description: 'The project key for the SQ project we are scanning', defaultValue: 'ntjp-takcache', required: true )
+         string(name: 'SONAR_ENV', description: 'The SonarQube environment to use when scanning.', defaultValue: 'inera-sonarqube')
+         string(name: 'SONAR_PROJECTKEY', description: 'The project key for the SQ project we are scanning', defaultValue: 'ntjp-takcache')
          string(name: 'SONAR_JAVA_BINARIES', description: 'What binaries to scan.', defaultValue: 'target/classes/**/*')
          string(name: 'SONAR_JACOCO_REPORTS', description: 'Where the jacoco coverage report is stored.', defaultValue: './target/site/jacoco/jacoco.xml')
          string(name: 'SONAR_TEST_INCLUSIONS', description: 'What tests to include in the scan', defaultValue: '**/src/test/**/*.java ')
@@ -15,6 +14,7 @@ pipeline {
         JAVA_HOME = "${env.JDK_PATH}"
         MAVEN_IMAGE = 'maven:3.8.4-jdk-11'
         SCANNER_HOME = tool name: 'SonarScanner 4.5'
+        SONAR_TOKENID = credentials('ntjp-sonarqube-token')
     }
 
     stages {
@@ -43,7 +43,7 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                withSonarQubeEnv(credentialsId: "${params.SONAR_TOKENID}", installationName: "${params.SONAR_ENV}") {
+                withSonarQubeEnv(credentialsId: "${env.SONAR_TOKENID}", installationName: "${params.SONAR_ENV}") {
                     sh """${SCANNER_HOME}/bin/sonar-scanner \
                             -Dsonar.projectKey=${params.SONAR_PROJECTKEY} \
                             -Dsonar.projectVersion=${pomVersion} \
