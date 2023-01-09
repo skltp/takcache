@@ -47,6 +47,7 @@ import se.skltp.takcache.util.VagvalSchemasTestListsUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:spring-context.xml")
+@TestPropertySource("classpath:test-properties.properties")
 public class TakCacheTest {
 
   @Rule
@@ -188,9 +189,9 @@ public class TakCacheTest {
     takCache.setLocalTakCacheFileName(getLocalCacheResource());
 
     Mockito.when(takService.getVirtualiseringar())
-        .thenThrow(new TakServiceException(new Exception("TEST: Mock-exception on call to takService.getVirtualiseringar() (for cache fallback)")));
+        .thenThrow(new TakServiceException(new Exception("Failed get virtualizations from TAK")));
     Mockito.when(takService.getBehorigheter())
-        .thenThrow(new TakServiceException(new Exception("TEST: Mock-exception on call to takService.getBehorigheter() (for cache fallback)")));
+        .thenThrow(new TakServiceException(new Exception("Failed get behorigheter from TAK")));
 
     TakCacheLog takCacheLog = takCache.refresh();
 
@@ -316,7 +317,7 @@ public class TakCacheTest {
     assertEquals(5, takCacheLog.getNumberVagval());
 
     Mockito.when(takService.getVirtualiseringar())
-        .thenThrow(new TakServiceException(new Exception("TEST: Mock-exception on call to takService.getVirtualiseringar() (for cache fallback)"))); ;
+        .thenThrow(new TakServiceException(new Exception("Should not happen"))); ;
 
     takCacheLog = takCache.refresh();
 

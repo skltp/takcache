@@ -30,6 +30,7 @@ import se.skltp.takcache.util.VagvalSchemasTestListsUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:spring-context.xml")
+@TestPropertySource("classpath:test-properties.properties")
 public class VagvalCacheTest {
 
   @Rule
@@ -74,7 +75,7 @@ public class VagvalCacheTest {
       throws Exception {
 
     Mockito.when(takService.getVirtualiseringar())
-        .thenThrow(new TakServiceException(new Exception("TEST: Mock-exception on call to takService.getVirtualiseringar() (for cache fallback)")));
+        .thenThrow(new TakServiceException(new Exception("Should not happen")));
 
     vagvalCache.setLocalTakCacheFileName(getLocalCacheResource());
 

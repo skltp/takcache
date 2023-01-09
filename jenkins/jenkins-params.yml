@@ -1,3 +1,0 @@
-sonar-projectkey: 'ntjp-takcache'                       # The project key for the project.
-sonar-java-binaries: 'target/classes/**/*'              # What binaries to scan.
-sonar-jacoco-reports: './target/site/jacoco/jacoco.xml' # Where the jacoco coverage report is stored.

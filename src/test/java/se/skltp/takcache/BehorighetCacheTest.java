@@ -30,6 +30,7 @@ import se.skltp.takcache.util.VagvalSchemasTestListsUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:spring-context.xml")
+@TestPropertySource("classpath:test-properties.properties")
 public class BehorighetCacheTest {
   @Rule
   public TemporaryFolder testFolder = new TemporaryFolder();
@@ -74,7 +75,7 @@ public class BehorighetCacheTest {
       throws Exception {
 
     Mockito.when(takService.getBehorigheter())
-        .thenThrow(new TakServiceException(new Exception("TEST: Mock-exception on call to takService.getBehorigheter() (for cache fallback)")));
+        .thenThrow(new TakServiceException(new Exception("Should not happen")));
 
     behorigheterCache.setLocalTakCacheFileName(getLocalCacheResource());
 
