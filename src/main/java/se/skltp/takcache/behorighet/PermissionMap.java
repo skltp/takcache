@@ -1,11 +1,10 @@
 package se.skltp.takcache.behorighet;
 
-import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 
 public class PermissionMap {
     Map<String, List<AnropsBehorighetsInfoType>> behorighetMap;
@@ -33,6 +32,6 @@ public class PermissionMap {
     }
 
     private String createPermissionsMapKey(String receiverId, String senderId, String tjansteKontrakt) {
-        return receiverId + "|" + senderId + "|" + tjansteKontrakt;
+        return (receiverId + "|" + senderId + "|" + tjansteKontrakt).toLowerCase();
     }
 }

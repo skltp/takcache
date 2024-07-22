@@ -1,11 +1,10 @@
 package se.skltp.takcache.vagval;
 
-import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 
 public class VirtualiseringsInfoMap {
 
@@ -35,6 +34,6 @@ public class VirtualiseringsInfoMap {
     }
 
     private String createVirtualiseringsInfoMapKey(String receiverId, String tjansteKontrakt) {
-        return receiverId + "|" + tjansteKontrakt;
+        return (receiverId + "|" + tjansteKontrakt).toLowerCase();
     }
 }
