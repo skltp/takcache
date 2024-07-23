@@ -5,7 +5,7 @@
 
   <groupId>se.skltp.takcache</groupId>
   <artifactId>takcache</artifactId>
-  <version>2.0.1-SNAPSHOT</version>
+  <version>2.0.1-RC1</version>
 
   <name>takcache</name>
 
@@ -28,7 +28,7 @@
     <url>http://github.com/skltp/takcache</url>
     <connection>scm:git:https://github.com/skltp/takcache.git</connection>
     <developerConnection>scm:git:https://github.com/skltp/takcache.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v2.0.1-RC1</tag>
   </scm>
 
   <distributionManagement>
