@@ -30,7 +30,7 @@ import se.skltp.takcache.vagval.VagvalHandler;
 @Service
 public class VagvalCacheImpl implements VagvalCache {
 
-  private static final Logger LOGGER = LogManager.getLogger(TakCacheImpl.class);
+  private static final Logger LOGGER = LogManager.getLogger(VagvalCacheImpl.class);
 
   TakService takService;
 

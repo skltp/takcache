@@ -11,17 +11,17 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
 
     <tak.version>1.5.0</tak.version>
-    <log4j2-version>2.20.0</log4j2-version>
+    <log4j2-version>2.23.1</log4j2-version>
     <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
-    <spring.version>5.3.18</spring.version>
+    <spring.version>5.3.39</spring.version>
     <lmax_disruptor-version>3.4.4</lmax_disruptor-version>
     <surefire.plugin.version>2.22.2</surefire.plugin.version>
     <failsafe.plugin.version>2.22.2</failsafe.plugin.version>
-    <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
+    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
   </properties>
 
   <scm>
@@ -111,13 +111,13 @@
     <dependency>
       <groupId>org.xmlunit</groupId>
       <artifactId>xmlunit-legacy</artifactId>
-      <version>2.9.0</version>
+      <version>2.9.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-rt</artifactId>
-      <version>2.3.3</version>
+      <version>2.3.7</version>
     </dependency>
 
   </dependencies>
