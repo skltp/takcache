@@ -3,7 +3,7 @@ package se.skltp.takcache;
 import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertEquals;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
