@@ -14,7 +14,9 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
 
-    <tak.version>1.5.0</tak.version>
+    <tak.version>3.2.3</tak.version>
+    <jakarta-packages-version>4.0.2</jakarta-packages-version>
+
     <log4j2-version>2.23.1</log4j2-version>
     <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
     <spring.version>5.3.39</spring.version>
@@ -44,12 +46,58 @@
     </snapshotRepository>
   </distributionManagement>
 
+  <dependencyManagement>
+    <dependencies>
+      <!-- TAK Cache needs to know what the TAK Vägval schemas look like -->
+      <dependency>
+        <groupId>se.skltp.tak</groupId>
+        <artifactId>tak-schemas</artifactId>
+        <version>${tak.version}</version>
+      </dependency>
+
+      <!-- JAXB API, needed for jakarta.xml.bind.* with Java 11 or newer -->
+      <dependency>
+        <groupId>jakarta.xml.bind</groupId>
+        <artifactId>jakarta.xml.bind-api</artifactId>
+        <version>${jakarta-packages-version}</version>
+      </dependency>
+
+      <!-- JAXB Runtime, needed for jakarta.xml.bind.* with Java 11 or newer -->
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>${jakarta-packages-version}</version>
+        <scope>runtime</scope>
+      </dependency>
+
+      <!-- JAX-WS API, needed for jakarta.xml.ws.* with Java 11 or newer -->
+      <dependency>
+        <groupId>jakarta.xml.ws</groupId>
+        <artifactId>jakarta.xml.ws-api</artifactId>
+        <version>${jakarta-packages-version}</version>
+      </dependency>
+
+      <!-- JAX-WS Runtime, needed for jakarta.xml.ws.* with Java 11 or newer -->
+      <dependency>
+        <groupId>com.sun.xml.ws</groupId>
+        <artifactId>jaxws-rt</artifactId>
+        <version>${jakarta-packages-version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <!-- TAK vagval schemas -->
+    <!-- TODO: Temporarily Disabled. Once a built RC or Final version of TAK 4.0+ exists, it should be reactivated. -->
+    <!-- TODO: ALSO!! At that point, you must delete the copied-in class files from se.skltp.tak... src files. -->
+<!--    <dependency>-->
+<!--      <groupId>se.skltp.tak</groupId>-->
+<!--      <artifactId>tak-schemas</artifactId>-->
+<!--    </dependency>-->
+
     <dependency>
-      <groupId>se.skltp.tak</groupId>
-      <artifactId>tak-schemas</artifactId>
-      <version>${tak.version}</version>
+      <groupId>com.sun.xml.ws</groupId>
+      <artifactId>jaxws-rt</artifactId>
     </dependency>
 
     <dependency>
@@ -114,11 +162,7 @@
       <version>2.9.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.sun.xml.ws</groupId>
-      <artifactId>jaxws-rt</artifactId>
-      <version>2.3.7</version>
-    </dependency>
+
 
   </dependencies>
 

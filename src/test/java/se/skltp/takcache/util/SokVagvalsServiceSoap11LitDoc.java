@@ -1,15 +1,12 @@
 package se.skltp.takcache.util;
 
-import se.skltp.tak.vagvalsinfo.wsdl.v2.HamtaAllaAnropsBehorigheterResponseType;
-import se.skltp.tak.vagvalsinfo.wsdl.v2.HamtaAllaTjanstekontraktResponseType;
-import se.skltp.tak.vagvalsinfo.wsdl.v2.HamtaAllaVirtualiseringarResponseType;
-import se.skltp.tak.vagvalsinfo.wsdl.v2.SokVagvalsInfoInterface;
+import se.skltp.tak.vagvalsinfo.wsdl.v2.*;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
+import jakarta.jws.WebService;
+import jakarta.jws.soap.SOAPBinding;
 
 @WebService(targetNamespace = "urn:skl:tp:vagvalsinfo:v2", name = "SokVagvalsSoap11LitDoc")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
@@ -36,6 +33,11 @@ public class SokVagvalsServiceSoap11LitDoc implements SokVagvalsInfoInterface {
     @WebMethod
     public HamtaAllaVirtualiseringarResponseType hamtaAllaVirtualiseringar(@WebParam(partName = "parameters",name = "hamtaAllaVirtualiseringar",targetNamespace = "urn:skl:tp:vagvalsinfo:v2") Object o) {
         return hamtaAllaVirtualiseringarResponseType;
+    }
+
+    @Override
+    public HamtaAllaTjanstekomponenterResponseType hamtaAllaTjanstekomponenter(Object parameters) {
+        return null;
     }
 
 }

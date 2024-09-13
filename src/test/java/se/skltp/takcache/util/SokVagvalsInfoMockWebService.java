@@ -3,7 +3,7 @@ package se.skltp.takcache.util;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 
-import javax.xml.ws.Endpoint;
+import jakarta.xml.ws.Endpoint;
 import java.util.List;
 
 public class SokVagvalsInfoMockWebService {
