@@ -21,7 +21,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xml.sax.InputSource;
 import se.skltp.takcache.exceptions.TakServiceException;
@@ -48,7 +47,7 @@ public class VagvalCacheTest {
 
   @Before
   public void beforeTest() {
-    MockitoAnnotations.initMocks(this);
+    MockitoAnnotations.openMocks(this);
 
     // Reset internal cache between tests
     vagvalCache.restoreCache(null);

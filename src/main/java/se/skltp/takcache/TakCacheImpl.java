@@ -10,7 +10,6 @@ import static se.skltp.takcache.TakCacheLog.MSG_SAVE_TO_LOCAL_CACHE_FILE;
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
 import static se.skltp.takcache.TakCacheLog.SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_COPY;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -138,7 +137,7 @@ public class TakCacheImpl implements TakCache {
       vagvalCache.restoreCache(persistentCache.virtualiseringsInfo);
       behorigheterCache.restoreCache(persistentCache.anropsBehorighetsInfo);
 
-      LOGGER.warn("Restored from local cache file: " + localTakCacheFileName);
+      LOGGER.warn("Restored from local cache file: {}", localTakCacheFileName);
       takCacheLog.addLog(SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_COPY + localTakCacheFileName);
       takCacheLog.setRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
 
