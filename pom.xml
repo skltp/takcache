@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>se.skltp.takcache</groupId>
   <artifactId>takcache</artifactId>
-  <version>2.2.0-SNAPSHOT</version>
-
+  <version>2.3.0-SNAPSHOT</version>
   <name>takcache</name>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-
-    <tak.version>4.0.0</tak.version>
-    <jakarta-packages-version>4.0.2</jakarta-packages-version>
-
-    <log4j2-version>2.23.1</log4j2-version>
-    <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
-    <spring.version>6.1.14</spring.version>
-    <lmax_disruptor-version>3.4.4</lmax_disruptor-version>
-    <surefire.plugin.version>2.22.2</surefire.plugin.version>
-    <failsafe.plugin.version>2.22.2</failsafe.plugin.version>
-    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
-  </properties>
-
   <scm>
-    <url>http://github.com/skltp/takcache</url>
     <connection>scm:git:https://github.com/skltp/takcache.git</connection>
     <developerConnection>scm:git:https://github.com/skltp/takcache.git</developerConnection>
-    <tag>HEAD</tag>
+    <url>http://github.com/skltp/takcache</url>
   </scm>
-
   <distributionManagement>
     <repository>
       <id>release-nexus</id>
@@ -45,39 +23,43 @@
       <url>${snapshot-nexus-url}</url>
     </snapshotRepository>
   </distributionManagement>
-
+  <properties>
+    <failsafe.plugin.version>2.22.2</failsafe.plugin.version>
+    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
+    <lmax_disruptor-version>3.4.4</lmax_disruptor-version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <spring.version>6.1.14</spring.version>
+    <surefire.plugin.version>2.22.2</surefire.plugin.version>
+    <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
+    <maven.compiler.target>17</maven.compiler.target>
+    <tak.version>4.0.0</tak.version>
+    <jakarta-packages-version>4.0.2</jakarta-packages-version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <log4j2-version>2.23.1</log4j2-version>
+  </properties>
   <dependencyManagement>
     <dependencies>
-      <!-- TAK Cache needs to know what the TAK Vägval schemas look like -->
       <dependency>
         <groupId>se.skltp.tak</groupId>
         <artifactId>tak-schemas</artifactId>
         <version>${tak.version}</version>
       </dependency>
-
-      <!-- JAXB API, needed for jakarta.xml.bind.* with Java 11 or newer -->
       <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bind-api</artifactId>
         <version>${jakarta-packages-version}</version>
       </dependency>
-
-      <!-- JAXB Runtime, needed for jakarta.xml.bind.* with Java 11 or newer -->
       <dependency>
         <groupId>com.sun.xml.bind</groupId>
         <artifactId>jaxb-impl</artifactId>
         <version>${jakarta-packages-version}</version>
         <scope>runtime</scope>
       </dependency>
-
-      <!-- JAX-WS API, needed for jakarta.xml.ws.* with Java 11 or newer -->
       <dependency>
         <groupId>jakarta.xml.ws</groupId>
         <artifactId>jakarta.xml.ws-api</artifactId>
         <version>${jakarta-packages-version}</version>
       </dependency>
-
-      <!-- JAX-WS Runtime, needed for jakarta.xml.ws.* with Java 11 or newer -->
       <dependency>
         <groupId>com.sun.xml.ws</groupId>
         <artifactId>jaxws-rt</artifactId>
@@ -85,19 +67,15 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <dependencies>
-    <!-- TAK vagval schemas -->
     <dependency>
       <groupId>se.skltp.tak</groupId>
       <artifactId>tak-schemas</artifactId>
     </dependency>
-
     <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-rt</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
@@ -129,7 +107,6 @@
       <artifactId>disruptor</artifactId>
       <version>${lmax_disruptor-version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
@@ -160,40 +137,33 @@
       <version>2.9.1</version>
       <scope>test</scope>
     </dependency>
-
-
   </dependencies>
-
   <build>
     <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${failsafe.plugin.version}</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>integration-test</goal>
-                <goal>verify</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${surefire.plugin.version}</version>
-        </plugin>
-      </plugins>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${failsafe.plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire.plugin.version}</version>
+      </plugin>
+    </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>test-coverage</id>
       <build>
         <plugins>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
           </plugin>
           <plugin>
@@ -219,5 +189,4 @@
       </build>
     </profile>
   </profiles>
-
 </project>
