@@ -9,7 +9,8 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.SocketUtils;
+
+import org.springframework.test.util.TestSocketUtils;
 import se.skltp.takcache.util.SokVagvalsInfoMockWebService;
 
 import static org.junit.Assert.assertEquals;
@@ -30,7 +31,7 @@ public class TakCacheIT {
 
     @BeforeClass
     public static void before(){
-        String address = String.format(TAK_SOKVALSINFO_ADDRESS, SocketUtils.findAvailableTcpPort(8080));
+        String address = String.format(TAK_SOKVALSINFO_ADDRESS, TestSocketUtils.findAvailableTcpPort());
         System.setProperty(ENDPOINT_ADDRESS_PROPERTY_NAME, address);
         mockWebService = new SokVagvalsInfoMockWebService(address);
     }

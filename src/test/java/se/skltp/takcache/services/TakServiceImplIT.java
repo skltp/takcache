@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.SocketUtils;
+import org.springframework.test.util.TestSocketUtils;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 import se.skltp.takcache.TakCache;
@@ -34,7 +34,7 @@ public class TakServiceImplIT {
 
   @BeforeClass
   public static void before() {
-    String address = String.format(TAK_SOKVALSINFO_ADDRESS, SocketUtils.findAvailableTcpPort(8080));
+    String address = String.format(TAK_SOKVALSINFO_ADDRESS, TestSocketUtils.findAvailableTcpPort());
     System.setProperty(ENDPOINT_ADDRESS_PROPERTY_NAME, address);
     mockWebService = new SokVagvalsInfoMockWebService(address);
   }
