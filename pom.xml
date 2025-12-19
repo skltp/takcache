@@ -35,7 +35,7 @@
     <tak.version>4.0.0</tak.version>
     <jakarta-packages-version>4.0.2</jakarta-packages-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <log4j2-version>2.23.1</log4j2-version>
+    <log4j2-version>2.25.3</log4j2-version>
   </properties>
   <dependencyManagement>
     <dependencies>
