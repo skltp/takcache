@@ -1,11 +1,11 @@
 package se.skltp.takcache.behorighet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.*;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.IN_TEN_YEARS;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.getRelativeDate;

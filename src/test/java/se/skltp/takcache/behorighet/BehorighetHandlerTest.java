@@ -1,7 +1,7 @@
 package se.skltp.takcache.behorighet;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.AN_HOUR_AGO;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.IN_ONE_HOUR;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.IN_TEN_YEARS;
@@ -10,7 +10,7 @@ import static se.skltp.takcache.util.VagvalSchemasTestUtil.createAuthorization;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.getRelativeDate;
 
 import java.util.ArrayList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 
 public class BehorighetHandlerTest {

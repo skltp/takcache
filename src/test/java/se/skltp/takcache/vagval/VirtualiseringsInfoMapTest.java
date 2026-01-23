@@ -1,7 +1,7 @@
 package se.skltp.takcache.vagval;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.AN_HOUR_AGO;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.IN_ONE_HOUR;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.IN_TEN_YEARS;
@@ -10,7 +10,7 @@ import static se.skltp.takcache.util.VagvalSchemasTestUtil.createRouting;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.getRelativeDate;
 
 import java.util.ArrayList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 
 public class VirtualiseringsInfoMapTest {

@@ -1,8 +1,8 @@
 package se.skltp.takcache;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_OK;
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.REUSING_EXISTING_CACHE;
@@ -16,37 +16,34 @@ import static se.skltp.takcache.util.TestTakDataDefines.RIV21;
 import static se.skltp.takcache.util.TestTakDataDefines.SENDER_1;
 import static se.skltp.takcache.util.TestTakDataDefines.SENDER_3;
 
-import java.io.FileReader;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.custommonkey.xmlunit.XMLAssert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.xml.sax.InputSource;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.xmlunit.assertj.XmlAssert;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 import se.skltp.takcache.exceptions.TakServiceException;
 import se.skltp.takcache.services.TakService;
 import se.skltp.takcache.util.VagvalSchemasTestListsUtil;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath*:spring-context.xml")
+@SpringJUnitConfig(locations = "classpath*:spring-context.xml")
+@ExtendWith(MockitoExtension.class)
 public class TakCacheTest {
 
-  @Rule
-  public TemporaryFolder testFolder = new TemporaryFolder();
+  @TempDir
+  Path testFolder;
 
   @Mock
   TakService takService;
@@ -60,14 +57,13 @@ public class TakCacheTest {
   @InjectMocks
   BehorigheterCacheImpl behorighetCache;
 
-  @BeforeClass
+  @BeforeAll
   public static void beforeClass() {
 
   }
 
-  @Before
+  @BeforeEach
   public void beforeTest() {
-    MockitoAnnotations.openMocks(this);
 
     // Reset internal cache between tests
     takCache.resetCache();
@@ -183,9 +179,9 @@ public class TakCacheTest {
 
     takCache.setLocalTakCacheFileName(getLocalCacheResource());
 
-    Mockito.when(takService.getVirtualiseringar())
+    Mockito.lenient().when(takService.getVirtualiseringar())
         .thenThrow(new TakServiceException(new Exception("TEST: Mock-exception on call to takService.getVirtualiseringar() (for cache fallback)")));
-    Mockito.when(takService.getBehorigheter())
+    Mockito.lenient().when(takService.getBehorigheter())
         .thenThrow(new TakServiceException(new Exception("TEST: Mock-exception on call to takService.getBehorigheter() (for cache fallback)")));
 
     TakCacheLog takCacheLog = takCache.refresh();
@@ -203,8 +199,8 @@ public class TakCacheTest {
 
     takCache.setLocalTakCacheFileName(getLocalCacheResource());
 
-    Mockito.when(takService.getVirtualiseringar()).thenReturn(new ArrayList<>());
-    Mockito.when(takService.getBehorigheter()).thenReturn(new ArrayList<>());
+    Mockito.lenient().when(takService.getVirtualiseringar()).thenReturn(new ArrayList<>());
+    Mockito.lenient().when(takService.getBehorigheter()).thenReturn(new ArrayList<>());
 
     TakCacheLog takCacheLog = takCache.refresh();
 
@@ -240,9 +236,9 @@ public class TakCacheTest {
 
     takCache.setLocalTakCacheFileName(getLocalCacheResource());
 
-    Mockito.when(takService.getVirtualiseringar())
+    Mockito.lenient().when(takService.getVirtualiseringar())
         .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
-    Mockito.when(takService.getBehorigheter())
+    Mockito.lenient().when(takService.getBehorigheter())
         .thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
 
     TakCacheLog takCacheLog = takCache.refresh(Arrays.asList("NamespaceNoMatch"));
@@ -260,18 +256,18 @@ public class TakCacheTest {
 
     mockTakServiceDefaultValues();
 
-    String cachefileName = String
-        .format("%s/localcache-test.xml", testFolder.getRoot().getPath());
+    String cachefileName = testFolder.resolve("localcache-test.xml").toString();
     takCache.setLocalTakCacheFileName(cachefileName);
 
     TakCacheLog takCacheLog = takCache.refresh();
 
     assertTrue(takCacheLog.isRefreshSuccessful());
     assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
-    XMLAssert.assertXpathExists("/persistentCache/virtualiseringsInfo",
-        new InputSource(new FileReader(cachefileName)));
-    XMLAssert.assertXpathExists("/persistentCache/anropsBehorighetsInfo",
-        new InputSource(new FileReader(cachefileName)));
+    String xmlContent = java.nio.file.Files.readString(testFolder.resolve("localcache-test.xml"));
+    XmlAssert.assertThat(xmlContent)
+        .hasXPath("/persistentCache/virtualiseringsInfo");
+    XmlAssert.assertThat(xmlContent)
+        .hasXPath("/persistentCache/anropsBehorighetsInfo");
   }
 
   @Test
@@ -280,8 +276,7 @@ public class TakCacheTest {
 
     mockTakServiceDefaultValues();
 
-    String cachefileName = String
-        .format("%s/localcache-test-2.xml", testFolder.getRoot().getPath());
+    String cachefileName = testFolder.resolve("localcache-test-2.xml").toString();
     vagvalCache.setLocalTakCacheFileName(cachefileName);
     behorighetCache.setLocalTakCacheFileName(cachefileName);
 
@@ -293,10 +288,11 @@ public class TakCacheTest {
     assertTrue(takCacheLog.isRefreshSuccessful());
     assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
 
-    XMLAssert.assertXpathExists("/persistentCache/anropsBehorighetsInfo",
-        new InputSource(new FileReader(cachefileName)));
-    XMLAssert.assertXpathExists("/persistentCache/virtualiseringsInfo",
-        new InputSource(new FileReader(cachefileName)));
+    String xmlContent = java.nio.file.Files.readString(testFolder.resolve("localcache-test-2.xml"));
+    XmlAssert.assertThat(xmlContent)
+        .hasXPath("/persistentCache/anropsBehorighetsInfo");
+    XmlAssert.assertThat(xmlContent)
+        .hasXPath("/persistentCache/virtualiseringsInfo");
   }
 
   @Test
@@ -327,9 +323,9 @@ public class TakCacheTest {
   }
 
   private void mockTakServiceDefaultValues() throws TakServiceException {
-    Mockito.when(takService.getBehorigheter())
+    Mockito.lenient().when(takService.getBehorigheter())
         .thenReturn(VagvalSchemasTestListsUtil.getStaticBehorighetList());
-    Mockito.when(takService.getVirtualiseringar())
+    Mockito.lenient().when(takService.getVirtualiseringar())
         .thenReturn(VagvalSchemasTestListsUtil.getStaticVagvalList());
   }
 }
