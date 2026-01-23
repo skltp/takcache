@@ -32,6 +32,7 @@
     <ecs-logging-java.version>1.7.0</ecs-logging-java.version>
     <tak.version>4.0.0</tak.version>
     <jakarta-packages-version>4.0.2</jakarta-packages-version>
+    <cxf.version>4.1.4</cxf.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <log4j2-version>2.25.3</log4j2-version>
     <junit-jupiter.version>5.10.2</junit-jupiter.version>
@@ -62,9 +63,20 @@
         <version>${jakarta-packages-version}</version>
       </dependency>
       <dependency>
-        <groupId>com.sun.xml.ws</groupId>
-        <artifactId>jaxws-rt</artifactId>
-        <version>${jakarta-packages-version}</version>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-frontend-jaxws</artifactId>
+        <version>${cxf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-transports-http</artifactId>
+        <version>${cxf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-transports-http-jetty</artifactId>
+        <version>${cxf.version}</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -74,8 +86,17 @@
       <artifactId>tak-schemas</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.sun.xml.ws</groupId>
-      <artifactId>jaxws-rt</artifactId>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http-jetty</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
