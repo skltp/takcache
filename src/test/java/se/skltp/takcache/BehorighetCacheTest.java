@@ -8,7 +8,8 @@ import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_OK;
 import static se.skltp.takcache.TakCacheLog.RefreshStatus.RESTORED_FROM_LOCAL_CACHE;
 
 import java.nio.file.Path;
-import org.junit.jupiter.api.BeforeAll;
+import java.util.Objects;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -26,7 +27,7 @@ import se.skltp.takcache.util.VagvalSchemasTestListsUtil;
 
 @SpringJUnitConfig(locations = "classpath*:spring-context.xml")
 @ExtendWith(MockitoExtension.class)
-public class BehorighetCacheTest {
+class BehorighetCacheTest {
   @TempDir
   Path testFolder;
 
@@ -37,12 +38,8 @@ public class BehorighetCacheTest {
   @Autowired
   private BehorigheterCacheImpl behorigheterCache;
 
-  @BeforeAll
-  public static void beforeClass() {
-  }
-
   @BeforeEach
-  public void beforeTest() {
+  void beforeTest() {
 
     // Reset internal cache between tests
     behorigheterCache.restoreCache(null);
@@ -50,7 +47,7 @@ public class BehorighetCacheTest {
   }
 
   @Test
-  public void getVirtualiseringarShouldNotBeCalledDuringRefresh() throws Exception {
+  void getVirtualiseringarShouldNotBeCalledDuringRefresh() throws Exception {
     Mockito.lenient().when(takService.getVirtualiseringar())
         .thenThrow(new TakServiceException(new Exception("Should not happen")));
     Mockito.when(takService.getBehorigheter())
@@ -65,7 +62,7 @@ public class BehorighetCacheTest {
   }
 
   @Test
-  public void restoreFromCacheShouldWork()
+  void restoreFromCacheShouldWork()
       throws Exception {
 
     Mockito.when(takService.getBehorigheter())
@@ -83,7 +80,7 @@ public class BehorighetCacheTest {
   }
 
   @Test
-  public void saveToCacheShouldWork()
+  void saveToCacheShouldWork()
       throws Exception {
 
     Mockito.when(takService.getBehorigheter())
@@ -103,7 +100,7 @@ public class BehorighetCacheTest {
 
 
   private String getLocalCacheResource() {
-    return TakCacheTest.class.getClassLoader().getResource("tklocalcache-test.xml").getFile();
+    return Objects.requireNonNull(TakCacheTest.class.getClassLoader().getResource("tklocalcache-test.xml")).getFile();
   }
 
 

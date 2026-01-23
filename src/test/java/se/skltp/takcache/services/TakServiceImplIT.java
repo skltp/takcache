@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
@@ -16,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.util.TestSocketUtils;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
-import se.skltp.takcache.TakCache;
 import se.skltp.takcache.exceptions.TakServiceException;
 import se.skltp.takcache.util.SokVagvalsInfoMockWebService;
 
@@ -33,7 +31,7 @@ public class TakServiceImplIT {
   TakService takService;
 
   @BeforeAll
-  public static void before() {
+  static void before() {
     // Save original property value
     originalEndpointProperty = System.getProperty(ENDPOINT_ADDRESS_PROPERTY_NAME);
 
@@ -43,7 +41,7 @@ public class TakServiceImplIT {
   }
 
   @AfterAll
-  public static void afterAll() {
+  static void afterAll() {
     // Clean up system property
     if (originalEndpointProperty == null) {
       System.clearProperty(ENDPOINT_ADDRESS_PROPERTY_NAME);
@@ -62,7 +60,7 @@ public class TakServiceImplIT {
   }
 
   @AfterEach
-  public void afterEach() {
+  void afterEach() {
     // Ensure the mock web service is stopped after each test to prevent interference
     try {
       mockWebService.stop();
@@ -72,26 +70,26 @@ public class TakServiceImplIT {
   }
 
    @Test
-  public void getVirtualiseringarTest() throws Exception {
+   void getVirtualiseringarTest() throws Exception {
     mockWebService.start();
     List<VirtualiseringsInfoType> virtualiseringar = takService.getVirtualiseringar();
     assertEquals(5, virtualiseringar.size());
   }
 
   @Test
-  public void getBehorigheterTest() throws Exception {
+  void getBehorigheterTest() throws Exception {
     mockWebService.start();
     List<AnropsBehorighetsInfoType> behorigheter = takService.getBehorigheter();
     assertEquals(5, behorigheter.size());
   }
 
   @Test
-  public void getBehorigheterNoContactWithServerShouldThrowException() throws Exception {
+  void getBehorigheterNoContactWithServerShouldThrowException() {
     assertThrows(TakServiceException.class, () -> takService.getBehorigheter());
   }
 
   @Test
-  public void getVirtualiseringarNoContactWithServerShouldThrowException() throws Exception {
+  void getVirtualiseringarNoContactWithServerShouldThrowException() {
     assertThrows(TakServiceException.class, () -> takService.getVirtualiseringar());
   }
 }

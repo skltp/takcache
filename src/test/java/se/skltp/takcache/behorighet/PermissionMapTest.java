@@ -19,9 +19,9 @@ public class PermissionMapTest {
     public static final String SENDER_4 = "sender-4";
 
     @Test
-    public void testMapCreation() throws Exception {
+    void testMapCreation() {
 
-        ArrayList<AnropsBehorighetsInfoType> authorization = new ArrayList<AnropsBehorighetsInfoType>();
+        ArrayList<AnropsBehorighetsInfoType> authorization = new ArrayList<>();
         authorization.add(createAuthorization(SENDER_1, NAMNRYMD_1, RECEIVER_1));
         authorization.add(createAuthorization(SENDER_2, NAMNRYMD_1, RECEIVER_1));
         authorization.add(createAuthorization(SENDER_3, NAMNRYMD_1, RECEIVER_1, getRelativeDate(TWO_HOURS_AGO), getRelativeDate(AN_HOUR_AGO)));

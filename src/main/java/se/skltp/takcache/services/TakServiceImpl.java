@@ -28,8 +28,8 @@ public class TakServiceImpl implements TakService {
 
   public static final String ENDPOINT_ADDRESS_PROPERTY_NAME = "takcache.endpoint.address";
 
-  private String endpointAddressTjanstekatalog;
-  private String userAgentHeader;
+  private final String endpointAddressTjanstekatalog;
+  private final String userAgentHeader;
 
   private SokVagvalsInfoInterface port = null;
 
@@ -40,7 +40,7 @@ public class TakServiceImpl implements TakService {
   }
 
   public List<VirtualiseringsInfoType> getVirtualiseringar() throws TakServiceException {
-    List<VirtualiseringsInfoType> virtualiseringsInfoTypes = null;
+    List<VirtualiseringsInfoType> virtualiseringsInfoTypes;
     try {
       LOGGER.info("Fetch all virtualizations from TAK...");
       HamtaAllaVirtualiseringarResponseType t = getPort().hamtaAllaVirtualiseringar(null);
@@ -54,7 +54,7 @@ public class TakServiceImpl implements TakService {
   }
 
   public List<AnropsBehorighetsInfoType> getBehorigheter() throws TakServiceException {
-    List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypes = null;
+    List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypes;
     try {
       LOGGER.info("Fetch all permissions from TAK...");
       HamtaAllaAnropsBehorigheterResponseType t = getPort().hamtaAllaAnropsBehorigheter(null);
@@ -67,20 +67,20 @@ public class TakServiceImpl implements TakService {
     return anropsBehorighetsInfoTypes;
   }
 
-  private static URL createEndpointUrlFromWsdl(String adressOfWsdl) {
+  private static URL createEndpointUrlFromWsdl(String adressOfWsdl) throws MalformedURLException {
     try {
       return URI.create(adressOfWsdl).toURL();
     } catch (MalformedURLException e) {
       LOGGER.error("Malformed URL to TAK {}", adressOfWsdl);
-      throw new RuntimeException(e);
+      throw e;
     }
   }
 
-  private static URL createEndpointUrlFromServiceAddress(String serviceAddress) {
+  private static URL createEndpointUrlFromServiceAddress(String serviceAddress) throws MalformedURLException {
     return createEndpointUrlFromWsdl(serviceAddress + "?wsdl");
   }
 
-  private SokVagvalsInfoInterface getPort() {
+  private SokVagvalsInfoInterface getPort() throws MalformedURLException {
 
     if (port == null) {
       LOGGER.info("Use TAK endpoint adress: {}", endpointAddressTjanstekatalog);

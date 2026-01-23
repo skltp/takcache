@@ -7,8 +7,8 @@ import se.skltp.takcache.exceptions.TakServiceException;
 
 public interface TakService {
 
-    public List<AnropsBehorighetsInfoType> getBehorigheter() throws TakServiceException;
+    List<AnropsBehorighetsInfoType> getBehorigheter() throws TakServiceException;
 
-    public List<VirtualiseringsInfoType> getVirtualiseringar() throws TakServiceException;
+    List<VirtualiseringsInfoType> getVirtualiseringar() throws TakServiceException;
 
 }

@@ -28,7 +28,7 @@ public class TakCacheIT {
     TakCache takCache;
 
     @BeforeAll
-    public static void before(){
+    static void before(){
         // Save original property value
         originalEndpointProperty = System.getProperty(ENDPOINT_ADDRESS_PROPERTY_NAME);
 
@@ -38,7 +38,7 @@ public class TakCacheIT {
     }
 
     @AfterAll
-    public static void afterAll() {
+    static void afterAll() {
         // Clean up system property
         if (originalEndpointProperty == null) {
             System.clearProperty(ENDPOINT_ADDRESS_PROPERTY_NAME);
@@ -57,7 +57,7 @@ public class TakCacheIT {
     }
 
     @Test
-    public void simpleSuccessfulRefreshTest() throws Exception {
+    void simpleSuccessfulRefreshTest() {
 
         mockWebService.start();
 

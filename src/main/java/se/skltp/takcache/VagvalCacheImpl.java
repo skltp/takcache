@@ -13,11 +13,12 @@ import static se.skltp.takcache.TakCacheLog.SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 import se.skltp.takcache.TakCacheLog.RefreshStatus;
@@ -83,7 +84,7 @@ public class VagvalCacheImpl implements VagvalCache {
       refreshVagvalCache(new TakCacheLog(), null);
     }
     if (vagvalHandler == null) {
-      return Collections.<RoutingInfo>emptyList();
+      return Collections.emptyList();
     }
     return toRoutingInfo(vagvalHandler.geVirtualiseringar(tjanstegranssnitt, receiverAddress));
   }
@@ -141,7 +142,7 @@ public class VagvalCacheImpl implements VagvalCache {
       }
       LOGGER.info("Init number of virtualizations: {}", virtualiseringar.size());
       List<VirtualiseringsInfoType> filteredVirtualiseringar = filterVirtualiseringar(virtualiseringar, vagvalFilter);
-      if (filteredVirtualiseringar == null || filteredVirtualiseringar.isEmpty()) {
+      if (filteredVirtualiseringar.isEmpty()) {
         LOGGER.error("No VirtualiseringsInfo after filtering");
         return;
       }
@@ -156,13 +157,13 @@ public class VagvalCacheImpl implements VagvalCache {
     }
   }
 
-  private List<VirtualiseringsInfoType> filterVirtualiseringar(
+  private @NonNull List<VirtualiseringsInfoType> filterVirtualiseringar(
       List<VirtualiseringsInfoType> virtualiseringar, VagvalFilter vagvalFilter) {
     if (vagvalFilter != null) {
       return virtualiseringar
           .stream()
-          .filter(virt -> vagvalFilter.valid(virt))
-          .collect(Collectors.toList());
+          .filter(vagvalFilter::valid)
+          .toList();
     }
     return virtualiseringar;
   }
@@ -185,7 +186,7 @@ public class VagvalCacheImpl implements VagvalCache {
       PersistentCache persistentCache = TakCachePersistentHandler.restoreFromLocalCache(localTakCacheFileName);
       restoreCache(persistentCache.virtualiseringsInfo);
 
-      LOGGER.warn("Restored from local cache file: " + localTakCacheFileName);
+      LOGGER.warn("Restored from local cache file: {}", localTakCacheFileName);
       takCacheLog.addLog(SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_COPY + localTakCacheFileName);
       takCacheLog.setRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
 

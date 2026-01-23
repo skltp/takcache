@@ -8,7 +8,6 @@ import se.skltp.takcache.util.XmlGregorianCalendarUtil;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VagvalHandler {
 
@@ -35,7 +34,7 @@ public class VagvalHandler {
     List<VirtualiseringsInfoType> virtualiseringarMatchingRivProfile = validVirtualiseringar
         .stream()
         .filter(virt -> rivProfile.equals(virt.getRivProfil()))
-        .collect(Collectors.toList());
+        .toList();
 
     if (virtualiseringarMatchingRivProfile.isEmpty()) {
       throw new RoutingException(RoutingFailReason.NO_MATCHING_RIV_PROFILE, "Ingen matchande riv-profil");
@@ -43,7 +42,7 @@ public class VagvalHandler {
       throw new RoutingException(RoutingFailReason.MULTIPLE_MATCHES, "Flera matchande vägval");
     }
 
-    return virtualiseringarMatchingRivProfile.get(0).getAdress();
+    return virtualiseringarMatchingRivProfile.getFirst().getAdress();
   }
 
 
@@ -58,7 +57,7 @@ public class VagvalHandler {
 
   public List<String> getRoutingRivProfiles(String tjanstegranssnitt, String receiverAddress) {
     List<VirtualiseringsInfoType> validVirtualiseringar = getValidVagval(tjanstegranssnitt, receiverAddress);
-    return validVirtualiseringar.stream().map(VirtualiseringsInfoType::getRivProfil).collect(Collectors.toList());
+    return validVirtualiseringar.stream().map(VirtualiseringsInfoType::getRivProfil).toList();
   }
 
   private List<VirtualiseringsInfoType> getValidVagval(String tjanstegranssnitt,

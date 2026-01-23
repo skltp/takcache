@@ -11,8 +11,8 @@ import jakarta.jws.soap.SOAPBinding;
 @WebService(targetNamespace = "urn:skl:tp:vagvalsinfo:v2", name = "SokVagvalsSoap11LitDoc")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public class SokVagvalsServiceSoap11LitDoc implements SokVagvalsInfoInterface {
-    private HamtaAllaAnropsBehorigheterResponseType hamtaAllaAnropsBehorigheterResponseType = new HamtaAllaAnropsBehorigheterResponseType();
-    private HamtaAllaVirtualiseringarResponseType hamtaAllaVirtualiseringarResponseType = new HamtaAllaVirtualiseringarResponseType();
+    private final HamtaAllaAnropsBehorigheterResponseType hamtaAllaAnropsBehorigheterResponseType = new HamtaAllaAnropsBehorigheterResponseType();
+    private final HamtaAllaVirtualiseringarResponseType hamtaAllaVirtualiseringarResponseType = new HamtaAllaVirtualiseringarResponseType();
 
     @Override
     @WebResult(name = "hamtaAllaTjanstekontraktResponse", targetNamespace = "urn:skl:tp:vagvalsinfo:v2", partName = "response")

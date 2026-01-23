@@ -22,14 +22,14 @@ public class BehorighetHandlerTest {
     public static final String SENDER_3 = "sender-3";
 
     public static final String RECEIVER_3 = "RECEIVER-3";
-    public static final String receiver_3 = "receiver-3";
+    public static final String RECEIVER_3_LOWER = "receiver-3";
     public static final String RECEIVER_4 = "RECEIVER-4";
-    public static final String receiver_4 = "receiver-4";
+    public static final String RECEIVER_4_LOWER = "receiver-4";
 
     @Test
-    public void testIsAuthorized() {
+    void testIsAuthorized() {
 
-        ArrayList<AnropsBehorighetsInfoType> authorization = new ArrayList<AnropsBehorighetsInfoType>();
+        ArrayList<AnropsBehorighetsInfoType> authorization = new ArrayList<>();
         authorization.add(createAuthorization(SENDER_1, NAMNRYMD_1, RECEIVER_1));
         authorization.add(createAuthorization(SENDER_2, NAMNRYMD_1, RECEIVER_1));
         authorization.add(createAuthorization(SENDER_3, NAMNRYMD_1, RECEIVER_1, getRelativeDate(TWO_HOURS_AGO), getRelativeDate(AN_HOUR_AGO)));
@@ -43,13 +43,13 @@ public class BehorighetHandlerTest {
     }
 
     @Test
-    public void testIsAuthorized_ReceiverCaseInsensitivity() {
-        ArrayList<AnropsBehorighetsInfoType> authorization = new ArrayList<AnropsBehorighetsInfoType>();
+    void testIsAuthorized_ReceiverCaseInsensitivity() {
+        ArrayList<AnropsBehorighetsInfoType> authorization = new ArrayList<>();
         authorization.add(createAuthorization(SENDER_1, NAMNRYMD_1, RECEIVER_3));
-        authorization.add(createAuthorization(SENDER_1, NAMNRYMD_1, receiver_4));
+        authorization.add(createAuthorization(SENDER_1, NAMNRYMD_1, RECEIVER_4_LOWER));
 
         BehorighetHandler behorighetHandler = new BehorighetHandler(authorization);
-        assertTrue( behorighetHandler.isAuthorized(SENDER_1, NAMNRYMD_1, receiver_3));
+        assertTrue( behorighetHandler.isAuthorized(SENDER_1, NAMNRYMD_1, RECEIVER_3_LOWER));
         assertTrue( behorighetHandler.isAuthorized(SENDER_1, NAMNRYMD_1, RECEIVER_4));
     }
 
