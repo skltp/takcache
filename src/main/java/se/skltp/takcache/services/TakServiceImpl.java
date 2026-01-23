@@ -1,6 +1,7 @@
 package se.skltp.takcache.services;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -68,7 +69,7 @@ public class TakServiceImpl implements TakService {
 
   private static URL createEndpointUrlFromWsdl(String adressOfWsdl) {
     try {
-      return new URL(adressOfWsdl);
+      return URI.create(adressOfWsdl).toURL();
     } catch (MalformedURLException e) {
       LOGGER.error("Malformed URL to TAK {}", adressOfWsdl);
       throw new RuntimeException(e);

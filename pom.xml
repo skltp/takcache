@@ -24,18 +24,16 @@
     </snapshotRepository>
   </distributionManagement>
   <properties>
-    <failsafe.plugin.version>2.22.2</failsafe.plugin.version>
-    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
-    <lmax_disruptor-version>3.4.4</lmax_disruptor-version>
-    <maven.compiler.source>17</maven.compiler.source>
-    <spring.version>6.1.14</spring.version>
-    <surefire.plugin.version>2.22.2</surefire.plugin.version>
-    <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
-    <maven.compiler.target>17</maven.compiler.target>
+    <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
+    <lmax_disruptor-version>4.0.0</lmax_disruptor-version>
+    <maven.compiler.release>21</maven.compiler.release>
+    <spring.version>6.2.15</spring.version>
+    <surefire.plugin.version>3.5.4</surefire.plugin.version>
+    <ecs-logging-java.version>1.7.0</ecs-logging-java.version>
     <tak.version>4.0.0</tak.version>
     <jakarta-packages-version>4.0.2</jakarta-packages-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <log4j2-version>2.23.1</log4j2-version>
+    <log4j2-version>2.25.3</log4j2-version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -142,7 +140,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${failsafe.plugin.version}</version>
+        <version>${surefire.plugin.version}</version>
         <executions>
           <execution>
             <goals>
