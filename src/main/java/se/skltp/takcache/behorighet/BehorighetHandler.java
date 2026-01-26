@@ -7,8 +7,8 @@ import se.skltp.takcache.util.XmlGregorianCalendarUtil;
 
 public class BehorighetHandler {
 
-  private PermissionMap permissionMap;
-  private List<AnropsBehorighetsInfoType> anropsBehorighetsInfos;
+  private final PermissionMap permissionMap;
+  private final List<AnropsBehorighetsInfoType> anropsBehorighetsInfos;
 
   public BehorighetHandler(List<AnropsBehorighetsInfoType> anropsBehorighetsInfos) {
     if (anropsBehorighetsInfos == null) {

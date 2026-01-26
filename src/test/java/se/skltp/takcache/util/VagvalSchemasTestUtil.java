@@ -38,16 +38,17 @@ public class VagvalSchemasTestUtil {
 	public static final Duration IN_ONE_HOUR;
 
 	static {
-		Duration tenYearsDuration = null;
-		Duration anHourAgo = null;
-		Duration twoHoursAgo = null;
-		Duration inOneHour = null;
+		Duration tenYearsDuration;
+		Duration anHourAgo;
+		Duration twoHoursAgo;
+		Duration inOneHour;
 		try {
 			tenYearsDuration = DatatypeFactory.newInstance().newDurationYearMonth(true, 10, 0);
 			anHourAgo = DatatypeFactory.newInstance().newDuration(false, 0, 0, 0, 1, 0, 0);
 			twoHoursAgo = DatatypeFactory.newInstance().newDuration(false, 0, 0, 0, 2, 0, 0);
 			inOneHour = DatatypeFactory.newInstance().newDuration(true, 0, 0, 0, 1, 0, 0);
 		} catch (DatatypeConfigurationException e) {
+			throw new ExceptionInInitializerError(e);
 		}
 		IN_TEN_YEARS = tenYearsDuration;
 		AN_HOUR_AGO = anHourAgo;

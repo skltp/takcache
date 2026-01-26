@@ -1,11 +1,11 @@
 package se.skltp.takcache.behorighet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.*;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.IN_TEN_YEARS;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.getRelativeDate;
@@ -19,9 +19,9 @@ public class PermissionMapTest {
     public static final String SENDER_4 = "sender-4";
 
     @Test
-    public void testMapCreation() throws Exception {
+    void testMapCreation() {
 
-        ArrayList<AnropsBehorighetsInfoType> authorization = new ArrayList<AnropsBehorighetsInfoType>();
+        ArrayList<AnropsBehorighetsInfoType> authorization = new ArrayList<>();
         authorization.add(createAuthorization(SENDER_1, NAMNRYMD_1, RECEIVER_1));
         authorization.add(createAuthorization(SENDER_2, NAMNRYMD_1, RECEIVER_1));
         authorization.add(createAuthorization(SENDER_3, NAMNRYMD_1, RECEIVER_1, getRelativeDate(TWO_HOURS_AGO), getRelativeDate(AN_HOUR_AGO)));

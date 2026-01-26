@@ -8,7 +8,7 @@ import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 
 public class VirtualiseringsInfoMap {
 
-    private Map<String, List<VirtualiseringsInfoType>> virtualiseringarMap;
+    private final Map<String, List<VirtualiseringsInfoType>> virtualiseringarMap;
 
     public VirtualiseringsInfoMap( List<VirtualiseringsInfoType> virtualiseringsInfo) {
         this.virtualiseringarMap = createVirtualiseringsInfoMap(virtualiseringsInfo);

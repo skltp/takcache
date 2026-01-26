@@ -5,11 +5,11 @@ import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 
 public class BehorighetContractFilter implements BehorighetFilter {
 
+  private final List<String> tjanstegranssnittFilter;
+
   public BehorighetContractFilter(List<String> tjanstegranssnittFilter) {
     this.tjanstegranssnittFilter = tjanstegranssnittFilter;
   }
-
-  public List<String> tjanstegranssnittFilter;
 
   @Override
   public boolean valid(AnropsBehorighetsInfoType anropsBehorighetsInfoType) {

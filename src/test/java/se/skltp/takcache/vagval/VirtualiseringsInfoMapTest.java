@@ -1,7 +1,7 @@
 package se.skltp.takcache.vagval;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.AN_HOUR_AGO;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.IN_ONE_HOUR;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.IN_TEN_YEARS;
@@ -10,7 +10,7 @@ import static se.skltp.takcache.util.VagvalSchemasTestUtil.createRouting;
 import static se.skltp.takcache.util.VagvalSchemasTestUtil.getRelativeDate;
 
 import java.util.ArrayList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 
 public class VirtualiseringsInfoMapTest {
@@ -25,12 +25,12 @@ public class VirtualiseringsInfoMapTest {
 
 
     public static final String RECEIVER_3 = "RECEIVER-3";
-    public static final String receiver_3 = "receiver-3";
+    public static final String RECEIVER_3_LOWER = "receiver-3";
     public static final String RECEIVER_4 = "RECEIVER-4";
-    public static final String receiver_4 = "receiver-4";
+    public static final String RECEIVER_4_LOWER = "receiver-4";
 
     @Test
-    public void testVirtualiseringsMap() {
+    void testVirtualiseringsMap() {
 
         ArrayList<VirtualiseringsInfoType> routing = new ArrayList<>();
         routing.add(createRouting(ADDRESS_1, RIV21, NAMNRYMD_1, RECEIVER_1, getRelativeDate(TWO_HOURS_AGO), getRelativeDate(AN_HOUR_AGO)));
@@ -49,13 +49,13 @@ public class VirtualiseringsInfoMapTest {
 
 
     @Test
-    public void testVirtualiseringsMap_ReceiverCaseInsensitivity() {
+    void testVirtualiseringsMap_ReceiverCaseInsensitivity() {
         ArrayList<VirtualiseringsInfoType> routing = new ArrayList<>();
         routing.add(createRouting(ADDRESS_2, RIV21, NAMNRYMD_2, RECEIVER_3));
-        routing.add(createRouting(ADDRESS_2, RIV20, NAMNRYMD_2, receiver_4));
+        routing.add(createRouting(ADDRESS_2, RIV20, NAMNRYMD_2, RECEIVER_4_LOWER));
 
         VirtualiseringsInfoMap virtualiseringsMap = new VirtualiseringsInfoMap(routing);
-        assertEquals(1, virtualiseringsMap.lookupInVirtualiseringsInfoMap(receiver_3, NAMNRYMD_2).size());
+        assertEquals(1, virtualiseringsMap.lookupInVirtualiseringsInfoMap(RECEIVER_3_LOWER, NAMNRYMD_2).size());
         assertEquals(1, virtualiseringsMap.lookupInVirtualiseringsInfoMap(RECEIVER_4, NAMNRYMD_2).size());
     }
 

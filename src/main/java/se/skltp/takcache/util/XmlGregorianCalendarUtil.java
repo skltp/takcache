@@ -7,22 +7,26 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 public class XmlGregorianCalendarUtil {
-	private static DatatypeFactory datatypeFactory = getDatatypeFactory();
+	private static final DatatypeFactory datatypeFactory;
+
+	static {
+		try {
+			datatypeFactory = getDatatypeFactory();
+		} catch (DatatypeConfigurationException e) {
+			throw new ExceptionInInitializerError(e);
+		}
+	}
 
 	private XmlGregorianCalendarUtil() {
     // Private Utility class
   }
 	
-	private static DatatypeFactory getDatatypeFactory() {
-		try {
-			return DatatypeFactory.newInstance();
-		} catch (DatatypeConfigurationException e) {
-			throw new RuntimeException("Could not create DatatypeFactory", e);
-		}
+	private static DatatypeFactory getDatatypeFactory() throws DatatypeConfigurationException {
+		return DatatypeFactory.newInstance();
 	}
 
-	public static final XMLGregorianCalendar getNowAsXMLGregorianCalendar() {
-		GregorianCalendar now = (GregorianCalendar) GregorianCalendar.getInstance();
+	public static XMLGregorianCalendar getNowAsXMLGregorianCalendar() {
+		GregorianCalendar now = new GregorianCalendar();
 		return datatypeFactory.newXMLGregorianCalendar(now);
 	}
 

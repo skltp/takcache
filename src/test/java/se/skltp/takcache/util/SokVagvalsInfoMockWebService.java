@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SokVagvalsInfoMockWebService {
     private Endpoint endpoint;
-    private String url;
+    private final String url;
     SokVagvalsServiceSoap11LitDoc sokVagvalsInfo;
 
     public SokVagvalsInfoMockWebService(String url) {

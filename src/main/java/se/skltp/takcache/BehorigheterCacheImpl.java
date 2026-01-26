@@ -12,11 +12,12 @@ import static se.skltp.takcache.TakCacheLog.SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.takcache.TakCacheLog.RefreshStatus;
@@ -28,7 +29,7 @@ import se.skltp.takcache.services.TakService;
 @Service
 public class BehorigheterCacheImpl implements BehorigheterCache {
 
-  private static final Logger LOGGER = LogManager.getLogger(TakCacheImpl.class);
+  private static final Logger LOGGER = LogManager.getLogger(BehorigheterCacheImpl.class);
 
   TakService takService;
 
@@ -57,7 +58,7 @@ public class BehorigheterCacheImpl implements BehorigheterCache {
 
   @Override
   public List<AnropsBehorighetsInfoType> getAnropsBehorighetsInfos() {
-    return behorighetHandler == null ? Collections.<AnropsBehorighetsInfoType>emptyList()
+    return behorighetHandler == null ? Collections.emptyList()
         : behorighetHandler.getAnropsBehorighetsInfos();
   }
 
@@ -113,7 +114,7 @@ public class BehorigheterCacheImpl implements BehorigheterCache {
       }
       LOGGER.info("Init number of permissions: {}", behorigheter.size());
       List<AnropsBehorighetsInfoType> filteredBehorigheter = filterBehorigheter(behorigheter, behorighetFilter);
-      if (filteredBehorigheter == null || filteredBehorigheter.isEmpty()) {
+      if (filteredBehorigheter.isEmpty()) {
         LOGGER.warn("No behorigheter after filtering");
         return;
       }
@@ -126,13 +127,13 @@ public class BehorigheterCacheImpl implements BehorigheterCache {
   }
 
 
-  private List<AnropsBehorighetsInfoType> filterBehorigheter(
+  private @NonNull List<AnropsBehorighetsInfoType> filterBehorigheter(
       List<AnropsBehorighetsInfoType> behorigheter, BehorighetFilter behorighetFilter) {
     if (behorighetFilter != null) {
       return behorigheter
           .stream()
-          .filter(behorighet -> behorighetFilter.valid(behorighet))
-          .collect(Collectors.toList());
+          .filter(behorighetFilter::valid)
+          .toList();
     }
     return behorigheter;
   }
@@ -148,7 +149,7 @@ public class BehorigheterCacheImpl implements BehorigheterCache {
 
       restoreCache(persistentCache.anropsBehorighetsInfo);
 
-      LOGGER.warn("Restored permissions from local cache file: " + localTakCacheFileName);
+      LOGGER.warn("Restored permissions from local cache file: {}", localTakCacheFileName);
       takCacheLog.addLog(SUCCESFULLY_RESTORED_FROM_LOCAL_TAK_COPY + localTakCacheFileName);
       takCacheLog.setRefreshStatus(RESTORED_FROM_LOCAL_CACHE);
 

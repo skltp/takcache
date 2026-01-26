@@ -17,15 +17,15 @@ public class TakCachePersistentHandler {
 
   private static final Logger LOGGER = LogManager.getLogger(TakCachePersistentHandler.class);
   public static final String MSG_NO_FILE_NAME_DEFINED = "No filename defined for local cache";
-  public static final String MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK = "Failed to restore from local TAK: ";
-  public static final String MSG_FAILED_TO_SAVE_TO_LOCAL_TAK = "Failed to save to local TAK: ";
+  public static final String MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK = "Failed to restore from local TAK: {}";
+  public static final String MSG_FAILED_TO_SAVE_TO_LOCAL_TAK = "Failed to save to local TAK: {}";
 
    private TakCachePersistentHandler() {
     // Private Utility class
   }
 
   @XmlRootElement
-  static class PersistentCache {
+  public static class PersistentCache {
 
     @XmlElement
     protected List<VirtualiseringsInfoType> virtualiseringsInfo;
@@ -48,7 +48,7 @@ public class TakCachePersistentHandler {
       pc.anropsBehorighetsInfo = behorigheter;
       jaxbMarshaller.marshal(pc, new File(fileName));
     } catch (Exception e) {
-      LOGGER.error(MSG_FAILED_TO_SAVE_TO_LOCAL_TAK + fileName, e);
+      LOGGER.error(MSG_FAILED_TO_SAVE_TO_LOCAL_TAK, fileName, e);
       throw (new PersistentCacheException(e));
     }
   }
@@ -90,7 +90,7 @@ public class TakCachePersistentHandler {
       Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
       return (PersistentCache) jaxbUnmarshaller.unmarshal(new File(fileName));
     } catch (Exception e) {
-      LOGGER.error(MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK + fileName, e);
+      LOGGER.error(MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK, fileName, e);
       throw (new PersistentCacheException(e));
     }
   }

@@ -21,7 +21,6 @@ import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 import se.skltp.takcache.TakCacheLog.RefreshStatus;
 import se.skltp.takcache.TakCachePersistentHandler.PersistentCache;
 import se.skltp.takcache.exceptions.PersistentCacheException;
-import se.skltp.takcache.exceptions.RoutingException;
 import se.skltp.takcache.services.TakService;
 
 
@@ -84,27 +83,6 @@ public class TakCacheImpl implements TakCache {
 
     takCacheLog.logEndInitialize(vagvalCache.count(), behorigheterCache.count());
     return takCacheLog;
-  }
-
-  @Override
-  public boolean isAuthorized(String senderId, String tjanstegranssnitt, String receiverAddress) {
-    return behorigheterCache.isAuthorized(senderId, tjanstegranssnitt, receiverAddress);
-  }
-
-  @Override
-  public List<AnropsBehorighetsInfoType> getAnropsBehorighetsInfos() {
-    return behorigheterCache.getAnropsBehorighetsInfos();
-  }
-
-  @Override
-  public List<RoutingInfo> getRoutingInfo(String tjanstegranssnitt, String receiverAddress) {
-    return vagvalCache.getRoutingInfo(tjanstegranssnitt, receiverAddress);
-  }
-
-  @Override
-  public String getRoutingAddress(String tjanstegranssnitt, String receiverAddress,
-      String rivProfile) throws RoutingException {
-    return vagvalCache.getRoutingAddress(tjanstegranssnitt, receiverAddress, rivProfile);
   }
 
   @Override

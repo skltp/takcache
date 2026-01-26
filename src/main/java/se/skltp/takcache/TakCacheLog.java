@@ -11,7 +11,7 @@ import static se.skltp.takcache.TakCacheLog.RefreshStatus.REFRESH_FAILED;
 
 public class TakCacheLog {
 
-  private static final SimpleDateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+  private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   public static final String MSG_INITIALIZE_TAK_CACHE = "Initialize TAK cache resources...";
   public static final String MSG_SAVE_TO_LOCAL_CACHE_FILE = "Succeeded to get virtualizations and/or permissions from TAK, save to local TAK copy...";
@@ -27,7 +27,7 @@ public class TakCacheLog {
     REFRESH_OK,
     REFRESH_FAILED,
     RESTORED_FROM_LOCAL_CACHE,
-    REUSING_EXISTING_CACHE;
+    REUSING_EXISTING_CACHE
   }
 
   private boolean isRefreshSuccessful = false;
@@ -36,7 +36,7 @@ public class TakCacheLog {
   private  int numberBehorigheter;
   private  int numberVagval;
 
-  private List<String> logBuffer = null;
+  private final List<String> logBuffer;
 
   public TakCacheLog() {
     logBuffer = new ArrayList<>();
@@ -84,7 +84,7 @@ public class TakCacheLog {
 
   public void logStartInitialize() {
     addLog("Host: " + getHostName());
-    addLog("Time: " + DF.format(Calendar.getInstance().getTime()));
+    addLog("Time: " + dateFormat.format(Calendar.getInstance().getTime()));
     addLog(MSG_INITIALIZE_TAK_CACHE);
   }
 
