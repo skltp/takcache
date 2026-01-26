@@ -2,10 +2,13 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>se.skltp.takcache</groupId>
   <artifactId>takcache</artifactId>
   <version>2.3.0-SNAPSHOT</version>
+
   <name>takcache</name>
+
   <scm>
     <connection>scm:git:https://github.com/skltp/takcache.git</connection>
     <developerConnection>scm:git:https://github.com/skltp/takcache.git</developerConnection>
@@ -23,25 +26,41 @@
       <url>${snapshot-nexus-url}</url>
     </snapshotRepository>
   </distributionManagement>
+
   <properties>
-    <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
-    <lmax_disruptor-version>4.0.0</lmax_disruptor-version>
+    <!-- Project -->
     <maven.compiler.release>21</maven.compiler.release>
-    <spring.version>6.2.15</spring.version>
-    <surefire.plugin.version>3.5.4</surefire.plugin.version>
-    <ecs-logging-java.version>1.7.0</ecs-logging-java.version>
-    <tak.version>4.0.0</tak.version>
-    <jakarta-packages-version>4.0.2</jakarta-packages-version>
-    <cxf.version>4.1.4</cxf.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <!-- Plugins -->
+    <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+    
+    <!-- Dependencies -->
+    <tak.version>4.0.0</tak.version>
+    <spring-framework.version>6.2.15</spring-framework.version>
+    <cxf.version>4.1.4</cxf.version>
+    <ecs-logging-java.version>1.7.0</ecs-logging-java.version>
+    <jakarta-packages-version>4.0.2</jakarta-packages-version>
+    <lmax_disruptor-version>4.0.0</lmax_disruptor-version>
     <log4j2-version>2.25.3</log4j2-version>
+    <slf4j.version>2.0.17</slf4j.version>
+    
+    <!-- Test dependencies -->
+    <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
     <junit-jupiter.version>5.10.2</junit-jupiter.version>
     <mockito.version>5.21.0</mockito.version>
     <xmlunit.version>2.11.0</xmlunit.version>
-    <slf4j.version>2.0.17</slf4j.version>
   </properties>
+
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-framework-bom</artifactId>
+        <version>${spring-framework.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>se.skltp.tak</groupId>
         <artifactId>tak-schemas</artifactId>
@@ -108,12 +127,15 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -155,12 +177,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>${spring.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.xmlunit</groupId>
       <artifactId>xmlunit-assertj</artifactId>
       <version>${xmlunit.version}</version>
@@ -173,11 +189,12 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${surefire.plugin.version}</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <argLine>-XX:+EnableDynamicAgentLoading</argLine>
         </configuration>
@@ -192,13 +209,14 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire.plugin.version}</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <argLine>-XX:+EnableDynamicAgentLoading</argLine>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>test-coverage</id>
