@@ -42,7 +42,7 @@ public class VagvalHandler {
       throw new RoutingException(RoutingFailReason.MULTIPLE_MATCHES, "Flera matchande vägval");
     }
 
-    return virtualiseringarMatchingRivProfile.getFirst().getAdress();
+    return virtualiseringarMatchingRivProfile.get(0).getAdress();
   }
 
 

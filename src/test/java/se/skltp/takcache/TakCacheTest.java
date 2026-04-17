@@ -103,8 +103,8 @@ class TakCacheTest {
     mockTakServiceDefaultValues();
     List<RoutingInfo> routingInfoList = takCache.getVagvalCache().getRoutingInfo(NAMNRYMD_1, RECEIVER_2);
     assertEquals(1, routingInfoList.size());
-    assertEquals(ADDRESS_1, routingInfoList.getFirst().getAddress());
-    assertEquals(RIV21, routingInfoList.getFirst().getRivProfile());
+    assertEquals(ADDRESS_1, routingInfoList.get(0).getAddress());
+    assertEquals(RIV21, routingInfoList.get(0).getRivProfile());
   }
 
   @Test
