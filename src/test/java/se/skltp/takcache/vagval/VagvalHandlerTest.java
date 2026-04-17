@@ -127,7 +127,7 @@ class VagvalHandlerTest {
         VagvalHandler vagvalHandler = new VagvalHandler(routing);
         assertEquals( 0, vagvalHandler.getRoutingRivProfiles(NAMNRYMD_1, RECEIVER_1).size());
         assertEquals( 1, vagvalHandler.getRoutingRivProfiles(NAMNRYMD_1, RECEIVER_2).size());
-        assertEquals( RIV21, vagvalHandler.getRoutingRivProfiles(NAMNRYMD_1, RECEIVER_2).getFirst());
+        assertEquals( RIV21, vagvalHandler.getRoutingRivProfiles(NAMNRYMD_1, RECEIVER_2).get(0));
         assertEquals( 2, vagvalHandler.getRoutingRivProfiles(NAMNRYMD_2, RECEIVER_2).size());
     }
 
