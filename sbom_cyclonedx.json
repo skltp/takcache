@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:b5f7420f-9283-4f55-a687-c2be3882f32e",
+  "serialNumber": "urn:uuid:1a94c7d3-bb45-4b18-9edb-b9b5ac57ca0f",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-04-17T13:10:37+00:00",
+    "timestamp": "2026-04-17T14:18:57+00:00",
     "tools": {
       "components": [
         {
@@ -20,7 +20,7 @@
       ]
     },
     "component": {
-      "bom-ref": "e0954a15-4b26-4767-b235-89a837f6450f",
+      "bom-ref": "811155c9-ec96-41d3-a13b-b55479da6c3d",
       "type": "application",
       "name": ".",
       "properties": [
@@ -33,7 +33,7 @@
   },
   "components": [
     {
-      "bom-ref": "cb91bcbf-241e-48a7-acd3-772646eac7f4",
+      "bom-ref": "bb6685b5-e34b-4a7b-8c54-546078673293",
       "type": "application",
       "name": "pom.xml",
       "properties": [
@@ -1073,16 +1073,16 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/se.skltp.takcache/takcache@3.0.1",
+      "bom-ref": "pkg:maven/se.skltp.takcache/takcache@3.0.2",
       "type": "library",
       "group": "se.skltp.takcache",
       "name": "takcache",
-      "version": "3.0.1",
-      "purl": "pkg:maven/se.skltp.takcache/takcache@3.0.1",
+      "version": "3.0.2",
+      "purl": "pkg:maven/se.skltp.takcache/takcache@3.0.2",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "se.skltp.takcache:takcache:3.0.1::5496efcb"
+          "value": "se.skltp.takcache:takcache:3.0.2::2885a6ad"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -1143,15 +1143,15 @@
   ],
   "dependencies": [
     {
-      "ref": "cb91bcbf-241e-48a7-acd3-772646eac7f4",
+      "ref": "811155c9-ec96-41d3-a13b-b55479da6c3d",
       "dependsOn": [
-        "pkg:maven/se.skltp.takcache/takcache@3.0.1"
+        "bb6685b5-e34b-4a7b-8c54-546078673293"
       ]
     },
     {
-      "ref": "e0954a15-4b26-4767-b235-89a837f6450f",
+      "ref": "bb6685b5-e34b-4a7b-8c54-546078673293",
       "dependsOn": [
-        "cb91bcbf-241e-48a7-acd3-772646eac7f4"
+        "pkg:maven/se.skltp.takcache/takcache@3.0.2"
       ]
     },
     {
@@ -1409,7 +1409,7 @@
       ]
     },
     {
-      "ref": "pkg:maven/se.skltp.takcache/takcache@3.0.1",
+      "ref": "pkg:maven/se.skltp.takcache/takcache@3.0.2",
       "dependsOn": [
         "pkg:maven/com.lmax/disruptor@4.0.0",
         "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.2.0",
