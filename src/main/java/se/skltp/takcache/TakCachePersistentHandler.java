@@ -7,15 +7,15 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.VirtualiseringsInfoType;
 import se.skltp.takcache.exceptions.PersistentCacheException;
 
 public class TakCachePersistentHandler {
 
-  private static final Logger LOGGER = LogManager.getLogger(TakCachePersistentHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TakCachePersistentHandler.class);
   public static final String MSG_NO_FILE_NAME_DEFINED = "No filename defined for local cache";
   public static final String MSG_FAILED_TO_RESTORE_FROM_LOCAL_TAK = "Failed to restore from local TAK: {}";
   public static final String MSG_FAILED_TO_SAVE_TO_LOCAL_TAK = "Failed to save to local TAK: {}";

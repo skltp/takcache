@@ -12,7 +12,7 @@
   <scm>
     <connection>scm:git:https://github.com/skltp/takcache.git</connection>
     <developerConnection>scm:git:https://github.com/skltp/takcache.git</developerConnection>
-    <url>http://github.com/skltp/takcache</url>
+    <url>https://github.com/skltp/takcache</url>
   </scm>
   <distributionManagement>
     <repository>
@@ -33,23 +33,24 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     
     <!-- Plugins -->
-    <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version> <!-- FEB 2026 -->
     
     <!-- Dependencies -->
     <tak.version>4.0.0</tak.version>
-    <spring-framework.version>6.2.15</spring-framework.version>
-    <cxf.version>4.1.4</cxf.version>
-    <ecs-logging-java.version>1.7.0</ecs-logging-java.version>
-    <jakarta-packages-version>4.0.2</jakarta-packages-version>
-    <lmax_disruptor-version>4.0.0</lmax_disruptor-version>
-    <log4j2-version>2.25.4</log4j2-version>
-    <slf4j.version>2.0.17</slf4j.version>
+    <spring-framework.version>6.2.17</spring-framework.version> <!-- MAR 2026 -->
+    <cxf.version>4.2.0</cxf.version> <!-- FEB 2026 -->
+    <ecs-logging-java.version>1.7.0</ecs-logging-java.version> <!-- APR 2025. Latest as of APR 2026. -->
+    <jakarta-packages-bind-version>4.0.5</jakarta-packages-bind-version> <!-- FEB 2026 -->
+    <jakarta-packages-ws-version>4.0.3</jakarta-packages-ws-version> <!-- FEB 2026 -->
+    <lmax_disruptor-version>4.0.0</lmax_disruptor-version> <!-- SEP 2023. Latest as of APR 2026. -->
+    <log4j2-version>2.25.4</log4j2-version> <!-- MAR 2026 -->
+    <slf4j.version>2.0.17</slf4j.version> <!-- FEB 2025. Latest as of APR 2026. -->
     
     <!-- Test dependencies -->
-    <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
-    <junit-jupiter.version>5.10.2</junit-jupiter.version>
-    <mockito.version>5.21.0</mockito.version>
-    <xmlunit.version>2.11.0</xmlunit.version>
+    <jacoco.plugin.version>0.8.14</jacoco.plugin.version> <!-- OCT 2025. Latest as of APR 2026. -->
+    <junit-jupiter.version>5.14.3</junit-jupiter.version> <!-- FEB 2026 -->
+    <mockito.version>5.23.0</mockito.version> <!-- MAR 2026 -->
+    <xmlunit.version>2.11.0</xmlunit.version> <!-- OCT 2025. Latest as of APR 2026. -->
   </properties>
 
   <dependencyManagement>
@@ -69,18 +70,18 @@
       <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>${jakarta-packages-version}</version>
+        <version>${jakarta-packages-bind-version}</version>
       </dependency>
       <dependency>
         <groupId>com.sun.xml.bind</groupId>
         <artifactId>jaxb-impl</artifactId>
-        <version>${jakarta-packages-version}</version>
+        <version>${jakarta-packages-bind-version}</version>
         <scope>runtime</scope>
       </dependency>
       <dependency>
         <groupId>jakarta.xml.ws</groupId>
         <artifactId>jakarta.xml.ws-api</artifactId>
-        <version>${jakarta-packages-version}</version>
+        <version>${jakarta-packages-ws-version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.cxf</groupId>
@@ -98,32 +99,16 @@
         <version>${cxf.version}</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${log4j2-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>se.skltp.tak</groupId>
-      <artifactId>tak-schemas</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-frontend-jaxws</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-transports-http</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-transports-http-jetty</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
@@ -132,38 +117,69 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>se.skltp.tak</groupId>
+      <artifactId>tak-schemas</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.lmax</groupId>
+      <artifactId>disruptor</artifactId>
+      <version>${lmax_disruptor-version}</version>
+    </dependency>
+
+    <!-- LOGGING API -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- Everything below is only pulled in during the test scope, to run tests,
+         and are not included with the library artifacts -->
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
+    <dependency> <!-- SLF4J provider for Log4J2 placed at top-parent level to propagate throughout the project. -->
       <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>${log4j2-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>${log4j2-version}</version>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <!-- VERSION handled by Log4J BOM. -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>co.elastic.logging</groupId>
       <artifactId>log4j2-ecs-layout</artifactId>
       <version>${ecs-logging-java.version}</version>
+      <scope>test</scope>
     </dependency>
+
     <dependency>
-      <groupId>com.lmax</groupId>
-      <artifactId>disruptor</artifactId>
-      <version>${lmax_disruptor-version}</version>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http-jetty</artifactId>
+      <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>${junit-jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
@@ -176,6 +192,7 @@
       <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.xmlunit</groupId>
       <artifactId>xmlunit-assertj</artifactId>

@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 import jakarta.xml.ws.BindingProvider;
 import jakarta.xml.ws.handler.MessageContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import se.skltp.tak.vagvalsinfo.wsdl.v2.AnropsBehorighetsInfoType;
@@ -24,7 +24,7 @@ import se.skltp.takcache.exceptions.TakServiceException;
 @Service
 public class TakServiceImpl implements TakService {
 
-  private static final Logger LOGGER = LogManager.getLogger(TakServiceImpl.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TakServiceImpl.class);
 
   public static final String ENDPOINT_ADDRESS_PROPERTY_NAME = "takcache.endpoint.address";
 
