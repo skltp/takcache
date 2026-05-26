@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:1a94c7d3-bb45-4b18-9edb-b9b5ac57ca0f",
+  "serialNumber": "urn:uuid:83f096fa-0cd8-488d-bb1a-e8f9728b03be",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-04-17T14:18:57+00:00",
+    "timestamp": "2026-05-26T12:32:55+00:00",
     "tools": {
       "components": [
         {
@@ -20,7 +20,7 @@
       ]
     },
     "component": {
-      "bom-ref": "811155c9-ec96-41d3-a13b-b55479da6c3d",
+      "bom-ref": "ef15031c-41d0-42cc-8447-86edf5d0b90e",
       "type": "application",
       "name": ".",
       "properties": [
@@ -33,7 +33,7 @@
   },
   "components": [
     {
-      "bom-ref": "bb6685b5-e34b-4a7b-8c54-546078673293",
+      "bom-ref": "8dcbfc00-f7a8-489d-a9c4-eb213bacfd24",
       "type": "application",
       "name": "pom.xml",
       "properties": [
@@ -198,11 +198,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/jakarta.annotation/jakarta.annotation-api@3.0.0",
+      "bom-ref": "pkg:maven/jakarta.annotation/jakarta.annotation-api@2.1.1",
       "type": "library",
       "group": "jakarta.annotation",
       "name": "jakarta.annotation-api",
-      "version": "3.0.0",
+      "version": "2.1.1",
       "licenses": [
         {
           "license": {
@@ -215,11 +215,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/jakarta.annotation/jakarta.annotation-api@3.0.0",
+      "purl": "pkg:maven/jakarta.annotation/jakarta.annotation-api@2.1.1",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "jakarta.annotation:jakarta.annotation-api:3.0.0::38f9ab5f"
+          "value": "jakarta.annotation:jakarta.annotation-api:2.1.1::d785beb6"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -363,11 +363,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-core",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -375,11 +375,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-core:4.2.0::ab0e214e"
+          "value": "org.apache.cxf:cxf-core:4.1.5::97f54fc9"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -388,11 +388,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-bindings-soap",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -400,11 +400,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-bindings-soap:4.2.0::4ef74818"
+          "value": "org.apache.cxf:cxf-rt-bindings-soap:4.1.5::a0c05814"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -413,11 +413,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-bindings-xml",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -425,11 +425,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-bindings-xml:4.2.0::1e3ff5f6"
+          "value": "org.apache.cxf:cxf-rt-bindings-xml:4.1.5::75a8783b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -438,11 +438,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-databinding-jaxb",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -450,11 +450,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-databinding-jaxb:4.2.0::451bab46"
+          "value": "org.apache.cxf:cxf-rt-databinding-jaxb:4.1.5::5fe7910d"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -463,11 +463,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-frontend-jaxws",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -475,11 +475,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-frontend-jaxws:4.2.0::97a90de2"
+          "value": "org.apache.cxf:cxf-rt-frontend-jaxws:4.1.5::4aa1d2ad"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -488,11 +488,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-frontend-simple",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -500,11 +500,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-frontend-simple:4.2.0::f35158e0"
+          "value": "org.apache.cxf:cxf-rt-frontend-simple:4.1.5::33146a0e"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -513,11 +513,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-transports-http",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -525,11 +525,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-transports-http:4.2.0::a8257b91"
+          "value": "org.apache.cxf:cxf-rt-transports-http:4.1.5::f3d6bdf9"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -538,11 +538,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-ws-addr",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -550,11 +550,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-ws-addr:4.2.0::22783310"
+          "value": "org.apache.cxf:cxf-rt-ws-addr:4.1.5::d31019bb"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -563,11 +563,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-ws-policy",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -575,11 +575,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-ws-policy:4.2.0::3aca4e9f"
+          "value": "org.apache.cxf:cxf-rt-ws-policy:4.1.5::f7fd8fe4"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -588,11 +588,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.2.0",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-wsdl",
-      "version": "4.2.0",
+      "version": "4.1.5",
       "licenses": [
         {
           "license": {
@@ -600,11 +600,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.2.0",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-wsdl:4.2.0::151b309b"
+          "value": "org.apache.cxf:cxf-rt-wsdl:4.1.5::ae317fab"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -815,31 +815,6 @@
         {
           "name": "aquasecurity:trivy:PkgID",
           "value": "org.glassfish.jaxb:txw2:4.0.6::de4c72d1"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "pom"
-        }
-      ]
-    },
-    {
-      "bom-ref": "pkg:maven/org.jspecify/jspecify@1.0.0",
-      "type": "library",
-      "group": "org.jspecify",
-      "name": "jspecify",
-      "version": "1.0.0",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "purl": "pkg:maven/org.jspecify/jspecify@1.0.0",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:PkgID",
-          "value": "org.jspecify:jspecify:1.0.0::2ab4ef99"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -1073,16 +1048,16 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/se.skltp.takcache/takcache@3.0.2",
+      "bom-ref": "pkg:maven/se.skltp.takcache/takcache@3.0.3",
       "type": "library",
       "group": "se.skltp.takcache",
       "name": "takcache",
-      "version": "3.0.2",
-      "purl": "pkg:maven/se.skltp.takcache/takcache@3.0.2",
+      "version": "3.0.3",
+      "purl": "pkg:maven/se.skltp.takcache/takcache@3.0.3",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "se.skltp.takcache:takcache:3.0.2::2885a6ad"
+          "value": "se.skltp.takcache:takcache:3.0.3::8ddcad52"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -1143,15 +1118,15 @@
   ],
   "dependencies": [
     {
-      "ref": "811155c9-ec96-41d3-a13b-b55479da6c3d",
+      "ref": "8dcbfc00-f7a8-489d-a9c4-eb213bacfd24",
       "dependsOn": [
-        "bb6685b5-e34b-4a7b-8c54-546078673293"
+        "pkg:maven/se.skltp.takcache/takcache@3.0.3"
       ]
     },
     {
-      "ref": "bb6685b5-e34b-4a7b-8c54-546078673293",
+      "ref": "ef15031c-41d0-42cc-8447-86edf5d0b90e",
       "dependsOn": [
-        "pkg:maven/se.skltp.takcache/takcache@3.0.2"
+        "8dcbfc00-f7a8-489d-a9c4-eb213bacfd24"
       ]
     },
     {
@@ -1183,7 +1158,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:maven/jakarta.annotation/jakarta.annotation-api@3.0.0",
+      "ref": "pkg:maven/jakarta.annotation/jakarta.annotation-api@2.1.1",
       "dependsOn": []
     },
     {
@@ -1216,10 +1191,10 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
       "dependsOn": [
         "pkg:maven/com.fasterxml.woodstox/woodstox-core@7.1.1",
-        "pkg:maven/jakarta.annotation/jakarta.annotation-api@3.0.0",
+        "pkg:maven/jakarta.annotation/jakarta.annotation-api@2.1.1",
         "pkg:maven/jakarta.xml.bind/jakarta.xml.bind-api@4.0.5",
         "pkg:maven/org.apache.ws.xmlschema/xmlschema-core@2.3.2",
         "pkg:maven/org.eclipse.angus/angus-activation@2.0.3",
@@ -1227,78 +1202,77 @@
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
       "dependsOn": [
         "pkg:maven/jakarta.xml.soap/jakarta.xml.soap-api@3.0.2",
         "pkg:maven/jakarta.xml.ws/jakarta.xml.ws-api@4.0.3",
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.2.0",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
         "pkg:maven/org.eclipse.angus/angus-activation@2.0.3"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.5",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0"
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.5",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.2.0"
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.5",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.2.0",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.5",
         "pkg:maven/org.eclipse.angus/angus-activation@2.0.3",
         "pkg:maven/org.ow2.asm/asm@9.9.1",
         "pkg:maven/xml-resolver/xml-resolver@1.2"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.5",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.2.0",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
         "pkg:maven/org.eclipse.angus/angus-mail@2.0.5"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.5",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
-        "pkg:maven/org.jspecify/jspecify@1.0.0"
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.5",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.2.0"
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.5"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.5",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
         "pkg:maven/org.apache.neethi/neethi@3.2.1",
         "pkg:maven/wsdl4j/wsdl4j@1.6.3"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.2.0",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.2.0",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
         "pkg:maven/org.ow2.asm/asm@9.9.1",
         "pkg:maven/wsdl4j/wsdl4j@1.6.3"
       ]
@@ -1347,10 +1321,6 @@
     },
     {
       "ref": "pkg:maven/org.glassfish.jaxb/txw2@4.0.6",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:maven/org.jspecify/jspecify@1.0.0",
       "dependsOn": []
     },
     {
@@ -1409,11 +1379,11 @@
       ]
     },
     {
-      "ref": "pkg:maven/se.skltp.takcache/takcache@3.0.2",
+      "ref": "pkg:maven/se.skltp.takcache/takcache@3.0.3",
       "dependsOn": [
         "pkg:maven/com.lmax/disruptor@4.0.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.2.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.2.0",
+        "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.5",
         "pkg:maven/org.slf4j/slf4j-api@2.0.17",
         "pkg:maven/org.springframework/spring-beans@6.2.17",
         "pkg:maven/org.springframework/spring-context@6.2.17",
@@ -1429,5 +1399,219 @@
       "dependsOn": []
     }
   ],
-  "vulnerabilities": []
+  "vulnerabilities": [
+    {
+      "id": "CVE-2026-42402",
+      "source": {
+        "name": "ghsa",
+        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+      },
+      "ratings": [
+        {
+          "source": {
+            "name": "ghsa"
+          },
+          "score": 7.5,
+          "severity": "high",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        },
+        {
+          "source": {
+            "name": "redhat"
+          },
+          "score": 6.5,
+          "severity": "medium",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "cwes": [
+        400
+      ],
+      "description": "Apache Neethi is vulnerable to a Denial of Service attack through algorithmic complexity in policy normalization. Specially crafted WS-Policy documents can trigger an exponential Cartesian cross-product expansion during the normalization process, causing unbounded memory allocation that exhausts the JVM heap. This occurs when the normalization process generates an excessive number of policy alternatives without bounds, leading to runtime memory exhaustion.\n\nUsers should upgrade to 3.2.2 which limits the maximum number of normalized policy alternatives.",
+      "recommendation": "Upgrade org.apache.neethi:neethi to version 3.2.2",
+      "advisories": [
+        {
+          "url": "https://avd.aquasec.com/nvd/cve-2026-42402"
+        },
+        {
+          "url": "http://www.openwall.com/lists/oss-security/2026/05/01/6"
+        },
+        {
+          "url": "https://access.redhat.com/security/cve/CVE-2026-42402"
+        },
+        {
+          "url": "https://github.com/apache/ws-neethi"
+        },
+        {
+          "url": "https://lists.apache.org/thread/p826j0phhmr9f83wzpmys1y0bdfrr2q4"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42402"
+        },
+        {
+          "url": "https://www.cve.org/CVERecord?id=CVE-2026-42402"
+        }
+      ],
+      "published": "2026-05-01T09:16:16+00:00",
+      "updated": "2026-05-01T18:08:59+00:00",
+      "affects": [
+        {
+          "ref": "pkg:maven/org.apache.neethi/neethi@3.2.1",
+          "versions": [
+            {
+              "version": "3.2.1",
+              "status": "affected"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CVE-2026-42403",
+      "source": {
+        "name": "ghsa",
+        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+      },
+      "ratings": [
+        {
+          "source": {
+            "name": "ghsa"
+          },
+          "score": 7.5,
+          "severity": "high",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        },
+        {
+          "source": {
+            "name": "redhat"
+          },
+          "score": 6.5,
+          "severity": "medium",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "cwes": [
+        400
+      ],
+      "description": "Apache Neethi does not properly detect circular references in policy definitions. When a WS-Policy document contains circular policy references (where Policy A references Policy B which references Policy A), the policy normalization process can enter an infinite loop or cause excessive recursion, leading to a stack overflow or application hang. An attacker can craft malicious policy documents with circular references to cause a Denial of Service condition\n\nUsers are recommended to upgrade to version 3.2.2, which fixes this issue.",
+      "recommendation": "Upgrade org.apache.neethi:neethi to version 3.2.2",
+      "advisories": [
+        {
+          "url": "https://avd.aquasec.com/nvd/cve-2026-42403"
+        },
+        {
+          "url": "http://www.openwall.com/lists/oss-security/2026/05/01/7"
+        },
+        {
+          "url": "https://access.redhat.com/security/cve/CVE-2026-42403"
+        },
+        {
+          "url": "https://github.com/apache/ws-neethi"
+        },
+        {
+          "url": "https://lists.apache.org/thread/zm6t8skkkskjwk1881l4m4n0l7dqclzo"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42403"
+        },
+        {
+          "url": "https://www.cve.org/CVERecord?id=CVE-2026-42403"
+        }
+      ],
+      "published": "2026-05-01T09:16:17+00:00",
+      "updated": "2026-05-01T18:08:21+00:00",
+      "affects": [
+        {
+          "ref": "pkg:maven/org.apache.neethi/neethi@3.2.1",
+          "versions": [
+            {
+              "version": "3.2.1",
+              "status": "affected"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CVE-2026-42404",
+      "source": {
+        "name": "ghsa",
+        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+      },
+      "ratings": [
+        {
+          "source": {
+            "name": "ghsa"
+          },
+          "score": 6.5,
+          "severity": "medium",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N"
+        },
+        {
+          "source": {
+            "name": "nvd"
+          },
+          "score": 7.2,
+          "severity": "high",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:N"
+        },
+        {
+          "source": {
+            "name": "redhat"
+          },
+          "score": 5.3,
+          "severity": "medium",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N"
+        }
+      ],
+      "cwes": [
+        918
+      ],
+      "description": "Apache Neethi does not impose any restrictions on URIs when manually fetching remote policy references through the PolicyReference API. When an application explicitly calls the API to retrieve a policy from a remote URI, an outbound request is made for arbitrary protocols and internal IP adddresses. From 3.2.2, only http or https URIs are allowed, and link-local/multicast/any-local addresses are forbidden.\n\nUsers are recommended to upgrade to version 3.2.2, which fixes this issue.",
+      "recommendation": "Upgrade org.apache.neethi:neethi to version 3.2.2",
+      "advisories": [
+        {
+          "url": "https://avd.aquasec.com/nvd/cve-2026-42404"
+        },
+        {
+          "url": "http://www.openwall.com/lists/oss-security/2026/05/01/8"
+        },
+        {
+          "url": "https://access.redhat.com/security/cve/CVE-2026-42404"
+        },
+        {
+          "url": "https://github.com/apache/ws-neethi"
+        },
+        {
+          "url": "https://lists.apache.org/thread/zdspnt64zznyjyn648553kptx69w23oq"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42404"
+        },
+        {
+          "url": "https://www.cve.org/CVERecord?id=CVE-2026-42404"
+        }
+      ],
+      "published": "2026-05-01T11:16:19+00:00",
+      "updated": "2026-05-01T18:06:24+00:00",
+      "affects": [
+        {
+          "ref": "pkg:maven/org.apache.neethi/neethi@3.2.1",
+          "versions": [
+            {
+              "version": "3.2.1",
+              "status": "affected"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
