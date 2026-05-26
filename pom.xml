@@ -40,7 +40,7 @@
     <!-- Dependencies -->
     <tak.version>4.0.0</tak.version>
     <spring-framework.version>6.2.17</spring-framework.version> <!-- MAR 2026 -->
-    <cxf.version>4.2.0</cxf.version> <!-- FEB 2026 -->
+    <cxf.version>4.1.5</cxf.version> <!-- FEB 2026 - 4.1.x is aligned to Spring Boot 3, and Jakarta EE10 - 4.2.x exists but is aligned to Spring Boot 4. -->
     <jakarta-packages-bind-version>4.0.5</jakarta-packages-bind-version> <!-- FEB 2026 -->
     <jakarta-packages-ws-version>4.0.3</jakarta-packages-ws-version> <!-- FEB 2026 -->
     <lmax_disruptor-version>4.0.0</lmax_disruptor-version> <!-- SEP 2023. Latest as of APR 2026. -->
