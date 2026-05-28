@@ -38,7 +38,7 @@
     <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version> <!-- FEB 2026 -->
     
     <!-- Dependencies -->
-    <tak.version>4.0.0</tak.version>
+    <tak.version>4.4.1</tak.version> <!-- MAY 2026 -->
     <spring-framework.version>6.2.17</spring-framework.version> <!-- MAR 2026 -->
     <cxf.version>4.1.5</cxf.version> <!-- FEB 2026 - 4.1.x is aligned to Spring Boot 3, and Jakarta EE10 - 4.2.x exists but is aligned to Spring Boot 4. -->
     <jakarta-packages-bind-version>4.0.5</jakarta-packages-bind-version> <!-- FEB 2026 -->
