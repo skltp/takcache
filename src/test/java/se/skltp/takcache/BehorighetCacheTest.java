@@ -20,10 +20,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.xmlunit.assertj.XmlAssert;
 import se.skltp.takcache.exceptions.TakServiceException;
 import se.skltp.takcache.services.TakService;
 import se.skltp.takcache.util.VagvalSchemasTestListsUtil;
+import se.skltp.takcache.util.XmlAssertions;
 
 @SpringJUnitConfig(locations = "classpath*:spring-context.xml")
 @ExtendWith(MockitoExtension.class)
@@ -93,7 +93,7 @@ class BehorighetCacheTest {
 
     assertTrue(takCacheLog.isRefreshSuccessful());
     assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
-    XmlAssert.assertThat(java.nio.file.Files.readString(testFolder.resolve("localcache-test.xml")))
+    XmlAssertions.assertThat(java.nio.file.Files.readString(testFolder.resolve("localcache-test.xml")))
         .hasXPath("/persistentCache/anropsBehorighetsInfo");
 
   }
