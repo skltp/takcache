@@ -28,10 +28,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.xmlunit.assertj.XmlAssert;
 import se.skltp.takcache.exceptions.TakServiceException;
 import se.skltp.takcache.services.TakService;
 import se.skltp.takcache.util.VagvalSchemasTestListsUtil;
+import se.skltp.takcache.util.XmlAssertions;
 
 @SpringJUnitConfig(locations = "classpath*:spring-context.xml")
 @ExtendWith(MockitoExtension.class)
@@ -242,7 +242,7 @@ class TakCacheTest {
     assertTrue(takCacheLog.isRefreshSuccessful());
     assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
     String xmlContent = java.nio.file.Files.readString(testFolder.resolve("localcache-test.xml"));
-    XmlAssert xmlAssert = XmlAssert.assertThat(xmlContent);
+    XmlAssertions xmlAssert = XmlAssertions.assertThat(xmlContent);
     xmlAssert.hasXPath("/persistentCache/virtualiseringsInfo");
     xmlAssert.hasXPath("/persistentCache/anropsBehorighetsInfo");
   }
@@ -266,7 +266,7 @@ class TakCacheTest {
     assertEquals(REFRESH_OK, takCacheLog.getRefreshStatus());
 
     String xmlContent = java.nio.file.Files.readString(testFolder.resolve("localcache-test-2.xml"));
-    XmlAssert xmlAssert = XmlAssert.assertThat(xmlContent);
+    XmlAssertions xmlAssert = XmlAssertions.assertThat(xmlContent);
     xmlAssert.hasXPath("/persistentCache/anropsBehorighetsInfo");
     xmlAssert.hasXPath("/persistentCache/virtualiseringsInfo");
   }
