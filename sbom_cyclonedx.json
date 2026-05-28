@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:c572c822-baab-4dc6-8788-44fede7792dd",
+  "serialNumber": "urn:uuid:ce21f5fd-76d8-4cce-99ed-09bf77c8eee2",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-05-28T08:30:36+00:00",
+    "timestamp": "2026-05-28T12:14:20+00:00",
     "tools": {
       "components": [
         {
@@ -20,7 +20,7 @@
       ]
     },
     "component": {
-      "bom-ref": "925570c7-22a5-432c-bb94-68487cf23709",
+      "bom-ref": "84601363-ca3f-40f0-b091-c14ccfdee58e",
       "type": "application",
       "name": ".",
       "properties": [
@@ -33,7 +33,7 @@
   },
   "components": [
     {
-      "bom-ref": "36a543fb-f675-48fa-8ffe-85d2aa0a1ae3",
+      "bom-ref": "66010029-6584-4154-9240-17955f70bd9c",
       "type": "application",
       "name": "pom.xml",
       "properties": [
@@ -338,11 +338,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-core",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -350,11 +350,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-core:4.1.5::97f54fc9"
+          "value": "org.apache.cxf:cxf-core:4.1.6::11c12e7b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -363,11 +363,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-bindings-soap",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -375,11 +375,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-bindings-soap:4.1.5::a0c05814"
+          "value": "org.apache.cxf:cxf-rt-bindings-soap:4.1.6::bed24336"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -388,11 +388,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-bindings-xml",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -400,11 +400,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-bindings-xml:4.1.5::75a8783b"
+          "value": "org.apache.cxf:cxf-rt-bindings-xml:4.1.6::dbbb7085"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -413,11 +413,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-databinding-jaxb",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -425,11 +425,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-databinding-jaxb:4.1.5::5fe7910d"
+          "value": "org.apache.cxf:cxf-rt-databinding-jaxb:4.1.6::dfc9260f"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -438,11 +438,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-frontend-jaxws",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -450,11 +450,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-frontend-jaxws:4.1.5::4aa1d2ad"
+          "value": "org.apache.cxf:cxf-rt-frontend-jaxws:4.1.6::6284311d"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -463,11 +463,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-frontend-simple",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -475,11 +475,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-frontend-simple:4.1.5::33146a0e"
+          "value": "org.apache.cxf:cxf-rt-frontend-simple:4.1.6::bd73d43b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -488,11 +488,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-transports-http",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -500,11 +500,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-transports-http:4.1.5::f3d6bdf9"
+          "value": "org.apache.cxf:cxf-rt-transports-http:4.1.6::a7e3f9ab"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -513,11 +513,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-ws-addr",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -525,11 +525,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-ws-addr:4.1.5::d31019bb"
+          "value": "org.apache.cxf:cxf-rt-ws-addr:4.1.6::f60a3f02"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -538,11 +538,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-ws-policy",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -550,11 +550,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-ws-policy:4.1.5::f7fd8fe4"
+          "value": "org.apache.cxf:cxf-rt-ws-policy:4.1.6::66243c90"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -563,11 +563,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
+      "bom-ref": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.6",
       "type": "library",
       "group": "org.apache.cxf",
       "name": "cxf-rt-wsdl",
-      "version": "4.1.5",
+      "version": "4.1.6",
       "licenses": [
         {
           "license": {
@@ -575,11 +575,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
+      "purl": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.6",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.cxf:cxf-rt-wsdl:4.1.5::ae317fab"
+          "value": "org.apache.cxf:cxf-rt-wsdl:4.1.6::10ca4162"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -588,86 +588,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3",
-      "type": "library",
-      "group": "org.apache.logging.log4j",
-      "name": "log4j-api",
-      "version": "2.24.3",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "purl": "pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.logging.log4j:log4j-api:2.24.3::aaf2f84a"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "pom"
-        }
-      ]
-    },
-    {
-      "bom-ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3",
-      "type": "library",
-      "group": "org.apache.logging.log4j",
-      "name": "log4j-core",
-      "version": "2.24.3",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.logging.log4j:log4j-core:2.24.3::4970bb08"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "pom"
-        }
-      ]
-    },
-    {
-      "bom-ref": "pkg:maven/org.apache.logging.log4j/log4j-slf4j2-impl@2.24.3",
-      "type": "library",
-      "group": "org.apache.logging.log4j",
-      "name": "log4j-slf4j2-impl",
-      "version": "2.24.3",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "purl": "pkg:maven/org.apache.logging.log4j/log4j-slf4j2-impl@2.24.3",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.logging.log4j:log4j-slf4j2-impl:2.24.3::9716c583"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "pom"
-        }
-      ]
-    },
-    {
-      "bom-ref": "pkg:maven/org.apache.neethi/neethi@3.2.1",
+      "bom-ref": "pkg:maven/org.apache.neethi/neethi@3.2.2",
       "type": "library",
       "group": "org.apache.neethi",
       "name": "neethi",
-      "version": "3.2.1",
+      "version": "3.2.2",
       "licenses": [
         {
           "license": {
@@ -675,11 +600,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.apache.neethi/neethi@3.2.1",
+      "purl": "pkg:maven/org.apache.neethi/neethi@3.2.2",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.apache.neethi:neethi:3.2.1::31153170"
+          "value": "org.apache.neethi:neethi:3.2.2::a40fad98"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -798,11 +723,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.6",
+      "bom-ref": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.8",
       "type": "library",
       "group": "org.glassfish.jaxb",
       "name": "jaxb-core",
-      "version": "4.0.6",
+      "version": "4.0.8",
       "licenses": [
         {
           "license": {
@@ -810,11 +735,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.6",
+      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.8",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.glassfish.jaxb:jaxb-core:4.0.6::8399028b"
+          "value": "org.glassfish.jaxb:jaxb-core:4.0.8::aeb8df63"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -823,11 +748,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.6",
+      "bom-ref": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.8",
       "type": "library",
       "group": "org.glassfish.jaxb",
       "name": "jaxb-runtime",
-      "version": "4.0.6",
+      "version": "4.0.8",
       "licenses": [
         {
           "license": {
@@ -835,11 +760,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.6",
+      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.8",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.glassfish.jaxb:jaxb-runtime:4.0.6::f1997ae7"
+          "value": "org.glassfish.jaxb:jaxb-runtime:4.0.8::160ad0d6"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -848,11 +773,11 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/org.glassfish.jaxb/txw2@4.0.6",
+      "bom-ref": "pkg:maven/org.glassfish.jaxb/txw2@4.0.8",
       "type": "library",
       "group": "org.glassfish.jaxb",
       "name": "txw2",
-      "version": "4.0.6",
+      "version": "4.0.8",
       "licenses": [
         {
           "license": {
@@ -860,11 +785,11 @@
           }
         }
       ],
-      "purl": "pkg:maven/org.glassfish.jaxb/txw2@4.0.6",
+      "purl": "pkg:maven/org.glassfish.jaxb/txw2@4.0.8",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "org.glassfish.jaxb:txw2:4.0.6::de4c72d1"
+          "value": "org.glassfish.jaxb:txw2:4.0.8::a5c81390"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -1098,16 +1023,16 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/se.skltp.takcache/takcache@3.0.4",
+      "bom-ref": "pkg:maven/se.skltp.takcache/takcache@3.0.5",
       "type": "library",
       "group": "se.skltp.takcache",
       "name": "takcache",
-      "version": "3.0.4",
-      "purl": "pkg:maven/se.skltp.takcache/takcache@3.0.4",
+      "version": "3.0.5",
+      "purl": "pkg:maven/se.skltp.takcache/takcache@3.0.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "se.skltp.takcache:takcache:3.0.4::4ac35ec8"
+          "value": "se.skltp.takcache:takcache:3.0.5::19e52999"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -1168,15 +1093,15 @@
   ],
   "dependencies": [
     {
-      "ref": "36a543fb-f675-48fa-8ffe-85d2aa0a1ae3",
+      "ref": "66010029-6584-4154-9240-17955f70bd9c",
       "dependsOn": [
-        "pkg:maven/se.skltp.takcache/takcache@3.0.4"
+        "pkg:maven/se.skltp.takcache/takcache@3.0.5"
       ]
     },
     {
-      "ref": "925570c7-22a5-432c-bb94-68487cf23709",
+      "ref": "84601363-ca3f-40f0-b091-c14ccfdee58e",
       "dependsOn": [
-        "36a543fb-f675-48fa-8ffe-85d2aa0a1ae3"
+        "66010029-6584-4154-9240-17955f70bd9c"
       ]
     },
     {
@@ -1237,112 +1162,94 @@
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
       "dependsOn": [
         "pkg:maven/com.fasterxml.woodstox/woodstox-core@7.1.1",
         "pkg:maven/jakarta.annotation/jakarta.annotation-api@2.1.1",
         "pkg:maven/jakarta.xml.bind/jakarta.xml.bind-api@4.0.5",
         "pkg:maven/org.apache.ws.xmlschema/xmlschema-core@2.3.2",
         "pkg:maven/org.eclipse.angus/angus-activation@2.0.3",
-        "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.6"
+        "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.8"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.6",
       "dependsOn": [
         "pkg:maven/jakarta.xml.soap/jakarta.xml.soap-api@3.0.2",
         "pkg:maven/jakarta.xml.ws/jakarta.xml.ws-api@4.0.3",
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.6",
         "pkg:maven/org.eclipse.angus/angus-activation@2.0.3"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.6",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5"
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.1.6",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5"
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.6"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.6",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.6",
         "pkg:maven/org.eclipse.angus/angus-activation@2.0.3",
         "pkg:maven/org.ow2.asm/asm@9.9.1",
         "pkg:maven/xml-resolver/xml-resolver@1.2"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.1.6",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.6",
         "pkg:maven/org.eclipse.angus/angus-mail@2.0.5"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.6",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5"
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.1.6",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.5"
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.6"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.1.6",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
-        "pkg:maven/org.apache.neethi/neethi@3.2.1",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
+        "pkg:maven/org.apache.neethi/neethi@3.2.2",
         "pkg:maven/wsdl4j/wsdl4j@1.6.3"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.5",
+      "ref": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.1.6",
       "dependsOn": [
-        "pkg:maven/org.apache.cxf/cxf-core@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-core@4.1.6",
         "pkg:maven/org.ow2.asm/asm@9.9.1",
         "pkg:maven/wsdl4j/wsdl4j@1.6.3"
       ]
     },
     {
-      "ref": "pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3",
-      "dependsOn": []
-    },
-    {
-      "ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3",
-      "dependsOn": [
-        "pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3"
-      ]
-    },
-    {
-      "ref": "pkg:maven/org.apache.logging.log4j/log4j-slf4j2-impl@2.24.3",
-      "dependsOn": [
-        "pkg:maven/org.apache.logging.log4j/log4j-api@2.24.3",
-        "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3",
-        "pkg:maven/org.slf4j/slf4j-api@2.0.17"
-      ]
-    },
-    {
-      "ref": "pkg:maven/org.apache.neethi/neethi@3.2.1",
+      "ref": "pkg:maven/org.apache.neethi/neethi@3.2.2",
       "dependsOn": []
     },
     {
@@ -1368,23 +1275,23 @@
       ]
     },
     {
-      "ref": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.6",
+      "ref": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.8",
       "dependsOn": [
         "pkg:maven/com.sun.istack/istack-commons-runtime@4.1.2",
         "pkg:maven/jakarta.activation/jakarta.activation-api@2.1.4",
         "pkg:maven/jakarta.xml.bind/jakarta.xml.bind-api@4.0.5",
         "pkg:maven/org.eclipse.angus/angus-activation@2.0.3",
-        "pkg:maven/org.glassfish.jaxb/txw2@4.0.6"
+        "pkg:maven/org.glassfish.jaxb/txw2@4.0.8"
       ]
     },
     {
-      "ref": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.6",
+      "ref": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.8",
       "dependsOn": [
-        "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.6"
+        "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.8"
       ]
     },
     {
-      "ref": "pkg:maven/org.glassfish.jaxb/txw2@4.0.6",
+      "ref": "pkg:maven/org.glassfish.jaxb/txw2@4.0.8",
       "dependsOn": []
     },
     {
@@ -1438,16 +1345,15 @@
       "ref": "pkg:maven/se.skltp.tak/tak-schemas@4.4.1",
       "dependsOn": [
         "pkg:maven/jakarta.xml.bind/jakarta.xml.bind-api@4.0.5",
-        "pkg:maven/jakarta.xml.ws/jakarta.xml.ws-api@4.0.3",
-        "pkg:maven/org.apache.logging.log4j/log4j-slf4j2-impl@2.24.3"
+        "pkg:maven/jakarta.xml.ws/jakarta.xml.ws-api@4.0.3"
       ]
     },
     {
-      "ref": "pkg:maven/se.skltp.takcache/takcache@3.0.4",
+      "ref": "pkg:maven/se.skltp.takcache/takcache@3.0.5",
       "dependsOn": [
         "pkg:maven/com.lmax/disruptor@4.0.0",
-        "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.5",
-        "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.5",
+        "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.1.6",
+        "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.6",
         "pkg:maven/org.slf4j/slf4j-api@2.0.17",
         "pkg:maven/org.springframework/spring-beans@6.2.17",
         "pkg:maven/org.springframework/spring-context@6.2.17",
@@ -1463,539 +1369,5 @@
       "dependsOn": []
     }
   ],
-  "vulnerabilities": [
-    {
-      "id": "CVE-2025-68161",
-      "source": {
-        "name": "ghsa",
-        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
-      },
-      "ratings": [
-        {
-          "source": {
-            "name": "amazon"
-          },
-          "severity": "medium"
-        },
-        {
-          "source": {
-            "name": "nvd"
-          },
-          "score": 4.8,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N"
-        }
-      ],
-      "cwes": [
-        297,
-        295
-      ],
-      "description": "The Socket Appender in Apache Log4j Core versions 2.0-beta9 through 2.25.2 does not perform TLS hostname verification of the peer certificate, even when the  verifyHostName https://logging.apache.org/log4j/2.x/manual/appenders/network.html#SslConfiguration-attr-verifyHostName  configuration attribute or the  log4j2.sslVerifyHostName https://logging.apache.org/log4j/2.x/manual/systemproperties.html#log4j2.sslVerifyHostName  system property is set to true.\n\nThis issue may allow a man-in-the-middle attacker to intercept or redirect log traffic under the following conditions:\n\n  *  The attacker is able to intercept or redirect network traffic between the client and the log receiver.\n  *  The attacker can present a server certificate issued by a certification authority trusted by the Socket Appender’s configured trust store (or by the default Java trust store if no custom trust store is configured).\n\n\nUsers are advised to upgrade to Apache Log4j Core version 2.25.3, which addresses this issue.\n\nAs an alternative mitigation, the Socket Appender may be configured to use a private or restricted trust root to limit the set of trusted certificates.",
-      "recommendation": "Upgrade org.apache.logging.log4j:log4j-core to version 2.25.3",
-      "advisories": [
-        {
-          "url": "https://avd.aquasec.com/nvd/cve-2025-68161"
-        },
-        {
-          "url": "http://www.openwall.com/lists/oss-security/2025/12/18/1"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2/commit/3b93748497e1adbbd027fda8a5e7268ec5d0d578"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2/pull/4002"
-        },
-        {
-          "url": "https://lists.apache.org/thread/xr33kyxq3sl67lwb61ggvm1fzc8k7dvx"
-        },
-        {
-          "url": "https://lists.debian.org/debian-lts-announce/2026/01/msg00015.html"
-        },
-        {
-          "url": "https://logging.apache.org/cyclonedx/vdr.xml"
-        },
-        {
-          "url": "https://logging.apache.org/log4j/2.x/manual/appenders/network.html#SslConfiguration-attr-verifyHostName"
-        },
-        {
-          "url": "https://logging.apache.org/log4j/2.x/manual/systemproperties.html#log4j2.sslVerifyHostName"
-        },
-        {
-          "url": "https://logging.apache.org/security.html#CVE-2025-68161"
-        },
-        {
-          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68161"
-        }
-      ],
-      "published": "2025-12-18T21:15:57+00:00",
-      "updated": "2026-01-20T01:15:55+00:00",
-      "affects": [
-        {
-          "ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3",
-          "versions": [
-            {
-              "version": "2.24.3",
-              "status": "affected"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "CVE-2026-34477",
-      "source": {
-        "name": "ghsa",
-        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
-      },
-      "ratings": [
-        {
-          "source": {
-            "name": "nvd"
-          },
-          "score": 5.9,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N"
-        },
-        {
-          "source": {
-            "name": "redhat"
-          },
-          "score": 6.8,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:N"
-        }
-      ],
-      "cwes": [
-        297,
-        295
-      ],
-      "description": "The fix for  CVE-2025-68161 https://logging.apache.org/security.html#CVE-2025-68161  was incomplete: it addressed hostname verification only when enabled via the  log4j2.sslVerifyHostName https://logging.apache.org/log4j/2.x/manual/systemproperties.html#log4j2.sslVerifyHostName  system property, but not when configured through the  verifyHostName https://logging.apache.org/log4j/2.x/manual/appenders/network.html#SslConfiguration-attr-verifyHostName  attribute of the <Ssl> element.\n\nAlthough the verifyHostName configuration attribute was introduced in Log4j Core 2.12.0, it was silently ignored in all versions through 2.25.3, leaving TLS connections vulnerable to interception regardless of the configured value.\n\nA network-based attacker may be able to perform a man-in-the-middle attack when all of the following conditions are met:\n\n  *  An SMTP, Socket, or Syslog appender is in use.\n  *  TLS is configured via a nested <Ssl> element.\n  *  The attacker can present a certificate issued by a CA trusted by the appender's configured trust store, or by the default Java trust store if none is configured.\nThis issue does not affect users of the HTTP appender, which uses a separate  verifyHostname https://logging.apache.org/log4j/2.x/manual/appenders/network.html#HttpAppender-attr-verifyHostName  attribute that was not subject to this bug and verifies host names by default.\n\nUsers are advised to upgrade to Apache Log4j Core 2.25.4, which corrects this issue.",
-      "recommendation": "Upgrade org.apache.logging.log4j:log4j-core to version 2.25.4",
-      "advisories": [
-        {
-          "url": "https://avd.aquasec.com/nvd/cve-2026-34477"
-        },
-        {
-          "url": "https://access.redhat.com/security/cve/CVE-2026-34477"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2/pull/4075"
-        },
-        {
-          "url": "https://lists.apache.org/thread/lkx8cl46t2bvkcwfcb2pd43ygc097lq4"
-        },
-        {
-          "url": "https://logging.apache.org/cyclonedx/vdr.xml"
-        },
-        {
-          "url": "https://logging.apache.org/log4j/2.x/manual/appenders/network.html#SslConfiguration-attr-verifyHostName"
-        },
-        {
-          "url": "https://logging.apache.org/security.html#CVE-2026-34477"
-        },
-        {
-          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34477"
-        },
-        {
-          "url": "https://www.cve.org/CVERecord?id=CVE-2026-34477"
-        }
-      ],
-      "published": "2026-04-10T16:16:30+00:00",
-      "updated": "2026-05-06T16:49:51+00:00",
-      "affects": [
-        {
-          "ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3",
-          "versions": [
-            {
-              "version": "2.24.3",
-              "status": "affected"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "CVE-2026-34478",
-      "source": {
-        "name": "ghsa",
-        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
-      },
-      "ratings": [
-        {
-          "source": {
-            "name": "nvd"
-          },
-          "score": 7.5,
-          "severity": "high",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
-        },
-        {
-          "source": {
-            "name": "redhat"
-          },
-          "score": 5.8,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:L/A:N"
-        }
-      ],
-      "cwes": [
-        117,
-        684
-      ],
-      "description": "Apache Log4j Core's  Rfc5424Layout https://logging.apache.org/log4j/2.x/manual/layouts.html#RFC5424Layout , in versions 2.21.0 through 2.25.3, is vulnerable to log injection via CRLF sequences due to undocumented renames of security-relevant configuration attributes.\n\nTwo distinct issues affect users of stream-based syslog services who configure Rfc5424Layout directly:\n\n  *  The newLineEscape attribute was silently renamed, causing newline escaping to stop working for users of TCP framing (RFC 6587), exposing them to CRLF injection in log output.\n  *  The useTlsMessageFormat attribute was silently renamed, causing users of TLS framing (RFC 5425) to be silently downgraded to unframed TCP (RFC 6587), without newline escaping.\n\n\nUsers of the SyslogAppender are not affected, as its configuration attributes were not modified.\n\nUsers are advised to upgrade to Apache Log4j Core 2.25.4, which corrects this issue.",
-      "recommendation": "Upgrade org.apache.logging.log4j:log4j-core to version 2.25.4",
-      "advisories": [
-        {
-          "url": "https://avd.aquasec.com/nvd/cve-2026-34478"
-        },
-        {
-          "url": "http://www.openwall.com/lists/oss-security/2026/04/10/7"
-        },
-        {
-          "url": "https://access.redhat.com/security/cve/CVE-2026-34478"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2/pull/4074"
-        },
-        {
-          "url": "https://lists.apache.org/thread/3k1clr2l6vkdnl4cbhjrnt1nyjvb5gwt"
-        },
-        {
-          "url": "https://logging.apache.org/cyclonedx/vdr.xml"
-        },
-        {
-          "url": "https://logging.apache.org/log4j/2.x/manual/layouts.html#RFC5424Layout"
-        },
-        {
-          "url": "https://logging.apache.org/security.html#CVE-2026-34478"
-        },
-        {
-          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34478"
-        },
-        {
-          "url": "https://www.cve.org/CVERecord?id=CVE-2026-34478"
-        }
-      ],
-      "published": "2026-04-10T16:16:31+00:00",
-      "updated": "2026-04-24T18:10:57+00:00",
-      "affects": [
-        {
-          "ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3",
-          "versions": [
-            {
-              "version": "2.24.3",
-              "status": "affected"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "CVE-2026-34480",
-      "source": {
-        "name": "ghsa",
-        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
-      },
-      "ratings": [
-        {
-          "source": {
-            "name": "nvd"
-          },
-          "score": 7.5,
-          "severity": "high",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
-        },
-        {
-          "source": {
-            "name": "redhat"
-          },
-          "score": 5.3,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
-        }
-      ],
-      "cwes": [
-        116
-      ],
-      "description": "Apache Log4j Core's  XmlLayout https://logging.apache.org/log4j/2.x/manual/layouts.html#XmlLayout , in versions up to and including 2.25.3, fails to sanitize characters forbidden by the  XML 1.0 specification https://www.w3.org/TR/xml/#charsets  producing invalid XML output whenever a log message or MDC value contains such characters.\n\nThe impact depends on the StAX implementation in use:\n\n  *  JRE built-in StAX: Forbidden characters are silently written to the output, producing malformed XML. Conforming parsers must reject such documents with a fatal error, which may cause downstream log-processing systems to drop the affected records.\n  *  Alternative StAX implementations (e.g.,  Woodstox https://github.com/FasterXML/woodstox , a transitive dependency of the Jackson XML Dataformat module): An exception is thrown during the logging call, and the log event is never delivered to its intended appender, only to Log4j's internal status logger.\n\n\nUsers are advised to upgrade to Apache Log4j Core 2.25.4, which corrects this issue by sanitizing forbidden characters before XML output.",
-      "recommendation": "Upgrade org.apache.logging.log4j:log4j-core to version 2.25.4",
-      "advisories": [
-        {
-          "url": "https://avd.aquasec.com/nvd/cve-2026-34480"
-        },
-        {
-          "url": "http://www.openwall.com/lists/oss-security/2026/04/10/9"
-        },
-        {
-          "url": "https://access.redhat.com/security/cve/CVE-2026-34480"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2"
-        },
-        {
-          "url": "https://github.com/apache/logging-log4j2/pull/4077"
-        },
-        {
-          "url": "https://lists.apache.org/thread/5x0hcnng0chhghp6jgjdp3qmbbhfjzhb"
-        },
-        {
-          "url": "https://logging.apache.org/cyclonedx/vdr.xml"
-        },
-        {
-          "url": "https://logging.apache.org/log4j/2.x/manual/layouts.html#XmlLayout"
-        },
-        {
-          "url": "https://logging.apache.org/security.html#CVE-2026-34480"
-        },
-        {
-          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34480"
-        },
-        {
-          "url": "https://www.cve.org/CVERecord?id=CVE-2026-34480"
-        }
-      ],
-      "published": "2026-04-10T16:16:31+00:00",
-      "updated": "2026-04-24T18:21:54+00:00",
-      "affects": [
-        {
-          "ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.3",
-          "versions": [
-            {
-              "version": "2.24.3",
-              "status": "affected"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "CVE-2026-42402",
-      "source": {
-        "name": "ghsa",
-        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
-      },
-      "ratings": [
-        {
-          "source": {
-            "name": "ghsa"
-          },
-          "score": 7.5,
-          "severity": "high",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
-        },
-        {
-          "source": {
-            "name": "redhat"
-          },
-          "score": 6.5,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
-        }
-      ],
-      "cwes": [
-        400
-      ],
-      "description": "Apache Neethi is vulnerable to a Denial of Service attack through algorithmic complexity in policy normalization. Specially crafted WS-Policy documents can trigger an exponential Cartesian cross-product expansion during the normalization process, causing unbounded memory allocation that exhausts the JVM heap. This occurs when the normalization process generates an excessive number of policy alternatives without bounds, leading to runtime memory exhaustion.\n\nUsers should upgrade to 3.2.2 which limits the maximum number of normalized policy alternatives.",
-      "recommendation": "Upgrade org.apache.neethi:neethi to version 3.2.2",
-      "advisories": [
-        {
-          "url": "https://avd.aquasec.com/nvd/cve-2026-42402"
-        },
-        {
-          "url": "http://www.openwall.com/lists/oss-security/2026/05/01/6"
-        },
-        {
-          "url": "https://access.redhat.com/security/cve/CVE-2026-42402"
-        },
-        {
-          "url": "https://github.com/apache/ws-neethi"
-        },
-        {
-          "url": "https://lists.apache.org/thread/p826j0phhmr9f83wzpmys1y0bdfrr2q4"
-        },
-        {
-          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42402"
-        },
-        {
-          "url": "https://www.cve.org/CVERecord?id=CVE-2026-42402"
-        }
-      ],
-      "published": "2026-05-01T09:16:16+00:00",
-      "updated": "2026-05-01T18:08:59+00:00",
-      "affects": [
-        {
-          "ref": "pkg:maven/org.apache.neethi/neethi@3.2.1",
-          "versions": [
-            {
-              "version": "3.2.1",
-              "status": "affected"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "CVE-2026-42403",
-      "source": {
-        "name": "ghsa",
-        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
-      },
-      "ratings": [
-        {
-          "source": {
-            "name": "ghsa"
-          },
-          "score": 7.5,
-          "severity": "high",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
-        },
-        {
-          "source": {
-            "name": "redhat"
-          },
-          "score": 6.5,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
-        }
-      ],
-      "cwes": [
-        400
-      ],
-      "description": "Apache Neethi does not properly detect circular references in policy definitions. When a WS-Policy document contains circular policy references (where Policy A references Policy B which references Policy A), the policy normalization process can enter an infinite loop or cause excessive recursion, leading to a stack overflow or application hang. An attacker can craft malicious policy documents with circular references to cause a Denial of Service condition\n\nUsers are recommended to upgrade to version 3.2.2, which fixes this issue.",
-      "recommendation": "Upgrade org.apache.neethi:neethi to version 3.2.2",
-      "advisories": [
-        {
-          "url": "https://avd.aquasec.com/nvd/cve-2026-42403"
-        },
-        {
-          "url": "http://www.openwall.com/lists/oss-security/2026/05/01/7"
-        },
-        {
-          "url": "https://access.redhat.com/security/cve/CVE-2026-42403"
-        },
-        {
-          "url": "https://github.com/apache/ws-neethi"
-        },
-        {
-          "url": "https://lists.apache.org/thread/zm6t8skkkskjwk1881l4m4n0l7dqclzo"
-        },
-        {
-          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42403"
-        },
-        {
-          "url": "https://www.cve.org/CVERecord?id=CVE-2026-42403"
-        }
-      ],
-      "published": "2026-05-01T09:16:17+00:00",
-      "updated": "2026-05-01T18:08:21+00:00",
-      "affects": [
-        {
-          "ref": "pkg:maven/org.apache.neethi/neethi@3.2.1",
-          "versions": [
-            {
-              "version": "3.2.1",
-              "status": "affected"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "CVE-2026-42404",
-      "source": {
-        "name": "ghsa",
-        "url": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
-      },
-      "ratings": [
-        {
-          "source": {
-            "name": "ghsa"
-          },
-          "score": 6.5,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N"
-        },
-        {
-          "source": {
-            "name": "nvd"
-          },
-          "score": 7.2,
-          "severity": "high",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:N"
-        },
-        {
-          "source": {
-            "name": "redhat"
-          },
-          "score": 5.3,
-          "severity": "medium",
-          "method": "CVSSv31",
-          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N"
-        }
-      ],
-      "cwes": [
-        918
-      ],
-      "description": "Apache Neethi does not impose any restrictions on URIs when manually fetching remote policy references through the PolicyReference API. When an application explicitly calls the API to retrieve a policy from a remote URI, an outbound request is made for arbitrary protocols and internal IP adddresses. From 3.2.2, only http or https URIs are allowed, and link-local/multicast/any-local addresses are forbidden.\n\nUsers are recommended to upgrade to version 3.2.2, which fixes this issue.",
-      "recommendation": "Upgrade org.apache.neethi:neethi to version 3.2.2",
-      "advisories": [
-        {
-          "url": "https://avd.aquasec.com/nvd/cve-2026-42404"
-        },
-        {
-          "url": "http://www.openwall.com/lists/oss-security/2026/05/01/8"
-        },
-        {
-          "url": "https://access.redhat.com/security/cve/CVE-2026-42404"
-        },
-        {
-          "url": "https://github.com/apache/ws-neethi"
-        },
-        {
-          "url": "https://lists.apache.org/thread/zdspnt64zznyjyn648553kptx69w23oq"
-        },
-        {
-          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42404"
-        },
-        {
-          "url": "https://www.cve.org/CVERecord?id=CVE-2026-42404"
-        }
-      ],
-      "published": "2026-05-01T11:16:19+00:00",
-      "updated": "2026-05-01T18:06:24+00:00",
-      "affects": [
-        {
-          "ref": "pkg:maven/org.apache.neethi/neethi@3.2.1",
-          "versions": [
-            {
-              "version": "3.2.1",
-              "status": "affected"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  "vulnerabilities": []
 }
