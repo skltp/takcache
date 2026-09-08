@@ -35,20 +35,21 @@
     <!-- TODO: REGULARLY CHECK CURRENTNESS OF DEPS -#- DEPENDENCY CURRENTNESS LAST CHECKED: APR 2026. -->
 
     <!-- Plugins -->
-    <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version> <!-- FEB 2026 -->
+    <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version> <!-- MAY 2026 -->
     
     <!-- Dependencies -->
-    <tak.version>4.4.1</tak.version> <!-- MAY 2026 -->
-    <spring-framework.version>6.2.17</spring-framework.version> <!-- MAR 2026 -->
-    <cxf.version>4.1.6</cxf.version> <!-- MAY 2026 - 4.1.x is aligned to Spring Boot 3, and Jakarta EE10 - 4.2.x exists but is aligned to Spring Boot 4. -->
+    <tak.version>4.4.3</tak.version> <!-- SEP 2026 -->
+    <spring-framework.version>6.2.19</spring-framework.version> <!-- JUN 2026 -->
+    <cxf.version>4.1.8</cxf.version> <!-- AUG 2026 - 4.1.x is aligned to Spring Boot 3, and Jakarta EE10 - 4.2.x exists but is aligned to Spring Boot 4. -->
     <jakarta-packages-bind-version>4.0.5</jakarta-packages-bind-version> <!-- FEB 2026 -->
+    <com-sun-xml-bind-jaxb-impl-version>4.0.9</com-sun-xml-bind-jaxb-impl-version> <!-- MAY 2026 -->
     <jakarta-packages-ws-version>4.0.3</jakarta-packages-ws-version> <!-- FEB 2026 -->
     <lmax_disruptor-version>4.0.0</lmax_disruptor-version> <!-- SEP 2023. Latest as of APR 2026. -->
-    <slf4j.version>2.0.17</slf4j.version> <!-- FEB 2025. Latest as of APR 2026. -->
+    <slf4j.version>2.0.18</slf4j.version> <!-- MAY 2025. Latest as of APR 2026. -->
     
     <!-- Test dependencies -->
-    <jacoco.plugin.version>0.8.14</jacoco.plugin.version> <!-- OCT 2025. Latest as of APR 2026. -->
-    <junit-jupiter.version>5.14.3</junit-jupiter.version> <!-- FEB 2026 -->
+    <jacoco.plugin.version>0.8.15</jacoco.plugin.version> <!-- JUN 2026. Latest as of APR 2026. -->
+    <junit-jupiter.version>5.14.4</junit-jupiter.version> <!-- APR 2026 -->
     <mockito.version>5.23.0</mockito.version> <!-- MAR 2026 -->
   </properties>
 
@@ -74,7 +75,7 @@
       <dependency>
         <groupId>com.sun.xml.bind</groupId>
         <artifactId>jaxb-impl</artifactId>
-        <version>${jakarta-packages-bind-version}</version>
+        <version>${com-sun-xml-bind-jaxb-impl-version}</version>
         <scope>runtime</scope>
       </dependency>
       <dependency>
